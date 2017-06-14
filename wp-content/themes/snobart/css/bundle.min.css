@@ -1,0 +1,9 @@
+body {
+  text-align: center;
+  margin: 0;
+}
+canvas {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
