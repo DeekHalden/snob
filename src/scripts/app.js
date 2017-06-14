@@ -31,6 +31,22 @@ class Dot {
         this.direction = randomIntFromInterval(0, 360);
     }
     update(dt) {
+        if (this.xMove) {
+            this.x += (10 / 6) * Math.cos(this.direction) + this.speed
+        } else {
+            this.x -= (10 / 6) * Math.cos(this.direction) + this.speed
+        }
+        if (this.yMove) {
+            this.y += (10 / 6) * Math.sin(this.direction) + this.speed
+        } else {
+            this.y -= (10 / 6) * Math.sin(this.direction) + this.speed
+
+        }
+        this.reRender()
+
+        
+    }
+    reRender() {
         if (this.x >= innerWidth - this.radius) {
             this.x = (10 / 6) * Math.cos(this.direction) + this.speed
         }
@@ -58,17 +74,7 @@ class Dot {
     render() {
         ctx.beginPath();
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        if (this.xMove) {
-            this.x += (10 / 6) * Math.cos(this.direction) + this.speed
-        } else {
-            this.x -= (10 / 6) * Math.cos(this.direction) + this.speed
-        }
-        if (this.yMove) {
-            this.y += (10 / 6) * Math.sin(this.direction) + this.speed
-        } else {
-            this.y -= (10 / 6) * Math.sin(this.direction) + this.speed
-
-        }
+        
     }
 };
 
@@ -154,7 +160,7 @@ class Diamond {
 
 var allDots = []
 var smallDots = []
-for (var i = 0; i < 3; i++) {
+for (var i = 0; i < 100; i++) {
     allDots.push(new Dot(centerX, centerY - 4, Math.random() >= 0.5, Math.random() >= 0.5))
     if (i % 3 === 0) {
         smallDots.push(new SmallDot(centerX, centerY - 4, Math.random() >= 0.5, Math.random() >= 0.5))

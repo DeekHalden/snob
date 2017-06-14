@@ -74,7 +74,7 @@ gulp.task('images', function() {
 
 
 gulp.task('js', function() {
-     return gulp.src(['./src/scripts/resources.js','./src/scripts/app.js','./src/scripts/engine.js'])
+     return gulp.src('./src/scripts/probe.js')
         .pipe(concat('bundle.min.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('wp-content/themes/snobart/scripts'));

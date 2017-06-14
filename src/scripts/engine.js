@@ -45,7 +45,7 @@ var Engine = (function(global) {
             
             dot.changeDirection(e.clientX - 137, e.clientY - 137)
         })
-        win.cancelAnimationFrame(diamond.checkCollision(e.clientX, e.clientY))
+        diamond.checkCollision(e.clientX, e.clientY)
         win.cancelAnimationFrame(main)
     }, false);
 
@@ -67,7 +67,7 @@ var Engine = (function(global) {
          * our update function since it may be used for smooth animation.
          */
         render();
-        update(dt);
+        update();
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -101,8 +101,8 @@ var Engine = (function(global) {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
-    function update(dt) {
-        updateEntities(dt);
+    function update() {
+        updateEntities();
 
     }
 
@@ -113,12 +113,12 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
-    function updateEntities(dt) {
+    function updateEntities() {
         smallDots.forEach(function(dot) {
-            dot.update(dt);
+            dot.update();
         })
         allDots.forEach(function(dot) {
-            dot.update(dt);
+            dot.update();
         });
         diamond.update();
     }
