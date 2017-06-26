@@ -1,0 +1,97 @@
+@font-face 
+    font-family Roboto-reg
+    src url(./../fonts/Roboto-Regular.ttf)
+    
+*
+    box-sizing border-box
+
+@import "./normalize.css" 
+@import "./ion.rangeSlider.css" 
+@import "./ion.rangeSlider.skinFlat.css"
+
+
+body 
+    width 100%;
+    font-family Roboto-reg
+    text-align center
+    margin 0
+    overflow hidden
+.body
+    background-color #fff
+    transition .5s ease all
+    &--dark
+        background-color #000
+canvas
+    position: absolute
+    top 0
+    left 0
+    z-index 1
+.slider-container
+    z-index: 1
+    width auto
+    height 100vh
+    position relative
+    &:after
+        transform translateY(-50%)
+        transition .5s ease all
+        pointer-events none
+        left 0
+        position absolute
+        top 50%
+        background-image: linear-gradient(to right, rgba(0,0,0,.6) 33%, rgba(255,255,255,0) 0%);
+        background-position: bottom;
+        background-size: 7px 2px;
+        background-repeat: repeat-x;
+        content ''
+        width 100%
+        font-size 30px
+        height 2px
+        // border-bottom 3px dotted #000
+    &--light
+        &:after
+            background-image: linear-gradient(to right, white 33%, rgba(0,0,0,0) 0%);
+            // border-bottom 3px dotted #fff
+    
+    
+.range-slider
+    width: calc(100% - 280px);
+    position absolute
+    top 50%
+    left 140px
+    margin 0 auto
+    z-index 2
+    transform translateY(-50%)
+    &__anchors
+        position relative
+        opacity 0
+        transition .2s ease all
+        &--important
+            display block 
+            opacity 1 
+    &__anchor
+        position absolute
+        top -4px
+        width 48px 
+        height 48px
+        display block
+        &:nth-child(1)
+            left -26px
+        &:nth-child(2)    
+            left 180px
+        &:nth-child(3)
+            right 180px
+        &:nth-child(4)
+            right -6px
+.slide
+    position: absolute;
+    right -100%
+
+
+            
+.irs-single:hover ~ .range-slider__anchors
+    display block
+
+
+
+    
+
