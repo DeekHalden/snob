@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="289px" height="289px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Gradient Finish Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F0E8DC" offset="0%"></stop>
+            <stop stop-color="#E1D2BA" offset="15.8522003%"></stop>
+            <stop stop-color="#D1BD98" offset="27.861926%"></stop>
+            <stop stop-color="#C0A878" offset="40.9964923%"></stop>
+            <stop stop-color="#AF9358" offset="51.2456154%"></stop>
+            <stop stop-color="#AA8E54" offset="53.7882653%"></stop>
+            <stop stop-color="#A48A50" offset="56.3309152%"></stop>
+            <stop stop-color="#9F854B" offset="58.8735651%"></stop>
+            <stop stop-color="#998147" offset="61.4162149%"></stop>
+            <stop stop-color="#947C43" offset="63.9588648%"></stop>
+            <stop stop-color="#8F783F" offset="66.4385364%"></stop>
+            <stop stop-color="#8A733B" offset="68.9182079%"></stop>
+            <stop stop-color="#866F37" offset="71.3978795%"></stop>
+            <stop stop-color="#816A33" offset="73.877551%"></stop>
+            <stop stop-color="#7C662F" offset="76.3572226%"></stop>
+            <stop stop-color="#79632D" offset="78.7085459%"></stop>
+            <stop stop-color="#76612A" offset="81.0598693%"></stop>
+            <stop stop-color="#735E28" offset="83.4111926%"></stop>
+            <stop stop-color="#705C25" offset="85.7625159%"></stop>
+            <stop stop-color="#6D5923" offset="88.1138393%"></stop>
+            <stop stop-color="#6C5822" offset="90.4910714%"></stop>
+            <stop stop-color="#6B5721" offset="92.8683036%"></stop>
+            <stop stop-color="#6A5721" offset="95.2455357%"></stop>
+            <stop stop-color="#695620" offset="97.6227679%"></stop>
+            <stop stop-color="#68551F" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="-7.38624065e-14" y="0" width="289" height="289"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Gradient-Finish-Copy">
+            <g id="Rectangle-5" transform="translate(100.000000, 100.000000) rotate(-270.000000) translate(-100.000000, -100.000000) ">
+                <use fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                <use fill="url(#linearGradient-2)" style="mix-blend-mode: screen;" xlink:href="#path-3"></use>
+            </g>
+        </g>
+    </g>
+</svg>

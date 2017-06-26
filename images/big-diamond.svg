@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="289px" height="289px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>No Gradient Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F0E8DC" offset="0%"></stop>
+            <stop stop-color="#E1D2BA" offset="16.794882%"></stop>
+            <stop stop-color="#D1BD98" offset="31.3584184%"></stop>
+            <stop stop-color="#C0A878" offset="41.8112245%"></stop>
+            <stop stop-color="#AF9358" offset="52.2640306%"></stop>
+            <stop stop-color="#AA8E54" offset="54.6572066%"></stop>
+            <stop stop-color="#A48A50" offset="57.0503827%"></stop>
+            <stop stop-color="#9F854B" offset="59.4435587%"></stop>
+            <stop stop-color="#998147" offset="61.8367347%"></stop>
+            <stop stop-color="#947C43" offset="64.2299107%"></stop>
+            <stop stop-color="#8F783F" offset="66.5007175%"></stop>
+            <stop stop-color="#8A733B" offset="68.7715242%"></stop>
+            <stop stop-color="#866F37" offset="71.042331%"></stop>
+            <stop stop-color="#816A33" offset="73.3131378%"></stop>
+            <stop stop-color="#7C662F" offset="75.5839445%"></stop>
+            <stop stop-color="#79632D" offset="77.8244579%"></stop>
+            <stop stop-color="#76612A" offset="80.0649713%"></stop>
+            <stop stop-color="#735E28" offset="82.3054847%"></stop>
+            <stop stop-color="#705C25" offset="84.5459981%"></stop>
+            <stop stop-color="#6D5923" offset="86.7865115%"></stop>
+            <stop stop-color="#6C5822" offset="89.4292092%"></stop>
+            <stop stop-color="#6B5721" offset="92.0719069%"></stop>
+            <stop stop-color="#6A5721" offset="94.7146046%"></stop>
+            <stop stop-color="#695620" offset="97.3573023%"></stop>
+            <stop stop-color="#68551F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="No-Gradient-Copy" fill="url(#linearGradient-1)">
+            <rect id="Rectangle-5" x="0" y="0" width="289" height="289"></rect>
+        </g>
+    </g>
+</svg>
