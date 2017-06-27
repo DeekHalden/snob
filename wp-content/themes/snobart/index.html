@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Effective JavaScript: Frogger</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/bundle.min.css">
 </head>
 <body class="body">
@@ -12,17 +13,31 @@
       </div>
       <input class="range-slider__range" type="text" id="controls" name="controls" value=""/>
     </div>
-    <div class="slide slide--0">
-      <H2 class="slide__teaser">We are not snobs. We are just better than everyone else. Be our guest.</H2>
-      <p class="slide__text"></p>
-    </div>
-    <div class="slide slide--1">
-      <H2 class="slide__teaser">We are not snobs. We are just better than everyone else. Be our guest.</H2>
-      <p class="slide__text"></p>
-    </div>
-    <div class="slide slide--2">
-      <H2 class="slide__teaser">We are not snobs. We are just better than everyone else. Be our guest.</H2>
-      <p class="slide__text"> </p>
+    <div class="slides">
+      <div class="slide slide--0">
+        <H2 class="slide__teaser">
+          slide0We are not snobs. We are just better than everyone else. Be our guest.</H2>
+        <video width="320" height="240" loop="loop">
+          <source src="./video/ole.mp4" type="video/mp4"/>
+        </video>
+        <p class="slide__text">WEB DEVELOPMENT</p>
+      </div>
+      <div class="slide slide--1">
+        <H2 class="slide__teaser">
+          slide1We are not snobs. We are just better than everyone else. Be our guest.</H2>
+        <video width="320" height="240" loop="loop">
+          <source src="./video/vasizstas.mp4" type="video/mp4"/>
+        </video>
+        <p class="slide__text">MOBILE APPLICATIONS</p>
+      </div>
+      <div class="slide slide--2">
+        <H2 class="slide__teaser">
+          slide2We are not snobs. We are just better than everyone else. Be our guest.</H2>
+        <video width="320" height="240" loop="loop">
+          <source src="./video/xu.mp4" type="video/mp4"/>
+        </video>
+        <p class="slide__text">DESIGN</p>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="./scripts/ion.rangeSlider.min.js"></script>
