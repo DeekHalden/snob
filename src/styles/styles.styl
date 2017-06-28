@@ -93,10 +93,12 @@ canvas
     
     
     h2
+        text-transform uppercase
         color inherit
         position absolute
         transition .1s ease all
         right -100%
+        text-align left
         top 60%
         width: 100%
         border-bottom 10px solid #af9358
@@ -107,7 +109,7 @@ canvas
         left 50%
         transform translateY(-50%) translateX(-50%)
     p
-        color #fff
+        color  #af9358
         position absolute
         left -100%
         top 50%
@@ -118,9 +120,12 @@ canvas
             transform translateY(-50%) translateX(-50%)
         &.active--right
             left 100%
+            opacity 0
+            transition .7s linear all
+    &--1, &--2
+        h2
+            color #fff
             
-.irs-single:hover ~ .range-slider__anchors
-    display block
 
 
 

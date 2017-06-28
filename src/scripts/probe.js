@@ -1,7 +1,7 @@
 // var loader = new type.Loader();
 // //.add(fontFamilyName, url)
-// // loader.add('roboto', '/snobish/fonts/Roboto-Regular.ttf');
 // loader.add('roboto', './../fonts/Roboto-Regular.ttf');
+// // loader.add('roboto', '/snob/fonts/Roboto-Regular.ttf');
 
 // loader.once('loadComplete', init)
 // loader.load();
@@ -31,27 +31,32 @@
 //     let centerX = innerWidth / 2;
 //     let centerY = innerHeight / 2;
 
-//     const texture0 = './../images/big-diamond.svg'
-//     const texture1 = './../images/big-diamond-start.svg'
-//     const texture2 = './../images/big-diamond-end.svg'
-//     const texture3 = './../images/mask.png'
-//     const texture4 = './../images/dot.png'
-//     const texture5 = './../images/dot--small.png'
-//     const texture6 = './../images/snob-b-w.png'
-//     const texture7 = './../images/diamond-anchor.png'
-//     const texture8 = './../images/dot-white.png'
-//     const texture9 = './../images/logo.svg'
+//     if(location.pathname === '/') {
+// 	    var texture0 = './../images/big-diamond.svg'
+// 	    var texture1 = './../images/big-diamond-start.svg'
+// 	    var texture2 = './../images/big-diamond-end.svg'
+// 	    var texture3 = './../images/mask.png'
+// 	    var texture4 = './../images/dot.png'
+// 	    var texture5 = './../images/dot--small.png'
+// 	    var texture6 = './../images/snob-b-w.png'
+// 	    var texture7 = './../images/diamond-anchor.png'
+// 	    var texture8 = './../images/dot-white.png'
+// 	    var texture9 = './../images/logo.svg'
+    	
+//     } else {
+// 	    var texture0 = '/snob/images/big-diamond.svg'
+// 	    var texture1 = '/snob/images/big-diamond-start.svg'
+// 	    var texture2 = '/snob/images/big-diamond-end.svg'
+// 	    var texture3 = '/snob/images/mask.png'
+// 	    var texture4 = '/snob/images/dot.png'
+// 	    var texture5 = '/snob/images/dot--small.png'
+// 	    var texture6 = '/snob/images/snob-b-w.png'
+// 	    var texture7 = '/snob/images/diamond-anchor.png'
+// 	    var texture8 = '/snob/images/dot-white.png'
+// 	    var texture9 = '/snob/images/logo.svg'
+    	
+//     }
 
-//     // const texture0 = '/snobish/images/big-diamond.svg'
-//     // const texture1 = '/snobish/images/big-diamond-start.svg'
-//     // const texture2 = '/snobish/images/big-diamond-end.svg'
-//     // const texture3 = '/snobish/images/mask.png'
-//     // const texture4 = '/snobish/images/dot.png'
-//     // const texture5 = '/snobish/images/dot--small.png'
-//     // const texture6 = '/snobish/images/snob-b-w.png'
-//     // const texture7 = '/snobish/images/diamond-anchor.png'
-//     // const texture8 = '/snobish/images/dot-white.png'
-//     // const texture9 = '/snobish/images/snob-b-w.png'
 
 //     const diamondTexture = PIXI.Texture.fromImage(texture0);
 //     const diamondMaskStart = PIXI.Texture.fromImage(texture1);
@@ -671,35 +676,60 @@
 //     }, 1000)
 // }
 
+var directionX;
+document.addEventListener('mousemove', function(event) {
+    directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+});
 
-function slideText(startValue, endValue, valueNow, element) {
+function slideText(startValue, endValue, computedNow, element, valueNow) {
     let percent = 0
-    if($(element).hasClass('slide--0')) {
-        percent = (valueNow * 2.4) * 100 / endValue;
-    } else if($(element).hasClass('slide--1')){
-        percent = (valueNow * 2.3) * 100 / endValue;
-        percent -= 10;
+    if ($(element).hasClass('slide--0')) {
+        percent = (computedNow * 2.4) * 100 / endValue;
     } else {
-        percent = (valueNow * 2.2) * 100 / endValue;
+        percent = (computedNow * 2.3) * 100 / endValue;
         percent -= 10;
     }
     let value = -100;
-    value +=percent;
-    // if() {
-    //     $(element).fadeOut();
-    // }
-    $(element).children('h2').css('right', value +'%')
-    console.log(valueNow, endValue);
-    if(valueNow >= endValue - 10 && valueNow <= endValue) {
-        $(element).children('p').addClass('active--left');
-        var el  = $(element).children('video').fadeIn();
-        $(el)[0].play();
-        console.log('launchVideo #1');
-    } else {
-        $(element).children('p').fadeOut().removeClass('active--left');
-        $('video').fadeOut();
-    }
+    value += percent;
+    translateText(element, value);
+    fade(startValue, endValue, computedNow, element, valueNow, directionX);
+}
 
+
+function translateText(element, value) {
+    $(element).children('h2').css('right', value + '%')
+}
+
+function fade(startValue, endValue, computedNow, element, valueNow, direction) {
+	var firstClassName = $(element).attr('class').split(' ')[0]
+    var secondClassName = $(element).attr('class').split(' ')[1]
+    if (direction > 0) {
+        if (computedNow >= endValue - 10 && computedNow <= endValue) {
+            var el = $(element).children('video').fadeIn();
+            $(el)[0].play();
+            $(element).children('p').addClass('active--left');
+        } else if (computedNow >= endValue / 1.5) {
+            
+            $(element).parent().find('.' + firstClassName + '--' + (secondClassName.slice(-1) - 1)).children('p').removeClass('active--left').addClass('active--right');
+        } else if (computedNow >= endValue / 2) {
+            $('video').fadeOut();
+        } 
+    } else {
+    	if (computedNow >= endValue - 10 && computedNow <= endValue) {
+            $(element).children('p').removeClass('active--right').removeClass('active--left');
+            $('video').fadeOut();
+
+            // $(element).parent().find('.' + firstClassName + '--' + (secondClassName.slice(-1) + 1)).children('p').removeClass('active--right').addClass('active--left');
+            // $(element).children('p').removeClass('active--right');
+    	} else if (computedNow <= endValue / 1.5 && computedNow >= endValue / 1.55) {
+        	console.log(1)
+            
+            $(element).parent().find('.' + firstClassName + '--' + (secondClassName.slice(-1) - 1)).children('p').removeClass('active--right').addClass('active--left');
+        } else if (computedNow <= endValue / 2) {
+        	console.log(1)
+            $(element).parent().find('.' + firstClassName + '--' + (secondClassName.slice(-1) - 1)).children('video').fadeIn();
+        }
+    }
 }
 
 let globalIn = false;
@@ -715,28 +745,28 @@ $(document).ready(function() {
 
         },
         onChange: function(data) {
-            
+
             $('.range-slider__anchors').addClass('range-slider__anchors--important');
             $('.first-part').fadeOut();
             let firstBreakpoint = $('.range-slider__anchor')[1].x - 110;
             let secondBreakpoint = $('.range-slider__anchor')[2].x - 110;
             let thirdBreakpoint = $('.range-slider__anchor')[3].x - 110;
-            
+
             if (data.from < firstBreakpoint) {
-                slideText(data.min, firstBreakpoint, data.from, $('.slide.slide--0'));
-                console.log('firstBreakpoint');
+                slideText(data.min, firstBreakpoint, data.from, $('.slide.slide--0'), data.from);
+
             }
             if (data.from >= firstBreakpoint - 100) {
                 $('body').addClass('body--dark');
                 $('.slider-container').addClass('slider-container--light');
             }
             if (data.from >= firstBreakpoint && data.from < secondBreakpoint) {
-                slideText(firstBreakpoint, secondBreakpoint - firstBreakpoint, data.from - firstBreakpoint, $('.slide.slide--1'));
-                console.log('secondBreakpoint');
+                slideText(firstBreakpoint, secondBreakpoint - firstBreakpoint, data.from - firstBreakpoint, $('.slide.slide--1'), data.from);
+
             }
-            if (data.from >= secondBreakpoint && data.from <= thirdBreakpoint ) {
-                slideText(secondBreakpoint, thirdBreakpoint  - secondBreakpoint, data.from - secondBreakpoint, $('.slide.slide--2'));
-                console.log('thirdBreakpoint');
+            if (data.from >= secondBreakpoint && data.from <= thirdBreakpoint) {
+                slideText(secondBreakpoint, thirdBreakpoint - secondBreakpoint, data.from - secondBreakpoint, $('.slide.slide--2'), data.from);
+
             }
             if ((data.from <= firstBreakpoint - 10)) {
                 $('body').removeClass('body--dark')

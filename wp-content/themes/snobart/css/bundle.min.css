@@ -513,7 +513,7 @@ th {
 
 .irs-single {
     z-index: 100;
-    opacity: 0;
+    opacity: 1;
     /*attention !!!!! */
     transition: ease opacity;
 }
@@ -618,14 +618,6 @@ th {
 /* =====================================================================================================================
 // Skin details */
 
-.irs-line-mid,
-.irs-line-left,
-.irs-line-right,
-.irs-bar,
-.irs-bar-edge,
-.irs-slider {
-    background: url(../img/sprite-skin-flat.png) repeat-x;
-}
 .js-irs-0 {
     
     margin: 0 auto;
