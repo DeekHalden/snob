@@ -1,7 +1,7 @@
 var loader = new type.Loader();
 //.add(fontFamilyName, url)
 // loader.add('roboto', '/snobish/fonts/Roboto-Regular.ttf');
-loader.add('roboto', '/../fonts/Roboto-Regular.ttf');
+loader.add('roboto', '/snob/fonts/Roboto-Regular.ttf');
 
 loader.once('loadComplete', init)
 loader.load();
@@ -31,16 +31,16 @@ function init() {
     let centerX = innerWidth / 2;
     let centerY = innerHeight / 2;
 
-    const texture0 = '/../images/big-diamond.svg'
-    const texture1 = '/../images/big-diamond-start.svg'
-    const texture2 = '/../images/big-diamond-end.svg'
-    const texture3 = '/../images/mask.png'
-    const texture4 = '/../images/dot.png'
-    const texture5 = '/../images/dot--small.png'
-    const texture6 = '/../images/snob-b-w.png'
-    const texture7 = '/../images/diamond-anchor.png'
-    const texture8 = '/../images/dot-white.png'
-    const texture9 = '/../images/logo.svg'
+    const texture0 = '/snob/images/big-diamond.svg'
+    const texture1 = '/snob/images/big-diamond-start.svg'
+    const texture2 = '/snob/images/big-diamond-end.svg'
+    const texture3 = '/snob/images/mask.png'
+    const texture4 = '/snob/images/dot.png'
+    const texture5 = '/snob/images/dot--small.png'
+    const texture6 = '/snob/images/snob-b-w.png'
+    const texture7 = '/snob/images/diamond-anchor.png'
+    const texture8 = '/snob/images/dot-white.png'
+    const texture9 = '/snob/images/logo.svg'
 
     // const texture0 = '/snobish/images/big-diamond.svg'
     // const texture1 = '/snobish/images/big-diamond-start.svg'
