@@ -513,7 +513,7 @@ th {
 
 .irs-single {
     z-index: 100;
-    opacity: 1;
+    opacity: 0;
     /*attention !!!!! */
     transition: ease opacity;
 }
@@ -816,10 +816,12 @@ canvas {
   color: #000;
 }
 .slide h2 {
+  text-transform: uppercase;
   color: inherit;
   position: absolute;
   transition: 0.1s ease all;
   right: -100%;
+  text-align: left;
   top: 60%;
   width: 100%;
   border-bottom: 10px solid #af9358;
@@ -832,7 +834,7 @@ canvas {
   transform: translateY(-50%) translateX(-50%);
 }
 .slide p {
-  color: #fff;
+  color: #af9358;
   position: absolute;
   left: -100%;
   top: 50%;
@@ -845,7 +847,10 @@ canvas {
 }
 .slide p.active--right {
   left: 100%;
+  opacity: 0;
+  transition: 0.7s linear all;
 }
-.irs-single:hover ~ .range-slider__anchors {
-  display: block;
+.slide--1 h2,
+.slide--2 h2 {
+  color: #fff;
 }
