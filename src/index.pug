@@ -9,32 +9,47 @@
 body.body
     .slider-container
         //- (style="display:none;")
+        .main-text-start
+            p Click to enter website
+        .main-text
+            p DRAG THE DIAMOND RIGHT
         .range-slider
             .range-slider__anchors
-                -for(var i=0; i < 4; i++)
-                    img(src="./images/diamond-anchor.png").range-slider__anchor
+                .range-slider__anchor
+                .range-slider__anchor
+                .range-slider__anchor
+                .range-slider__anchor
 
             input(type="text" id="controls" name="controls" value="").range-slider__range
         .slides
             .slide.slide--0
-                H2.slide__teaser slide0
-                    | We are not snobs. We are just better than everyone else. Be our guest.
+                H2.slide__teaser We are not snobs. We are just better than everyone else. Be our guest.
                 video(width="320" height="240" loop)
                     source(src="./video/ole.mp4" type="video/mp4")
-                p.slide__text WEB DEVELOPMENT
+                .slide__head-description
+                    h3.slide__description As snobs, we prefer making
+                    h3.slide__description significantly perfect
+                .slide__text
+                    span.slide__paragraph WEB 
+                    span.slide__paragraph DEVELOPMENT
             .slide.slide--1
-                H2.slide__teaser slide1
-                    | We are not snobs. We are just better than everyone else. Be our guest.
                 video(width="320" height="240" loop)
                     source(src="./video/vasizstas.mp4" type="video/mp4")
-                p.slide__text MOBILE APPLICATIONS
+                .slide__head-description
+                    h3.slide__description As snobs, we prefer making
+                    h3.slide__description significantly perfect
+                .slide__text
+                    span.slide__paragraph MOBILE
+                    span.slide__paragraph APPLICATIONS
             .slide.slide--2
-                H2.slide__teaser slide2
-                    | We are not snobs. We are just better than everyone else. Be our guest.
                 video(width="320" height="240" loop)
                     source(src="./video/xu.mp4" type="video/mp4")
+                .slide__head-description
+                    h3.slide__description As snobs, we prefer making
+                    h3.slide__description significantly perfect
+                .slide__text
+                    span.slide__paragraph DESIGN
 
-                p.slide__text DESIGN
         script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
         script(src="./scripts/ion.rangeSlider.min.js")
         script(src="./scripts/pixi.min.js")

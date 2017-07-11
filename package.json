@@ -39,6 +39,7 @@
     "jquery": "^3.2.1",
     "jquery-validation": "^1.16.0",
     "magnific-popup": "^1.1.0",
+    "pixi-svg": "^1.0.1",
     "pixi.js": "^4.5.3",
     "slick-carousel": "^1.6.0",
     "webpack-stream": "^3.2.0"
