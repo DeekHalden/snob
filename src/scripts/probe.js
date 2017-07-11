@@ -542,10 +542,12 @@ function init() {
             this.obj.anchor.set(.5, .5)
             this.add = true
             this.obj.on('tap', function() {
-                clearAdditions()
+                clearAdditions();
+                $('.main-text-start').fadeOut();
             });
             this.obj.on('mousedown', function() {
-                clearAdditions()
+                clearAdditions();
+                $('.main-text-start').fadeOut();
             });
             // this.obj.alpha = 0
         }
