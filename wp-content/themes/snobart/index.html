@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html></html>
 <head>
-<meta charset="UTF-8">
-<title>Effective JavaScript: Frogger</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/bundle.min.css">
+  <meta charset="UTF-8"/>
+  <title>Effective JavaScript: Frogger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/bundle.min.css"/>
 </head>
 <body class="body">
-  <div class="slider-container">
+  <div class="slider-container"><a class="menu">menu</a>
     <div class="main-text-start">
       <p>Click to enter website</p>
     </div>
@@ -16,51 +16,130 @@
     </div>
     <div class="range-slider">
       <div class="range-slider__anchors">
-        <div class="range-slider__anchor"></div>
-        <div class="range-slider__anchor"></div>
-        <div class="range-slider__anchor"></div>
-        <div class="range-slider__anchor"></div>
-      </div>
-      <input class="range-slider__range" type="text" id="controls" name="controls" value=""/>
+        <div class="range-slider__anchor">
+        </div>
+        <div class="range-slider__anchor">
+        </div>
+        <div class="range-slider__anchor">
+        </div>
+        <div class="range-slider__anchor">
+        </div>
+      </div><input class="range-slider__range" type="text" id="controls" name="controls" value=""/>
     </div>
-    <div class="slides">
-      <div class="slide slide--0">
-        <H2 class="slide__teaser">We are not snobs. We are just better than everyone else. Be our guest.</H2>
-        <video width="320" height="240" loop="loop">
-          <source src="./video/ole.mp4" type="video/mp4"/>
-        </video>
-        <div class="slide__head-description">
-          <h3 class="slide__description">As snobs, we prefer making</h3>
-          <h3 class="slide__description">significantly perfect</h3>
+    <div class="swiper-container swiper-container-h">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"> 
+          <h2 class="text">We are not snobs, we are just better than everyone else. Be our guest</h2>
         </div>
-        <div class="slide__text"><span class="slide__paragraph">WEB </span><span class="slide__paragraph">DEVELOPMENT</span></div>
-      </div>
-      <div class="slide slide--1">
-        <video width="320" height="240" loop="loop">
-          <source src="./video/vasizstas.mp4" type="video/mp4"/>
-        </video>
-        <div class="slide__head-description">
-          <h3 class="slide__description">As snobs, we prefer making</h3>
-          <h3 class="slide__description">significantly perfect</h3>
+        <div class="swiper-slide">
+          <div class="swiper-container slide--1 swiper-container-v">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide parallax-bg" data-swiper-parallax="-23%">
+                <video class="video" width="320" height="240">
+                  <source src="./video/ole.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">As snobs, we prefer making
+                  </h3>
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">significantly perfect
+                  </h3>
+                </div>
+                <div class="swiper-slide__text" data-swiper-parallax="-200"><span class="swiper-slide__paragraph">WEB</span><span class="swiper-slide__paragraph">DEVELOPMENT</span>
+                </div>
+                <div class="swiper-slide__goto-wrapper"><a class="swiper-slide__goto" data-swiper-parallax="-10000">learn more</a>
+                </div>
+              </div>
+              <div class="swiper-slide swiper-slide--bottom">
+                <video class="video" width="320" height="240">
+                  <source src="./video/ole.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description">qwert
+                  </h3>
+                </div>
+                <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                </div><a class="swiper-slide__goto">learn more</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="slide__text"><span class="slide__paragraph">MOBILE</span><span class="slide__paragraph">APPLICATIONS</span></div>
-      </div>
-      <div class="slide slide--2">
-        <video width="320" height="240" loop="loop">
-          <source src="./video/xu.mp4" type="video/mp4"/>
-        </video>
-        <div class="slide__head-description">
-          <h3 class="slide__description">As snobs, we prefer making</h3>
-          <h3 class="slide__description">significantly perfect</h3>
+        <div class="swiper-slide">
         </div>
-        <div class="slide__text"><span class="slide__paragraph">DESIGN</span></div>
+        <div class="swiper-slide">
+          <div class="swiper-container slide--2 swiper-container-v">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide parallax-bg" data-swiper-parallax="-23%">
+                <video class="video" width="320" height="240">
+                  <source src="./video/vasizstas.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">As snobs, we prefer making
+                  </h3>
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">significantly perfect
+                  </h3>
+                </div>
+                <div class="swiper-slide__text" data-swiper-parallax="-200"><span class="swiper-slide__paragraph">MOBILE</span><span class="swiper-slide__paragraph">APPLICATIONS</span>
+                </div>
+                <div class="swiper-slide__goto-wrapper"><a class="swiper-slide__goto" data-swiper-parallax="-10000">learn more</a>
+                </div>
+              </div>
+              <div class="swiper-slide swiper-slide--bottom">
+                <video class="video" width="320" height="240">
+                  <source src="./video/ole.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description">qwert
+                  </h3>
+                </div>
+                <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                </div><a class="swiper-slide__goto">learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-container slide--3 swiper-container-v">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide parallax-bg" data-swiper-parallax="-23%">
+                <video class="video" width="320" height="240">
+                  <source src="./video/xu.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">As snobs, we prefer making
+                  </h3>
+                  <h3 class="swiper-slide__description" data-swiper-parallax="-500">significantly perfect
+                  </h3>
+                </div>
+                <div class="swiper-slide__text" data-swiper-parallax="-200"><span class="swiper-slide__paragraph">DESIGN</span>
+                </div>
+                <div class="swiper-slide__goto-wrapper"><a class="swiper-slide__goto" data-swiper-parallax="-10000">learn more</a>
+                </div>
+              </div>
+              <div class="swiper-slide swiper-slide--bottom">
+                <video class="video" width="320" height="240">
+                  <source src="./video/ole.mp4" type="video/mp4"/>
+                </video>
+                <div class="swiper-slide__head-description">
+                  <h3 class="swiper-slide__description">qwert
+                  </h3>
+                </div>
+                <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                </div><a class="swiper-slide__goto">learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+        </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="./scripts/ion.rangeSlider.min.js"></script>
-    <script src="./scripts/pixi.min.js"></script>
-    <script src="./scripts/type.min.js"></script>
-    <script src="./scripts/probe.js"></script>
   </div>
-</body></body>
-</html>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="./scripts/ion.rangeSlider.min.js"></script>
+  <script src="./scripts/swiper.jquery.min.js"></script>
+  <script src="./scripts/pixi.min.js"></script>
+  <script src="./scripts/type.min.js"></script>
+  <script src="./scripts/probe.js"></script>
+</body>

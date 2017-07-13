@@ -33,6 +33,7 @@
   "dependencies": {
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
+    "bemto.pug": "^2.1.0",
     "fabric": "^1.7.12",
     "file-loader": "^0.11.1",
     "gulp-csso": "^0.1.8",

@@ -60,57 +60,32 @@
 </head>
 <body>
 <div class="container">
-
-  <div class="accordion">
-    <ul class="list-unstyled">
-      <li class="open">
-        <div class="question">
-          <h2>Will I be rich?</h2>
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-        <div class="answer">
-          <p>Absolutely! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
-        </div>
-      </li>
-      <li>
-        <div class="question">
-          <h2>What's for dinner?</h2>
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-        <div class="answer">
-          <p>Whatever you want! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
-        </div>
-      </li>
-      <li>
-        <div class="question">
-          <h2>Is JavaScript awesome?</h2>
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-        <div class="answer">
-          <p>Yes! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <a href="#1" data-id="1">first</a>
+  <a href="#2" data-id="2">second</a>
+  <a href="#3" data-id="3">third</a>
+  <select name="" id="">
+    <option value="1" data-id="2">second</option>
+    <option value="2" data-id="1">first</option>
+    <option value="3" data-id="3">third</option>
+  </select>  
+  
 
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
 
   <!-- ???????? start javascript ???????? -->
   <script>
-    const accordion = document.querySelector('.accordion');
-    const items     = accordion.querySelectorAll('li');
-    const questions = accordion.querySelectorAll('.question');
-    function toggleAccordion() {
-      const thisItem = this.parentNode;
-      items.forEach(item => {
-        if (thisItem == item) {
-          thisItem.classList.toggle('open');   
-          return;
-        }
-        item.classList.remove('open');
-      });         
-    }
-    questions.forEach(question => question.addEventListener('click', toggleAccordion));
+    $(document).ready(function() {
+      $('a').on('click',function(e) {
+        e.preventDefault()
+        let id = $(this).data('id')
+        $('option').attr('selected', false)
+        $('option[data-id="'+id+'"').attr('selected', true)
+      });
+    });
   </script>
 </body>
 </html>
