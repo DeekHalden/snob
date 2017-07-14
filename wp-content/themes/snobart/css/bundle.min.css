@@ -515,7 +515,7 @@ th {
     z-index: 100;
     opacity: 1;
     /*attention !!!!! */
-    transition: ease opacity;
+    transition: .5s ease transform
 }
 
 .irs-from,
@@ -877,18 +877,34 @@ a:hover {
   z-index: 123;
 }
 .swiper-slide:nth-child(2n + 3) {
-  background-color: #000;
+  background-color: #0e0c0e;
+}
+.swiper-slide__head-description {
+  position: absolute;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: #fff;
+  text-align: right;
+  max-width: 800px;
+}
+.swiper-slide__description {
+  text-align: right;
+  font-weight: 100;
+  line-height: 2px;
+  font-size: 24px;
+  letter-spacing: 4px;
 }
 .swiper-slide__goto-wrapper {
+  bottom: 0px;
+  left: 0;
+  right: 0px;
   height: 50px;
-  position: absolute;
-  transform: translateX(-50%);
-  bottom: 50px;
-  left: 50%;
-  width: 100px;
+  position: fixed;
+  transform: translateX(-50%) translateY(-50%);
 }
 .swiper-slide__goto {
-  position: relative;
   cursor: pointer;
   text-decoration: none;
   color: #fff;
@@ -914,6 +930,13 @@ a:hover {
   transition: 3s linear all;
   right: -100% !important;
 }
+.swiper-slide .video-cont {
+  position: fixed;
+  top: calc(50% - 120px);
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
 .swiper-slide .video {
   position: absolute;
   top: 40%;
@@ -923,30 +946,12 @@ a:hover {
 .swiper-slide .video--active {
   display: block;
 }
-.swiper-slide__head-description {
-  position: absolute;
-  margin: 0 auto;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  color: #fff;
-  text-align: right;
-  max-width: 800px;
-}
-.swiper-slide__description {
-  text-align: right;
-  font-weight: 100;
-  line-height: 2px;
-  font-size: 24px;
-  letter-spacing: 4px;
-}
 .swiper-slide__text {
   max-width: 900px;
   font-weight: 100;
   text-align: left;
   font-size: 115px;
   position: absolute;
-  left: -100%;
   top: 70%;
   transform: translateY(-50%);
   transition: 1s linear all;

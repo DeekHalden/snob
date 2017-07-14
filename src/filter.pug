@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+include ../node_modules/bemto.pug/bemto
+html
+head
+    meta(charset="UTF-8")
+    title Effective JavaScript: Frogger
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/bundle.min.css")
+    style.
+        li {
+            transition: .2s ease all
+        }
+        li.active {
+            display: block !important;
+            color: red;
+            opacity: 1 !important;
+        }
+        li.fade {
+            opacity: 0;
+            display: none
+        }
+
+body.body(data-list='{"A":["aaa","aab"],"B":["bbb","bbA"],"C":["caa","Cab"],"D":["bbd","bDc"]}')
+    -var data = {"A":["aaa","aab"],"B":["bbb","bbA"],"C":["caa","Cab"],"D":["bbd","bDc"]}
+    input(type="text" onkeyup="handleSearch(event)")
+    input(type="submit" )
+
+    ul
+        each el, index in data
+            p=index
+            each word in el
+                li=word
+    script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
+    script.
+        const LIST = $('.body').data('list');
+        function handleSearch(event) {
+            
+            if( event.target.value.length < 1) {
+                $('li').removeClass('active').removeClass('fade')
+            } else {
+                var searchQuery = event.target.value.toLowerCase();
+                $('li').removeClass('active').removeClass('fade')
+                for (let key in LIST) {
+                    if(LIST.hasOwnProperty(key)) {
+                        var displayedResult = LIST[key].filter(function(el){
+                            var searchValue = el.toLowerCase();
+                            console.log(searchValue)
+                            //- console.log(searchValue.indexOf(searchQuery) !== -1)
+                            return searchValue.indexOf(searchQuery) !== -1;
+                        });
+                        for(var i = 0; i < displayedResult.length; i++) {
+                            $('li').each(function() {
+                                if($(this).text() === displayedResult[i]) {
+                                    $('li').addClass('fade')
+                                    $(this).addClass('active')
+                                }
+                            })
+                        }
+                    }            
+                }
+            }
+        }
+

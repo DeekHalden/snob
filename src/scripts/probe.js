@@ -743,18 +743,22 @@ $(document).ready(function() {
         $(element).children('.text').css('right', value + '%')
     }
 
-    var swiperH = new Swiper('.swiper-container-h', {
-        pagination: '.swiper-pagination-h',
-        paginationClickable: true,
+    const swiperH = new Swiper('.swiper-container-h', {
         mousewheelForceToAxis: true,
         effect: 'fade',
         shortSwipes: false,
         onlyExternal: true,
-        longSwipes: false
+        longSwipes: false,
+        // parallax: true,
+        onSlideNextStart(swiper) {
+            console.log($('.swiper-slide')[swiperH.activeIndex]    )
+            // $('.swiper-slide')[swiperH.activeIndex].find('.swiper-slide__text').addClass('active--left') 
+            // let index = $(this).closest('.swiper-container-h').attr('class').split(' ')[1].split('--')[1] - 1
+            // swiperV[index].slideNext();
+        }
+        
     });
-    var swiperV = new Swiper('.swiper-container-v', {
-        pagination: '.swiper-pagination-v',
-        paginationClickable: true,
+    const swiperV = new Swiper('.swiper-container-v', {
         direction: 'vertical',
         mousewheelControl: true,
         parallax: true,
@@ -763,12 +767,21 @@ $(document).ready(function() {
         onlyExternal: true,
         shortSwipes: false,
         longSwipes: false,
-        onSlideChangeStart(swiper) {
-            $('.swiper-container').toggleClass('swiper-container--active')
+        onSlidePrevEnd(swiper) {
+            $('.swiper-container').removeClass('swiper-container--active')
+            
+        },
+        onSlideNextStart(swiper) {
+            $('.swiper-container').addClass('swiper-container--active')
             
         },
         onSlideChangeEnd(swiper) {
         }
+    });
+
+    $('.swiper-slide__goto').on('click',function() {
+        let index = $(this).closest('.swiper-container-v').attr('class').split(' ')[1].split('--')[1] - 1
+        swiperV[index].slideNext();
     });
 
     $("#controls").ionRangeSlider({
@@ -777,6 +790,7 @@ $(document).ready(function() {
         max: window.innerWidth - 280,
         from: 0,
         keyboard: true,
+        hide_min_max: true,
         onStart: function(data) {},
         onChange: function(data) {
             let computedNow = data.from
@@ -793,6 +807,7 @@ $(document).ready(function() {
                 $('.slider-container').addClass('slider-container--light');
             }
             if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
+                
                 swiperH.slideTo(1, 1000)
             }
             if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
