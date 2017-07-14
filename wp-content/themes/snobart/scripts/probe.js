@@ -747,7 +747,10 @@ $(document).ready(function() {
         pagination: '.swiper-pagination-h',
         paginationClickable: true,
         mousewheelForceToAxis: true,
-        effect: 'fade'
+        effect: 'fade',
+        shortSwipes: false,
+        onlyExternal: true,
+        longSwipes: false
     });
     var swiperV = new Swiper('.swiper-container-v', {
         pagination: '.swiper-pagination-v',
@@ -757,6 +760,9 @@ $(document).ready(function() {
         parallax: true,
         nested: true,
         speed: 1500,
+        onlyExternal: true,
+        shortSwipes: false,
+        longSwipes: false,
         onSlideChangeStart(swiper) {
             $('.swiper-container').toggleClass('swiper-container--active')
             
