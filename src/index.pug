@@ -8,14 +8,9 @@ head
     link(rel="stylesheet" href="css/bundle.min.css")
 -var data = [{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container
-        //- (style="display:none;")
-        a.menu() menu
+    .slider-container(style="visibility:hidden;opacity:0")
+        a.menu-toggler() menu
 
-        .main-text-start
-            p Click to enter website
-        .main-text
-            p DRAG THE DIAMOND RIGHT
         +b.range-slider
             +e.anchors
                 +e.anchor
@@ -24,40 +19,44 @@ body.body
                 +e.anchor
 
             +e.INPUT(type="text" id="controls" name="controls" value="").range
-        .swiper-container.swiper-container-h
+        .swiper-container.swiper-container-vertical1
             .swiper-wrapper
-                +b.swiper-slide 
-                    h2.text We are not snobs, we are just better than everyone else. Be our guest
+                .swiper-slide.menu-wrapper
+                    p ololo
+                .swiper-slide.active
+                    .swiper-container.swiper-container-h
+                        .swiper-wrapper
+                            +b.swiper-slide.swiper-slide--horizontal
+                                h2.text We are not snobs, we are just better than everyone else. Be our guest
 
-                each el, i in data 
-                    +b.swiper-slide
-                        .swiper-container(class='slide--' + (i + 1)).swiper-container-v
-                            .swiper-wrapper
-                                +b.swiper-slide.parallax-bg(data-swiper-parallax="-23%")
-                                    .video-cont(data-swiper-parallax="-100")
-                                        video.video(width="320" height="240" )
-                                            source(src=el.src type="video/mp4")
-                                    +e.head-description
-                                        each h3 in el.description
-                                            +e.H3.description(data-swiper-parallax="-500")=h3
-                                    +e.text(data-swiper-parallax="-10000")
-                                        each p in el.paragraph
-                                            +e.SPAN.paragraph=p
-                                    +e.goto-wrapper(data-swiper-parallax="-1000")
-                                        +e.A.goto learn more
-                                +b.swiper-slide.swiper-slide--bottom
-                                    video.video(width="320" height="240")
-                                        source(src='./video/ole.mp4' type="video/mp4")
-                                    +e.head-description
-                                        +e.H3.description qwert
-                                    +e.text
-                                        +e.SPAN.paragraph sqeqweqwe
-                    +b.swiper-slide
-
-    script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
-    script(src="./scripts/ion.rangeSlider.min.js")
-    script(src="./scripts/swiper.jquery.min.js")
-    script(src="./scripts/pixi.min.js")
-    script(src="./scripts/type.min.js")
+                            each el, i in data 
+                                +b.swiper-slide.swiper-slide--horizontal
+                                    .swiper-container(class='slide--' + (i + 1)).swiper-container-v
+                                        .swiper-wrapper
+                                            +b.swiper-slide.parallax-bg(data-swiper-parallax="-23%")
+                                                .video-cont(data-swiper-parallax="-100")
+                                                    video.video(width="320" height="240" )
+                                                        source(src=el.src type="video/mp4")
+                                                +e.head-description
+                                                    each h3 in el.description
+                                                        +e.H3.description(data-swiper-parallax="-500")=h3
+                                                +e.text(data-swiper-parallax="-10000")
+                                                    each p in el.paragraph
+                                                        +e.SPAN.paragraph=p
+                                                +e.goto-wrapper(data-swiper-parallax="-1000")
+                                                    +e.A.goto learn more
+                                            +b.swiper-slide.swiper-slide--bottom
+                                                video.video(width="320" height="240")
+                                                    source(src='./video/ole.mp4' type="video/mp4")
+                                                +e.head-description
+                                                    +e.H3.description qwert
+                                                +e.text
+                                                    +e.SPAN.paragraph sqeqweqwe
+                                +b.swiper-slide
+    .main-text-start
+        p Click to enter website
+    .main-text
+        p DRAG THE DIAMOND RIGHT
     script(src="./scripts/probe.js")
+
 

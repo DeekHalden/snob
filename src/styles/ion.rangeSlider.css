@@ -78,9 +78,12 @@
 
 .irs-single {
     z-index: 100;
-    opacity: 1;
+    opacity: 0;
     /*attention !!!!! */
     transition: .5s ease transform
+}
+.irs-single.active {
+    opacity: 1
 }
 
 .irs-from,

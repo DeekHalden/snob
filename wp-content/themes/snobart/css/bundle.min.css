@@ -513,9 +513,12 @@ th {
 
 .irs-single {
     z-index: 100;
-    opacity: 1;
+    opacity: 0;
     /*attention !!!!! */
     transition: .5s ease transform
+}
+.irs-single.active {
+    opacity: 1
 }
 
 .irs-from,
@@ -736,6 +739,7 @@ body {
   width: 100%;
   font-family: Roboto-reg;
   text-align: center;
+  overflow: hidden;
   margin: 0;
 }
 .body {
@@ -758,7 +762,8 @@ a {
 a:hover {
   color: #af9358;
 }
-.menu {
+.menu-toggler {
+  display: none;
   z-index: 10;
   position: absolute;
   top: 50px;
@@ -767,7 +772,7 @@ a:hover {
   cursor: pointer;
   font-size: 20px;
 }
-.menu--active {
+.menu-toggler--active {
   color: #fff;
 }
 .main-text {
@@ -871,6 +876,12 @@ a:hover {
 .swiper-slide {
   height: 100%;
   position: relative;
+}
+.swiper-slide.menu-wrapper {
+  background: #0e0c0e;
+}
+.swiper-slide.menu-wrapper p {
+  color: #fff;
 }
 .swiper-slide--bottom {
   background: #fff;

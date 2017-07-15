@@ -75,31 +75,37 @@ gulp.task('images', function() {
 
 gulp.task('js', function() {
      return gulp.src('./src/scripts/probe.js')
-        // .pipe(concat('probe.js'))
-        //  .pipe(webpackStream({
-        //     entry: {
-        //         app: './src/scripts/probe.js',
-        //     },
-        //     output: {
-        //         path: path.resolve(__dirname, './src/scripts/client/'),
-        //         filename: 'probe.js',
-        //     },
-        //     module: {
-        //         loaders: [{
-        //             test: /\.js$/,
-        //             // excluding some local linked packages.
-        //             // for normal use cases only node_modules is needed.
-        //             exclude: /node_modules|vue\/src|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
-        //             use: {
-        //                 loader: 'babel-loader',
-        //                 options: {
-        //                     presets: ['es2015']
-        //                 }
-        //             }
+        .pipe(concat('probe.js'))
+         .pipe(webpackStream({
+            entry: {
+                app: './src/scripts/probe.js',
+            },
+            output: {
+                path: path.resolve(__dirname, './src/scripts/client/'),
+                filename: 'probe.js',
+            },
+            module: {
+                loaders: [{
+                    test: /\.js$/,
+                    // excluding some local linked packages.
+                    // for normal use cases only node_modules is needed.
+                    exclude: /node_modules|vue\/src|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015']
+                        }
+                    }
 
-        //         }]
-        //     }
-        // }, webpack))
+                }],
+                // postLoaders: [
+                //     {
+                //         include: '/node_modules/pixi.js',
+                //         loader: 'transform?brfs'
+                //     }
+                // ]
+            }
+        }, webpack))
         .pipe(gulp.dest('wp-content/themes/snobart/scripts'));
 });
 

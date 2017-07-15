@@ -34,15 +34,19 @@
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
     "bemto.pug": "^2.1.0",
+    "brfs": "^1.4.3",
     "fabric": "^1.7.12",
     "file-loader": "^0.11.1",
     "gulp-csso": "^0.1.8",
+    "ion-rangeslider": "^2.2.0",
     "jquery": "^3.2.1",
     "jquery-validation": "^1.16.0",
     "magnific-popup": "^1.1.0",
     "pixi-svg": "^1.0.1",
     "pixi.js": "^4.5.3",
     "slick-carousel": "^1.6.0",
+    "swiper": "^3.4.2",
+    "transform-loader": "^0.2.4",
     "webpack-stream": "^3.2.0"
   }
 }

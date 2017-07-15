@@ -16,6 +16,7 @@ body
     width 100%;
     font-family Roboto-reg
     text-align center
+    overflow hidden
     
     margin 0
     
@@ -36,7 +37,8 @@ a
     font-size 20px
     &:hover
         color $gold
-.menu
+.menu-toggler
+    display: none
     z-index 10
     position absolute
     top 50px
@@ -138,6 +140,10 @@ a
     height 100%
     // background-color #fff
     position relative
+    &.menu-wrapper
+        background #0E0C0E
+        p
+            color #fff
     &--bottom
         background #fff
         z-index 123
