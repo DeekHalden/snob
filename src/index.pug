@@ -8,8 +8,7 @@ head
     link(rel="stylesheet" href="css/bundle.min.css")
 -var data = [{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container
-        //- (style="visibility:hidden;opacity:0")
+    .slider-container(style="visibility:hidden;opacity:0")
         a.menu-toggler() menu
 
         +b.range-slider
@@ -41,7 +40,7 @@ body.body
                                                 +e.head-description
                                                     each h3 in el.description
                                                         +e.H3.description(data-swiper-parallax="-500")=h3
-                                                +e.text(data-swiper-parallax="-100")
+                                                +e.text(data-swiper-parallax="-10000")
                                                     each p in el.paragraph
                                                         +e.SPAN.paragraph=p
                                                 +e.goto-wrapper(data-swiper-parallax="-1000")
