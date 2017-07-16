@@ -74,9 +74,10 @@ gulp.task('images', function() {
 
 
 gulp.task('js', function() {
-     return gulp.src('./src/scripts/probe.js')
+    const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+    return gulp.src('./src/scripts/probe.js')
         .pipe(concat('probe.js'))
-         .pipe(webpackStream({
+        .pipe(webpackStream({
             entry: {
                 app: './src/scripts/probe.js',
             },
@@ -104,8 +105,10 @@ gulp.task('js', function() {
                 //         loader: 'transform?brfs'
                 //     }
                 // ]
+
             }
         }, webpack))
+        
         .pipe(gulp.dest('wp-content/themes/snobart/scripts'));
 });
 
