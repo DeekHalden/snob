@@ -37,7 +37,7 @@ a
     font-size 20px
     &:hover
         color $gold
-.menu-toggler
+.menu-close, .menu-toggler
     display: none
     z-index 10
     position absolute
@@ -48,6 +48,9 @@ a
     font-size 20px
     &--active
         color #fff
+.menu-close
+    display none
+    color #fff
 .main-text
     text-transform uppercase
     display none
@@ -134,15 +137,20 @@ a
 .swiper-container 
     width 100%
     height 100%
+    transition 1s ease all
     &--active
         z-index 2
+.swiper-container-v
+    .swiper-slide:not(:first-child)
+        background-color #fff
+    
 .swiper-slide
     height 100%
     // background-color #fff
     position relative
     &.menu-wrapper
         background #0E0C0E
-        p
+        h1
             color #fff
     &--bottom
         background #fff
@@ -201,7 +209,7 @@ a
         right 0
         transform translateY(-50%)
     .video
-        // display none
+        display none
         position absolute
         top 40%
         left 50%
@@ -210,83 +218,38 @@ a
             display block
 
     &__text
-        max-width 900px
+        max-width 1000px
         font-weight 100
         text-align left
-        font-size 115px
+        font-size 90px
         position absolute
-        // left -100%
+        left 50%
+        transform translateX(-50%) translateY(-50%)
         top 70%
-        transform translateY(-50%)
-        transition 1s linear all
-        &.active--left
-            left 50%
-            transform translateY(-50%) translateX(-50%)
-        &.active--right
-            left 100%
-            
-    
+        color transparent
+        transition 3s linear all
+        transition-delay 1.5s
+        &--active
+            color #fff
+            // transition-delay 0s
     &__paragraph
         letter-spacing 30px
         display inline-block        
-        max-width 1100px
         height 79px
         margin 0 
+        color inherit
         line-height 54px
-        color transparent
         position relative
-        transition 2s linear all
-        transition-delay 2s
-        &--active
-            color #fff
-            // transition .5s linear all
-            // transition-delay 0s
-        // &--hidden
-        //     color transparent
-            
+        margin-right -30px
         &:after
             visibility visible
             left 0
             content ''
             position absolute
-            bottom 0
-            width 100%
+            bottom 10px
+            width calc(100% - 30px)
             height 9px 
             background-color #af9358
-// .slides
-//     left 0
-//     right -15px
-//     width calc(100% + 15px)
-//     position relative
-//     height 100vh
-    
-    
-// .slide
-//     left 0
-//     right 0px
-//     // height 100vh
-//     background-color transparent
-//     position absolute
-//     width 100%
-    
-    
-//     color #000
-//     .top
-//         top 0
-//         position absolute
-//         width 100%
-//         height 50%
-//     .bottom 
-//         top 50%
-//         position absolute
-//         width 100%
-//         height 50%
-        
-//     &--1, &--2
-//         h2
-            
-//             color #fff
-            
 
 
 

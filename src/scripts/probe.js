@@ -4,13 +4,12 @@ import { swiper } from 'swiper'
 import * as PIXI from 'pixi.js'
 import ionRangeSlider from 'ion-rangeslider'
 
-window.onload = () => {
+$(document).ready(function() {
     init()
-}
-
+});
 
 function init() {
-    function clearAdditions() {
+    function clearAdditions(e) {
         moveToRandomPosition = false;
         moveDiamondToStart = true;
         logo.decreaseOpacity();
@@ -53,16 +52,16 @@ function init() {
         var texture9 = './../images/logo.svg'
 
     } else {
-        var texture0 = '/snob/images/big-diamond.svg'
-        var texture1 = '/snob/images/big-diamond-start.svg'
-        var texture2 = '/snob/images/big-diamond-end.svg'
-        var texture3 = '/snob/images/mask.png'
-        var texture4 = '/snob/images/dot.png'
-        var texture5 = '/snob/images/dot--small.png'
-        var texture6 = '/snob/images/snob-b-w.png'
-        var texture7 = '/snob/images/diamond-anchor.png'
-        var texture8 = '/snob/images/dot-white.png'
-        var texture9 = '/snob/images/logo.svg'
+        var texture0 = '/snobV1/images/big-diamond.svg'
+        var texture1 = '/snobV1/images/big-diamond-start.svg'
+        var texture2 = '/snobV1/images/big-diamond-end.svg'
+        var texture3 = '/snobV1/images/mask.png'
+        var texture4 = '/snobV1/images/dot.png'
+        var texture5 = '/snobV1/images/dot--small.png'
+        var texture6 = '/snobV1/images/snob-b-w.png'
+        var texture7 = '/snobV1/images/diamond-anchor.png'
+        var texture8 = '/snobV1/images/dot-white.png'
+        var texture9 = '/snobV1/images/logo.svg'
 
     }
 
@@ -652,6 +651,7 @@ function init() {
     }, 10000);
 
     function create() {
+
         app.renderer.plugins.interaction.mouse.global
         if (moveToRandomPosition) {
             dotsArray.forEach(dot => {
@@ -698,26 +698,25 @@ function init() {
     setTimeout(function() {
         moveToRandomPosition = true
         app.ticker.add(create);
-
     }, 1000)
 }
 
 
-var directionX;
-document.addEventListener('mousemove', function(event) {
-    directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-});
-var lastX;
-$(document).bind('touchmove', function(e) {
-    var currentX = e.originalEvent.touches[0].clientX;
-    if (currentX > lastX) {
-        directionX = 1;
-    } else if (currentX < lastX) {
-        // moved up
-        directionX = -1;
-    }
-    lastX = currentX;
-});
+// var directionX;
+// document.addEventListener('mousemove', function(event) {
+//     directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+// });
+// var lastX;
+// $(document).bind('touchmove', function(e) {
+//     var currentX = e.originalEvent.touches[0].clientX;
+//     if (currentX > lastX) {
+//         directionX = 1;
+//     } else if (currentX < lastX) {
+//         // moved up
+//         directionX = -1;
+//     }
+//     lastX = currentX;
+// });
 
 
 
@@ -756,7 +755,9 @@ const swiperV = new Swiper('.swiper-container-v', {
     shortSwipes: false,
     longSwipes: false,
     onSlidePrevEnd(swiper) {
-        $('.swiper-container').removeClass('swiper-container--active')
+        if(swiper.activeIndex === 0) {
+            $('.swiper-container').removeClass('swiper-container--active')
+        }
         
     },
     onSlideNextStart(swiper) {
@@ -778,6 +779,8 @@ const swiperV = new Swiper('.swiper-container-v', {
     onSlidePrevStart(swiper) {
         if(swiper.activeIndex === 0) {
             $('.swiper-container').addClass('swiper-container--active')
+            $('.menu-toggler').addClass('menu-toggler--close')
+            
         }
     },
     onInit(swiper) {
@@ -801,21 +804,52 @@ const swiperH = new Swiper('.swiper-container-h', {
     onlyExternal: true,
     longSwipes: false,
     parallax: true,
+    
     onSlideChangeStart(swiper) {
-        // $(swiper).find($('.swiper-slide')[swiperH.activeIndex]).find('.swiper-slide__text').addClass('active--left') 
-        // let index = $(this).closest('.swiper-container-h').attr('class').split(' ')[1].split('--')[1] - 1
-        $('.swiper-container-h .swiper-slide__paragraph').removeClass('swiper-slide__paragraph--active')
-        // console.log(swiper.activeIndex)
-        $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__paragraph').addClass('swiper-slide__paragraph--active')
+        setTimeout(function() {
+            $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
+            $('.swiper-container-h .swiper-slide--horizontal video')[0].pause();
+        },200)
+        let index = $($('.swiper-container-h .swiper-container-v .swiper-slide-active'))
+        index.find('.swiper-slide__text--active')
+            .removeClass('swiper-slide__text--active')
+
     },
-    onSlideChangeEnd(swiper) {
+    onTransitionEnd(swiper) {
+        if($('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length) {
+            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').fadeIn();
+            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play();
+        }
+        $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
+            .addClass('swiper-slide__text--active')
+        // $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
+        //     // .addClass('swiper-slide__text--active-left')
+        //     .removeClass('swiper-slide__text--active-right')
+        //     .addClass('swiper-slide__text--active-left')
+    },
+    onTransitionStart(swiper) {
+        $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide__text')
+            .removeClass('swiper-slide__text--active')        
     }
     
 });
 $('.menu-toggler').on('click',function() {
     swiperV1.slideTo(0);
+
     $('.slider-container').addClass('slider-container--active')
-})
+    $(this).fadeOut('fast');
+    $('.menu-close').fadeIn();
+
+});
+$('.menu-close').on('click', function() {
+    swiperV1.slideTo(2);
+    $('.swiper-container').removeClass('swiper-container--active')
+    $(this).fadeOut('fast');
+
+    $('.menu-toggler').fadeIn();
+});
+
+
 $('.swiper-slide__goto').on('click',function() {
     let index = $(this).closest('.swiper-container-v').attr('class').split(' ')[1].split('--')[1] - 1
     swiperV[index].slideNext();
@@ -844,13 +878,13 @@ $("#controls").ionRangeSlider({
         }
         if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
             
-            swiperH.slideTo(1, 1000)
+            swiperH.slideTo(1, 3000)
         }
         if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
-            swiperH.slideTo(3, 1000)
+            swiperH.slideTo(3, 3000)
         }
         if (data.from >= thirdBreakpoint - 10 && data.from <= thirdBreakpoint + 10) {
-            swiperH.slideTo(5, 1000)
+            swiperH.slideTo(5, 3000)
         }
         if (data.from >= firstBreakpoint + 10 && data.from < secondBreakpoint - 10) {
             swiperH.slideTo(2, 1000)
@@ -884,16 +918,16 @@ $("#controls").ionRangeSlider({
         } else if( (data.from >= firstBreakpoint / 2 && data.from <= firstBreakpoint) || 
                    (data.from > firstBreakpoint && data.from <= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2)) ) { 
             slider.update({from : firstBreakpoint - 1})
-            swiperH.slideTo(1, 1000)
+            swiperH.slideTo(1, 3000)
           $('.irs-single').addClass('active')
         } else if ( (data.from >= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2) && data.from < secondBreakpoint ) || 
                 (data.from > secondBreakpoint && data.from <= secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2)) ) {
             slider.update({from : secondBreakpoint + 5})
-            swiperH.slideTo(3, 1000)
+            swiperH.slideTo(3, 3000)
           $('.irs-single').addClass('active')
         } else if (  data.from > secondBreakpoint + ( (thirdBreakpoint - secondBreakpoint) / 2) ) {
             slider.update({from : thirdBreakpoint + 15})
-            swiperH.slideTo(5, 1000)
+            swiperH.slideTo(5, 3000)
           $('.irs-single').addClass('active')
         }
         $('.irs-single')

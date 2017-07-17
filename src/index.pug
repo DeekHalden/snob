@@ -10,6 +10,7 @@ head
 body.body
     .slider-container(style="visibility:hidden;opacity:0")
         a.menu-toggler() menu
+        a.menu-close() &times;
 
         +b.range-slider
             +e.anchors
@@ -22,7 +23,7 @@ body.body
         .swiper-container.swiper-container-vertical1
             .swiper-wrapper
                 .swiper-slide.menu-wrapper
-                    p ololo
+                    h1 Menu
                 .swiper-slide.active
                     .swiper-container.swiper-container-h
                         .swiper-wrapper
@@ -33,25 +34,33 @@ body.body
                                 +b.swiper-slide.swiper-slide--horizontal
                                     .swiper-container(class='slide--' + (i + 1)).swiper-container-v
                                         .swiper-wrapper
-                                            +b.swiper-slide.parallax-bg(data-swiper-parallax="-23%")
-                                                .video-cont(data-swiper-parallax="-400")
-                                                    video.video(width="320" height="240" )
+                                            +b.swiper-slide
+                                                .video-cont(data-swiper-parallax="0")
+                                                    video.video(width="320" height="240"  )
                                                         source(src=el.src type="video/mp4")
                                                 +e.head-description
                                                     each h3 in el.description
-                                                        +e.H3.description(data-swiper-parallax="-500")=h3
-                                                +e.text(data-swiper-parallax="-10000")
+                                                        +e.H3.description=h3
+                                                +e.text()
                                                     each p in el.paragraph
-                                                        +e.SPAN.paragraph=p
-                                                +e.goto-wrapper(data-swiper-parallax="-1000")
+                                                        +e.SPAN.paragraph(data-swiper-parallax="100")=p
+                                                +e.goto-wrapper(data-swiper-parallax-y="0")
                                                     +e.A.goto learn more
-                                            +b.swiper-slide.swiper-slide--bottom
+                                            +b.swiper-slide
                                                 video.video(width="320" height="240")
                                                     source(src='./video/ole.mp4' type="video/mp4")
                                                 +e.head-description
                                                     +e.H3.description qwert
                                                 +e.text
                                                     +e.SPAN.paragraph sqeqweqwe
+                                            +b.swiper-slide
+                                                p slide 3
+                                            +b.swiper-slide
+                                                p slide 4
+                                            +b.swiper-slide
+                                                p slide 5
+                                            +b.swiper-slide
+                                                p map
                                 +b.swiper-slide
     .main-text-start
         p Click to enter website
