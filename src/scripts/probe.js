@@ -15,7 +15,8 @@ function init() {
         logo.decreaseOpacity();
         text.decreaseOpacity();
         $('.main-text-start').fadeOut();
-        $('.slider-container').css({'visibility':'visible'}).animate({'opacity': 1}, 3000);
+        $('.slider-container').css({'visibility':'visible'}).animate({'opacity': 1}, 1500);
+        
 
     }
     const app = new PIXI.Application();
@@ -47,9 +48,7 @@ function init() {
         var texture4 = './../images/dot.png'
         var texture5 = './../images/dot--small.png'
         var texture6 = './../images/snob-b-w.png'
-        var texture7 = './../images/diamond-anchor.png'
-        var texture8 = './../images/dot-white.png'
-        var texture9 = './../images/logo.svg'
+        var texture9 = './../images/Logo2kx2k.png'
 
     } else {
         var texture0 = '/snobV1/images/big-diamond.svg'
@@ -59,9 +58,7 @@ function init() {
         var texture4 = '/snobV1/images/dot.png'
         var texture5 = '/snobV1/images/dot--small.png'
         var texture6 = '/snobV1/images/snob-b-w.png'
-        var texture7 = '/snobV1/images/diamond-anchor.png'
-        var texture8 = '/snobV1/images/dot-white.png'
-        var texture9 = '/snobV1/images/logo.svg'
+        var texture9 = '/snobV1/images/Logo2kx2k.png'
 
     }
 
@@ -71,10 +68,8 @@ function init() {
     const diamondMaskEnd = PIXI.Texture.fromImage(texture2);
     const maskTexture = PIXI.Texture.fromImage(texture3);
     const dotTexture = PIXI.Texture.fromImage(texture4);
-    const smallDotTexture = PIXI.Texture.fromImage(texture5);
+    const dotSmallTexture = PIXI.Texture.fromImage(texture5);
     const logoTexture = new PIXI.Texture.fromImage(texture9);
-    const anchorTexture = PIXI.Texture.fromImage(texture7);
-    const dotWhiteTexture = PIXI.Texture.fromImage(texture8);
 
     const dotsCount = 100;
     // Variable
@@ -174,11 +169,13 @@ function init() {
                     setTimeout(() => {
                         self.obj.on('tap', function(mouseData) {
                             clearAdditions()
+                            $('.main-text-start').fadeOut();
                             
                         
                         });
                         self.obj.on('mousedown', function(mouseData) {
                             clearAdditions()
+                            $('.main-text-start').fadeOut();
                             
                         
                         });
@@ -192,6 +189,7 @@ function init() {
 
                         clearAdditions()
                     })
+                    $('.main-text-start').fadeOut();
                 });
             }, 1500);
         }
@@ -357,12 +355,12 @@ function init() {
 
 
     class Dot extends SuperClass {
-        constructor() {
-            super()
-            this.obj = new PIXI.Graphics();
-            this.obj.beginFill(0x000000)
-            this.obj.lineStyle(0, 0x000000);
-            this.obj.drawRect(0, 0, 3, 3);
+        constructor(image) {
+            super(image)
+            // this.obj = new PIXI.Graphics();
+            // this.obj.beginFill(0x000000)
+            // this.obj.lineStyle(0, 0x000000);
+            // this.obj.drawRect(0, 0, 3, 3);
             this.obj.alpha = 0
             this.obj.randomX = this.generateRandomDirection(0, innerWidth)
             this.obj.randomY = this.generateRandomDirection(0, innerHeight)
@@ -427,12 +425,12 @@ function init() {
 
 
     class SmallDot extends Dot {
-        constructor() {
-            super()
-            this.obj = new PIXI.Graphics();
-            this.obj.beginFill(0x000000)
-            this.obj.lineStyle(0, 0x000000);
-            this.obj.drawRect(0, 0, 1, 1);
+        constructor(image) {
+            super(image)
+            // this.obj = new PIXI.Graphics();
+            // this.obj.beginFill(0x000000)
+            // this.obj.lineStyle(0, 0x000000);
+            // this.obj.drawRect(0, 0, 1, 1);
             // this.obj = new PIXI.Graphics();
             // this.obj.lineStyle(1, 0x000000);  //(thickness, color)
             // this.obj.drawCircle(0, 0, 1);   //(x,y,radius)
@@ -455,43 +453,40 @@ function init() {
             return Math.floor(Math.random() * 1) + 1;
         }
         changeDirection(x, y) {
-            if (this.magnet) {
-                var dx = (this.obj.position.x + 200 / 2) - (x + 100 / 2);
-                var dy = (this.obj.position.y + 200 / 2) - (y + 100 / 2);
-                var width = (4 + 200) / 2;
-                var height = (4 + 200) / 2;
-                var crossWidth = width * dy;
-                var crossHeight = height * dx;
-                var collision = 'none';
-                //
-                if (Math.abs(dx) >= width && Math.abs(dy) >= height) {
-                    if (crossWidth > crossHeight) {
-                        collision = (crossWidth > (-crossHeight)) ? 'bottom' : 'left';
 
-                    } else {
-                        collision = (crossWidth > -(crossHeight)) ? 'right' : 'top';
-                    }
+            let dx = (this.obj.position.x + 200 / 2) - (x + 100 / 2);
+            let dy = (this.obj.position.y + 200 / 2) - (y + 100 / 2);
+            let width = (4 + 200) / 2;
+            let height = (4 + 200) / 2;
+            let crossWidth = width * dy;
+            let crossHeight = height * dx;
+            let collision = 'none';
+            //
+            if (Math.abs(dx) >= width && Math.abs(dy) >= height) {
+                if (crossWidth > crossHeight) {
+                    collision = (crossWidth > (-crossHeight)) ? 'bottom' : 'left';
+
+                } else {
+                    collision = (crossWidth > -(crossHeight)) ? 'right' : 'top';
                 }
-                if (collision == 'top') {
-                    this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-                    this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
-                }
-                if (collision == 'bottom') {
-                    this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-                    this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
-                }
-                if (collision == 'right') {
-                    this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-                    this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
-                }
-                if (collision == 'left') {
-                    this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-                    this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
-                }
-                return (collision);
-            } else {
-                return false
             }
+            if (collision == 'top') {
+                this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
+                this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            }
+            if (collision == 'bottom') {
+                this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
+                this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            }
+            if (collision == 'right') {
+                this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
+                this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            }
+            if (collision == 'left') {
+                this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
+                this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            }
+            return (collision);
         }
     }
 
@@ -594,9 +589,9 @@ function init() {
 
     var index = innerWidth / 4
     for (var i = 0; i < 100; i++) {
-        var dot = new Dot();
+        var dot = new Dot(dotTexture);
         if (i % 3 === 0) {
-            var smallDot = new SmallDot();
+            var smallDot = new SmallDot(dotSmallTexture);
             smallDots.push(smallDot)
             app.stage.addChild(smallDot.obj);
 
@@ -604,26 +599,7 @@ function init() {
         dotsArray.push(dot);
         app.stage.addChild(dot.obj);
     }
-    for (var i = 0; i < 4; i++) {
-        if (i === 0) {
-            var anchor = new Anchor(anchorTexture, i + 145, centerY);
-
-        } else if (i === 1) {
-
-
-            anchor = new Anchor(anchorTexture, centerX - centerX / 2.5, centerY);
-        } else if (i === 2) {
-
-            anchor = new Anchor(anchorTexture, centerX + centerX / 2.5, centerY);
-
-        } else if (i === 3) {
-            anchor = new Anchor(anchorTexture, innerWidth - 145, centerY)
-        }
-
-
-        anchors.push(anchor);
-        app.stage.addChild(anchor.obj);
-    }
+   
     app.stage.addChild(mask.obj);
     app.stage.addChild(diamond.obj);
     app.stage.addChild(diamondMaskObjStart.obj);
@@ -631,17 +607,13 @@ function init() {
     app.stage.addChild(text.obj);
     app.stage.addChild(logo.obj);
 
-
     var diamondInterval = setInterval(() => {
         diamond.increaseOpacity()
     }, 50);
     if (diamond.obj.alpha >= 1) {
         clearInterval(diamondInterval);
     }
-
-
-
-
+    
     const interval = setInterval(() => {
         if (diamondMaskObjStart.add) {
             diamondMaskObjStart.increaseOpacity()
@@ -674,13 +646,6 @@ function init() {
         }
         if (!moveToRandomPosition && moveDiamondToStart) {
             setTimeout(function() {
-                var index = 6;
-                var i = 0;
-
-                // timelineDots.forEach(dot => {
-                //     dot.moveTo(i, centerY - 8, 1000)
-                //     i += index
-                // });
                 $('.slider-container').fadeIn('slow');
                 clearInterval(interval);
                 app.stage.removeChild(dot.obj);
@@ -702,25 +667,10 @@ function init() {
 }
 
 
-// var directionX;
-// document.addEventListener('mousemove', function(event) {
-//     directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-// });
-// var lastX;
-// $(document).bind('touchmove', function(e) {
-//     var currentX = e.originalEvent.touches[0].clientX;
-//     if (currentX > lastX) {
-//         directionX = 1;
-//     } else if (currentX < lastX) {
-//         // moved up
-//         directionX = -1;
-//     }
-//     lastX = currentX;
-// });
 
 
 
-
+// GLOBALS
 let globalIn = false;
 let offset = 110;
 let anchorSize = 32 / 4
@@ -729,7 +679,10 @@ let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize;
 let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize;
 let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize;
 let slides = $('.slide');
+// GLOBALS
 
+
+// 1ST SLIDE TEXT SMOOTH MIVING
 function slideText(element, startValue, endValue, computedNow, valueNow) {
     let percent = 0
     percent = (computedNow * 2.4) * 100 / endValue;
@@ -738,15 +691,17 @@ function slideText(element, startValue, endValue, computedNow, valueNow) {
     // if(valueNow <= )
     translateText(element, value);
 }
-
-
 function translateText(element, value) {
     $(element).children('.text').css('right', value + '%')
 }
+// 1ST SLIDE TEXT SMOOTH MIVING
 
 
+
+// SWIPER 2-6
 const swiperV = new Swiper('.swiper-container-v', {
     direction: 'vertical',
+    pagination: '.swiperV-pagination',
     mousewheelControl: true,
     parallax: true,
     nested: true,
@@ -757,6 +712,7 @@ const swiperV = new Swiper('.swiper-container-v', {
     onSlidePrevEnd(swiper) {
         if(swiper.activeIndex === 0) {
             $('.swiper-container').removeClass('swiper-container--active')
+            $('.swiperV-pagination').removeClass('swiperV-pagination--active');
         }
         
     },
@@ -764,39 +720,33 @@ const swiperV = new Swiper('.swiper-container-v', {
         $('.swiper-container').addClass('swiper-container--active')
         
     },
-    onSlideChangeEnd(swiper) {
-    }
-});
- const swiperV1 = new Swiper('.swiper-container-vertical1', {
-    direction: 'vertical',
-    mousewheelControl: false,
-    parallax: true,
-    nested: true,
-    speed: 1500,
-    onlyExternal: true,
-    shortSwipes: false,
-    longSwipes: false,
-    onSlidePrevStart(swiper) {
-        if(swiper.activeIndex === 0) {
-            $('.swiper-container').addClass('swiper-container--active')
-            $('.menu-toggler').addClass('menu-toggler--close')
+
+    onSlideChangeStart(swiper) {
+        if(swiper.activeIndex >= 1 && swiper.activeIndex < 5) {
+            $('.menu-toggler').removeClass('menu-toggler--active')
+        } else {
+            $('.menu-toggler').addClass('menu-toggler--active')
             
         }
-    },
-    onInit(swiper) {
-        swiper.slideTo(2, 0)
-    },
-    onSlidePrevEnd(swiper) {
-        // $('.swiper-container').removeClass('swiper-container--active')
-        
-    },
-    onSlideNextStart(swiper) {
-        // $('.swiper-container').addClass('swiper-container--active')
-        
+        $('.swiperV-pagination').addClass('swiperV-pagination--active');
     },
     onSlideChangeEnd(swiper) {
+        if (swiper.activeIndex >= 1 && swiper.activeIndex <= 6) {
+            setTimeout(function() {
+                $('.swiper-pagination-bullet').addClass('swiper-pagination-bullet--active');
+            }, 1000)
+        }  else {
+            $('.swiper-pagination-bullet').removeClass('swiper-pagination-bullet--active')
+        }
+        
     }
+    
+
 });
+// SWIPER 2-6
+
+
+// SWIPER 1
 const swiperH = new Swiper('.swiper-container-h', {
     mousewheelForceToAxis: true,
     effect: 'fade',
@@ -822,10 +772,6 @@ const swiperH = new Swiper('.swiper-container-h', {
         }
         $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
             .addClass('swiper-slide__text--active')
-        // $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
-        //     // .addClass('swiper-slide__text--active-left')
-        //     .removeClass('swiper-slide__text--active-right')
-        //     .addClass('swiper-slide__text--active-left')
     },
     onTransitionStart(swiper) {
         $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide__text')
@@ -833,27 +779,75 @@ const swiperH = new Swiper('.swiper-container-h', {
     }
     
 });
-$('.menu-toggler').on('click',function() {
-    swiperV1.slideTo(0);
+// SWIPER 1
 
-    $('.slider-container').addClass('slider-container--active')
+
+// MENU SWIPER
+ const swiperV1 = new Swiper('.swiper-container-vertical1', {
+    direction: 'vertical',
+    mousewheelControl: false,
+    parallax: true,
+    nested: true,
+    speed: 1500,
+    onlyExternal: true,
+    shortSwipes: false,
+    longSwipes: false,
+    onSlidePrevStart(swiper) {
+        if(swiper.activeIndex === 0) {
+            $('.swiper-container').addClass('swiper-container--active')
+            $('.menu-toggler').addClass('menu-toggler--close')
+            
+        }
+    },
+    onInit(swiper) {
+        swiper.slideTo(2, 0)
+    },
+    onSlidePrevEnd(swiper) {
+        // $('.swiper-container').removeClass('swiper-container--active')
+    },
+    onSlideNextStart(swiper) {
+        // $('.swiper-container').addClass('swiper-container--active')
+        
+    },
+    onSlideChangeEnd(swiper) {
+    }
+});
+// MENU SWIPER
+
+
+// MENU ACTIONS
+$('.menu-toggler').on('click',function() {
+    console.log(swiperV[0].activeIndex)
+    swiperV1.slideTo(0);
+    $('.swiper-container-vertical1').addClass('swiper-container--active')
     $(this).fadeOut('fast');
     $('.menu-close').fadeIn();
-
 });
-$('.menu-close').on('click', function() {
-    swiperV1.slideTo(2);
-    $('.swiper-container').removeClass('swiper-container--active')
-    $(this).fadeOut('fast');
 
+$('.menu-close').on('click', function() {
+    console.log(swiperV[0].activeIndex)
+    swiperV1.slideTo(2);
+
+    if(swiperV[0].activeIndex === 0 || swiperV[1].activeIndex === 0 || swiperV[2].activeIndex === 0) {
+        $('.swiper-container-vertical1').removeClass('swiper-container--active')
+    } 
+    if(swiperV[0].activeIndex >= 1 || swiperV[1].activeIndex >= 1 || swiperV[2].activeIndex >= 1) {
+        $('.swiper-container-vertical1').addClass('swiper-container--active')
+    }
+
+    $('.menu-close').fadeOut();
     $('.menu-toggler').fadeIn();
 });
 
-
 $('.swiper-slide__goto').on('click',function() {
-    let index = $(this).closest('.swiper-container-v').attr('class').split(' ')[1].split('--')[1] - 1
+    let index = $(this).closest('.swiper-container-v').attr('class').split(' ')[1].split('--')[1] 
+    console.log(index)
     swiperV[index].slideNext();
 });
+
+// MENU ACTIONS
+
+// RANGE HANDLERS
 
 $("#controls").ionRangeSlider({
     type: "single",
@@ -878,23 +872,28 @@ $("#controls").ionRangeSlider({
         }
         if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
             
-            swiperH.slideTo(1, 3000)
+            swiperH.slideTo(1, 1500)
+            console.log($('.swiper-slide--horizontal.swiper-slide-active'))
+            
         }
         if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
-            swiperH.slideTo(3, 3000)
+            swiperH.slideTo(3, 1500)
+            console.log($('.swiper-slide--horizontal.swiper-slide-active'))
+            
         }
         if (data.from >= thirdBreakpoint - 10 && data.from <= thirdBreakpoint + 10) {
-            swiperH.slideTo(5, 3000)
+            swiperH.slideTo(5, 1500)
+            console.log($('.swiper-slide--horizontal.swiper-slide-active'))
         }
         if (data.from >= firstBreakpoint + 10 && data.from < secondBreakpoint - 10) {
-            swiperH.slideTo(2, 1000)
+            swiperH.slideTo(2, 0)
 
         } else if (data.from >= secondBreakpoint + 10 && data.from < thirdBreakpoint - 10) {
-            swiperH.slideTo(4, 1000)
+            swiperH.slideTo(4, 0)
         } else if (data.from >= thirdBreakpoint + 20) {
-            swiperH.slideTo(7, 1000)
+            swiperH.slideTo(7, 0)
         } else if (data.from < firstBreakpoint - 10) {
-            swiperH.slideTo(0, 1000)
+            swiperH.slideTo(0, 0)
         }
 
         if ((data.from <= firstBreakpoint - firstBreakpoint / 2)) {
@@ -918,16 +917,16 @@ $("#controls").ionRangeSlider({
         } else if( (data.from >= firstBreakpoint / 2 && data.from <= firstBreakpoint) || 
                    (data.from > firstBreakpoint && data.from <= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2)) ) { 
             slider.update({from : firstBreakpoint - 1})
-            swiperH.slideTo(1, 3000)
+            swiperH.slideTo(1, 1500)
           $('.irs-single').addClass('active')
         } else if ( (data.from >= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2) && data.from < secondBreakpoint ) || 
                 (data.from > secondBreakpoint && data.from <= secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2)) ) {
             slider.update({from : secondBreakpoint + 5})
-            swiperH.slideTo(3, 3000)
+            swiperH.slideTo(3, 1500)
           $('.irs-single').addClass('active')
         } else if (  data.from > secondBreakpoint + ( (thirdBreakpoint - secondBreakpoint) / 2) ) {
             slider.update({from : thirdBreakpoint + 15})
-            swiperH.slideTo(5, 3000)
+            swiperH.slideTo(5, 1500)
           $('.irs-single').addClass('active')
         }
         $('.irs-single')
@@ -945,6 +944,7 @@ $("#controls").ionRangeSlider({
 
     }
 });
+
 let slider = $("#controls").data("ionRangeSlider");
 
 $('.irs-single')
@@ -958,6 +958,25 @@ $('.irs-single')
 
 });
 
+// RANGE HANDLERS
+
 
 window.$ = $
 window.jQuery = jQuery
+
+
+// var directionX;
+// document.addEventListener('mousemove', function(event) {
+//     directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+// });
+// var lastX;
+// $(document).bind('touchmove', function(e) {
+//     var currentX = e.originalEvent.touches[0].clientX;
+//     if (currentX > lastX) {
+//         directionX = 1;
+//     } else if (currentX < lastX) {
+//         // moved up
+//         directionX = -1;
+//     }
+//     lastX = currentX;
+// });

@@ -1,4 +1,5 @@
 $gold = #af9358
+$main = #0E0C0E
 $transition = .5s ease all
 @font-face 
     font-family Roboto-reg
@@ -7,6 +8,7 @@ $transition = .5s ease all
 *
     box-sizing border-box
 
+@import "./icomoon.css" 
 @import "./normalize.css" 
 @import "./ion.rangeSlider.css" 
 @import "./ion.rangeSlider.skinFlat.css"
@@ -24,7 +26,7 @@ body
     background-color #fff
     transition 5s ease all
     &--dark
-        background-color #0E0C0E
+        background-color $main
 canvas
     position: absolute
     top 0
@@ -49,6 +51,7 @@ a
     &--active
         color #fff
 .menu-close
+    font-size 30px
     display none
     color #fff
 .main-text
@@ -138,25 +141,99 @@ a
     width 100%
     height 100%
     transition 1s ease all
+    z-index 1
     &--active
+        transition 2s ease all !important
         z-index 2
 .swiper-container-v
+    .swiper-slide:first-child, .swiper-slide:nth-child(2)
+        background-color $main !important
     .swiper-slide:not(:first-child)
         background-color #fff
-    
+        
+.swiperV-pagination
+    position fixed
+    z-index 1
+    top 0
+    bottom 0px
+    right auto
+    left 0
+    width 470px
+    height 100%
+    background-color $main
+    transform translateX(0) 
+    flex-direction column
+    justify-content center
+    align-items center
+    display flex
+    transition .5s linear all
+    left -470px
+    &--active
+        background $main url('./../images/indicator.png') no-repeat 129px center
+        left 0
+    // &:after
+    //     content ''
+    //     position absolute
+    //     z-index 1
+    //     height 100%
+    //     width 20px
+    //     top 50%
+    //     transform translateY(-50%)
+    //     left 123px
+    .swiper-pagination-bullet   
+        transition .5s ease all
+        position relative
+        background-color #fff
+        font-size 0
+        border-radius 0
+        width 20px
+        height 20px
+        transform rotate(45deg)
+        opacity 0
+        margin 50px 0 !important
+        &--active
+            opacity .2
+        &:first-child
+            display none
+        &.swiper-pagination-bullet-active
+            background: url('./../images/big-diamond.svg') no-repeat center;
+            background-size: 20px 20px !important;
+            position relative
+            opacity 1
+            &:before
+                z-index 2
+                position: absolute;
+                content: '-';
+                width: 1px;
+                height: 20px;
+                color: #fff;
+                left: -100px;
+                background: #fff;
+                transform: rotate(45deg);
+                left: -63px;
+                top: 77px;
 .swiper-slide
     height 100%
     // background-color #fff
     position relative
+    &--first
+        transition-delay 1s
+        background-color $main
+    .wrapper
+        width 100%
+        height 100%
+        background-color #fff
     &.menu-wrapper
-        background #0E0C0E
+        background $main
         h1
             color #fff
+    &--map
+        background-color $main !important
     &--bottom
         background #fff
         z-index 123
     &:nth-child(2n + 3)
-        background-color #0E0C0E
+        background-color $main
     &__head-description
         // display none
         position absolute
@@ -200,7 +277,7 @@ a
         border-bottom 9px solid #af9358
         border-radius 5px
         &--active
-            transition 3s linear all
+            transition 1.5s linear all
             right -100% !important
     .video-cont
         position fixed
@@ -227,8 +304,8 @@ a
         transform translateX(-50%) translateY(-50%)
         top 70%
         color transparent
-        transition 3s linear all
-        transition-delay 1.5s
+        transition 1.5s linear all
+        transition-delay .5s
         &--active
             color #fff
             // transition-delay 0s

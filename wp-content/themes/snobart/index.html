@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/bundle.min.css"/>
 </head>
 <body class="body">
-  <div class="slider-container" style="visibility:hidden;opacity:0;"><a class="menu-toggler">menu</a><a class="menu-close">&times;</a>
+  <div class="slider-container" style="visibility:hidden;opacity:0;"><a class="menu-toggler">menu</a><a class="menu-close icon-close"></a>
     <div class="range-slider">
       <div class="range-slider__anchors">
         <div class="range-slider__anchor">
@@ -22,9 +22,7 @@
     </div>
     <div class="swiper-container swiper-container-vertical1">
       <div class="swiper-wrapper">
-        <div class="swiper-slide menu-wrapper">
-          <h1>Menu</h1>
-        </div>
+        <div class="swiper-slide menu-wrapper"></div>
         <div class="swiper-slide active">
           <div class="swiper-container swiper-container-h">
             <div class="swiper-wrapper">
@@ -32,7 +30,7 @@
                 <h2 class="text">We are not snobs, we are just better than everyone else. Be our guest</h2>
               </div>
               <div class="swiper-slide swiper-slide--horizontal">
-                <div class="swiper-container slide--1 swiper-container-v">
+                <div class="swiper-container .swiper-container-v--0 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div class="video-cont" data-swiper-parallax="0">
@@ -51,36 +49,45 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax-y="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide">
-                      <video class="video" width="320" height="240">
-                        <source src="./video/ole.mp4" type="video/mp4"/>
-                      </video>
-                      <div class="swiper-slide__head-description">
-                        <h3 class="swiper-slide__description">qwert
-                        </h3>
+                    <div class="swiper-slide swiper-slide--first">
+                      <div class="wrapper parallax-bg">
+                        <video class="video" width="320" height="240">
+                          <source src="./video/ole.mp4" type="video/mp4"/>
+                        </video>
+                        <div class="swiper-slide__head-description" data-swiper-parallax-y="-1000%">
+                          <h3 class="swiper-slide__description">qwert
+                          </h3>
+                        </div>
+                        <div class="swiper-slide__text" data-swiper-parallax-y="-100%"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                        </div>
                       </div>
-                      <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="wrapper">
+                        <p>slide 3</p>
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 3</p>
+                      <div class="wrapper">
+                        <p>slide 4</p>
+                      </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 4</p>
+                      <div class="wrapper">
+                        <p>slide 5</p>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                      <p>slide 5</p>
-                    </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide swiper-slide--map">
                       <p>map</p>
                     </div>
                   </div>
+                  <div class="swiperV-pagination"></div>
                 </div>
               </div>
               <div class="swiper-slide">
               </div>
               <div class="swiper-slide swiper-slide--horizontal">
-                <div class="swiper-container slide--2 swiper-container-v">
+                <div class="swiper-container .swiper-container-v--1 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div class="video-cont" data-swiper-parallax="0">
@@ -99,36 +106,45 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax-y="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide">
-                      <video class="video" width="320" height="240">
-                        <source src="./video/ole.mp4" type="video/mp4"/>
-                      </video>
-                      <div class="swiper-slide__head-description">
-                        <h3 class="swiper-slide__description">qwert
-                        </h3>
+                    <div class="swiper-slide swiper-slide--first">
+                      <div class="wrapper parallax-bg">
+                        <video class="video" width="320" height="240">
+                          <source src="./video/ole.mp4" type="video/mp4"/>
+                        </video>
+                        <div class="swiper-slide__head-description" data-swiper-parallax-y="-1000%">
+                          <h3 class="swiper-slide__description">qwert
+                          </h3>
+                        </div>
+                        <div class="swiper-slide__text" data-swiper-parallax-y="-100%"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                        </div>
                       </div>
-                      <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="wrapper">
+                        <p>slide 3</p>
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 3</p>
+                      <div class="wrapper">
+                        <p>slide 4</p>
+                      </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 4</p>
+                      <div class="wrapper">
+                        <p>slide 5</p>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                      <p>slide 5</p>
-                    </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide swiper-slide--map">
                       <p>map</p>
                     </div>
                   </div>
+                  <div class="swiperV-pagination"></div>
                 </div>
               </div>
               <div class="swiper-slide">
               </div>
               <div class="swiper-slide swiper-slide--horizontal">
-                <div class="swiper-container slide--3 swiper-container-v">
+                <div class="swiper-container .swiper-container-v--2 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div class="video-cont" data-swiper-parallax="0">
@@ -147,30 +163,39 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax-y="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide">
-                      <video class="video" width="320" height="240">
-                        <source src="./video/ole.mp4" type="video/mp4"/>
-                      </video>
-                      <div class="swiper-slide__head-description">
-                        <h3 class="swiper-slide__description">qwert
-                        </h3>
+                    <div class="swiper-slide swiper-slide--first">
+                      <div class="wrapper parallax-bg">
+                        <video class="video" width="320" height="240">
+                          <source src="./video/ole.mp4" type="video/mp4"/>
+                        </video>
+                        <div class="swiper-slide__head-description" data-swiper-parallax-y="-1000%">
+                          <h3 class="swiper-slide__description">qwert
+                          </h3>
+                        </div>
+                        <div class="swiper-slide__text" data-swiper-parallax-y="-100%"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                        </div>
                       </div>
-                      <div class="swiper-slide__text"><span class="swiper-slide__paragraph">sqeqweqwe</span>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="wrapper">
+                        <p>slide 3</p>
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 3</p>
+                      <div class="wrapper">
+                        <p>slide 4</p>
+                      </div>
                     </div>
                     <div class="swiper-slide">
-                      <p>slide 4</p>
+                      <div class="wrapper">
+                        <p>slide 5</p>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                      <p>slide 5</p>
-                    </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide swiper-slide--map">
                       <p>map</p>
                     </div>
                   </div>
+                  <div class="swiperV-pagination"></div>
                 </div>
               </div>
               <div class="swiper-slide">

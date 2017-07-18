@@ -10,7 +10,7 @@ head
 body.body
     .slider-container(style="visibility:hidden;opacity:0")
         a.menu-toggler() menu
-        a.menu-close() &times;
+        a.menu-close().icon-close
 
         +b.range-slider
             +e.anchors
@@ -23,7 +23,6 @@ body.body
         .swiper-container.swiper-container-vertical1
             .swiper-wrapper
                 .swiper-slide.menu-wrapper
-                    h1 Menu
                 .swiper-slide.active
                     .swiper-container.swiper-container-h
                         .swiper-wrapper
@@ -32,7 +31,7 @@ body.body
 
                             each el, i in data 
                                 +b.swiper-slide.swiper-slide--horizontal
-                                    .swiper-container(class='slide--' + (i + 1)).swiper-container-v
+                                    .swiper-container(class='.swiper-container-v--' + i).swiper-container-v
                                         .swiper-wrapper
                                             +b.swiper-slide
                                                 .video-cont(data-swiper-parallax="0")
@@ -46,21 +45,26 @@ body.body
                                                         +e.SPAN.paragraph(data-swiper-parallax="100")=p
                                                 +e.goto-wrapper(data-swiper-parallax-y="0")
                                                     +e.A.goto learn more
+                                            +b.swiper-slide.swiper-slide--first
+                                                .wrapper.parallax-bg
+                                                    video.video(width="320" height="240")
+                                                        source(src='./video/ole.mp4' type="video/mp4")
+                                                    +e.head-description(data-swiper-parallax-y="-1000%")
+                                                        +e.H3.description qwert
+                                                    +e.text(data-swiper-parallax-y="-100%")
+                                                        +e.SPAN.paragraph sqeqweqwe
                                             +b.swiper-slide
-                                                video.video(width="320" height="240")
-                                                    source(src='./video/ole.mp4' type="video/mp4")
-                                                +e.head-description
-                                                    +e.H3.description qwert
-                                                +e.text
-                                                    +e.SPAN.paragraph sqeqweqwe
+                                                .wrapper
+                                                    p slide 3
                                             +b.swiper-slide
-                                                p slide 3
+                                                .wrapper
+                                                    p slide 4
                                             +b.swiper-slide
-                                                p slide 4
-                                            +b.swiper-slide
-                                                p slide 5
-                                            +b.swiper-slide
+                                                .wrapper
+                                                    p slide 5
+                                            +b.swiper-slide.swiper-slide--map
                                                 p map
+                                        .swiperV-pagination
                                 +b.swiper-slide
     .main-text-start
         p Click to enter website
