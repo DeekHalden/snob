@@ -1,5 +1,5 @@
 $gold = #af9358
-$main = #0E0C0E
+
 $transition = .5s ease all
 @font-face 
     font-family Roboto-reg
@@ -24,9 +24,6 @@ body
     
 .body
     background-color #fff
-    transition 5s ease all
-    &--dark
-        background-color $main
 canvas
     position: absolute
     top 0
@@ -40,7 +37,7 @@ a
     &:hover
         color $gold
 .menu-close, .menu-toggler
-    display: none
+    // display: none
     z-index 10
     position absolute
     top 50px
@@ -146,10 +143,13 @@ a
         transition 2s ease all !important
         z-index 2
 .swiper-container-v
-    .swiper-slide:first-child, .swiper-slide:nth-child(2)
-        background-color $main !important
-    .swiper-slide:not(:first-child)
-        background-color #fff
+    .swiper-slide
+        background-color #000 !important
+    // .swiper-slide:not(:first-child),  .swiper-slide:not(:nth-child(2))
+    //     background-color #fff
+    .swiper-slide
+        transition 1s ease all
+    
         
 .swiperV-pagination
     position fixed
@@ -160,7 +160,7 @@ a
     left 0
     width 470px
     height 100%
-    background-color $main
+    background-color #000
     transform translateX(0) 
     flex-direction column
     justify-content center
@@ -169,7 +169,7 @@ a
     transition .5s linear all
     left -470px
     &--active
-        background $main url('./../images/indicator.png') no-repeat 129px center
+        background #000 url('./../images/indicator.png') no-repeat 126px center
         left 0
     // &:after
     //     content ''
@@ -196,12 +196,14 @@ a
         &:first-child
             display none
         &.swiper-pagination-bullet-active
+            transition .5s ease all
             background: url('./../images/big-diamond.svg') no-repeat center;
             background-size: 20px 20px !important;
             position relative
             opacity 1
             &:before
                 z-index 2
+                transition .5s ease all
                 position: absolute;
                 content: '-';
                 width: 1px;
@@ -210,30 +212,45 @@ a
                 left: -100px;
                 background: #fff;
                 transform: rotate(45deg);
-                left: -63px;
+                left: -68px;
                 top: 77px;
 .swiper-slide
     height 100%
     // background-color #fff
     position relative
     &--first
-        transition-delay 1s
-        background-color $main
+        // transition-delay 1s
+        background-color #000
     .wrapper
         width 100%
         height 100%
+        transition 3s linear all
         background-color #fff
+        right -100%
+        position relative
+            // transform  translateX(50%)
+        &--active-top
+            top -100%
+        &--black
+            right -100%
+            position absolute
+        &--black-active
+            right 30%
+            right 0
     &.menu-wrapper
-        background $main
+        background #000
         h1
             color #fff
     &--map
-        background-color $main !important
+        background-color #000 !important
     &--bottom
         background #fff
         z-index 123
     &:nth-child(2n + 3)
-        background-color $main
+        background-color #000
+    &__img-wrapper
+        position absolute
+        background-color rgba(255,255,255,.3)
     &__head-description
         // display none
         position absolute
@@ -327,8 +344,58 @@ a
             width calc(100% - 30px)
             height 9px 
             background-color #af9358
+    &__content
+        padding-top 250px
+        position relative
+        color transparent
+        width 920px
+        margin-left auto
+        margin-right 7vw
+        transition-delay 0s
+        transition 1s linear all
+        &--active
+            color #000
+        h3
+            @extends .swiper-slide__paragraph
+            text-transform uppercase
+            font-size 50px
+            font-weight bold
+            letter-spacing 30px
+            z-index 1
+            color inherit
+            margin-bottom 150px
+            &:after
+                z-index -1
+                visibility: visible;
+                left: 0;
+                content: '';
+                position: absolute;
+                bottom: 34px;
+                width: 200%;
+                height: 20px;
+                background-color: #af9358;
+            
+        p
+            color inherit
+            text-align left
+            font-size 17px
+            line-height 48px
+            letter-spacing 5px
 
-
-
-    
-
+@media(max-width 1500px)
+    .swiperV-pagination
+        width 100px    
+        &--active
+            background #000 url('./../images/indicator.png') no-repeat 16px center
+        .swiper-pagination-bullet
+            &.swiper-pagination-bullet-active
+                &:before
+                    left: -14px;
+                    top: 24px;
+@media(max-width 1024px)
+    .swiperV-pagination
+        width 50px
+        background #000
+    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet
+        display none
+        
