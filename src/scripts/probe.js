@@ -370,7 +370,7 @@ function init() {
     }
 
     class Dot extends SuperClass {
-        constructor(image, direction=45, speed=3) {
+        constructor(image, direction=45, speed=4) {
             super(image)
             // this.obj = new PIXI.Graphics();
             // this.obj.beginFill(0x000000)
@@ -524,7 +524,11 @@ function init() {
             let distance = Math.sqrt(dx*dx + dy*dy)
 
             let angle = arad(Math.acos(dx / distance))
-            this.obj.initialDirection = this.obj.direction = rad(angle)
+            if(y > innerHeight / 2) {
+                this.obj.initialDirection = this.obj.direction = -(rad(angle))
+            } else {
+                this.obj.initialDirection = this.obj.direction = rad(angle)
+            }
             this.obj.initialSpeed = this.obj.speed = distance / duration
         }
     }
@@ -795,34 +799,35 @@ function init() {
 
         } else if (!moveToRandomPosition &&  !freeFall) {
             dotsArray.forEach(dot => {
-                dot.moveTo(centerX, centerY, 100)
+                dot.moveTo(centerX, centerY, 50)
             })
             smallDots.forEach(dot => {
-                dot.moveTo(centerX, centerY, 100)   
+                dot.moveTo(centerX, centerY, 50)   
             })
-            // setTimeout(function() {
-            //     dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
-            //     smallDots.forEach(dot => app.stage.removeChild(dot.obj));
-            // }, 1500)
+            setTimeout(function() {
+                dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
+                smallDots.forEach(dot => app.stage.removeChild(dot.obj));
+                moveDiamondToStart = true
+            }, 1500)
         }
         
 
         // if (moveToRandomPosition) {
         // } 
-        // if (!moveToRandomPosition && moveDiamondToStart) {
-        //     setTimeout(function() {
-        //         $('.slider-container').fadeIn('slow');
-        //         clearInterval(interval);
-        //         app.stage.removeChild(dot.obj);
-        //         app.stage.removeChild(mask.obj);
-        //         app.stage.removeChild(diamondMaskObjStart.obj);
-        //         app.stage.removeChild(diamondMaskObjEnd.obj);
-        //         app.stage.removeChild(logo.obj);
-        //         app.stage.removeChild(text.obj);
+        if (!moveToRandomPosition && moveDiamondToStart) {
+            setTimeout(function() {
+                $('.slider-container').fadeIn('slow');
+                clearInterval(interval);
+                app.stage.removeChild(dot.obj);
+                app.stage.removeChild(mask.obj);
+                app.stage.removeChild(diamondMaskObjStart.obj);
+                app.stage.removeChild(diamondMaskObjEnd.obj);
+                app.stage.removeChild(logo.obj);
+                app.stage.removeChild(text.obj);
 
-        //         diamond.scale();
-        //     }, 1500)
-        // }
+                diamond.scale();
+            }, 1500)
+        }
     }
 
     setTimeout(function() {
