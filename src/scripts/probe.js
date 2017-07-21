@@ -161,25 +161,32 @@ function init() {
             this.direction = '';
             let self = this;
             this.interval;
+            this.fadeIn = true
             setTimeout(() => {
                 this.obj.on('mouseover', function(mouseData) {
-                    $('.main-text-start').fadeIn();
+                    if(self.fadeIn === true) {
+                        $('.main-text-start').fadeIn();
+                    }
                     moveToRandomPosition = false;
                     logo.increaseOpacity();
                     setTimeout(() => {
                         self.obj.on('tap', function(mouseData) {
                             clearAdditions()
                             $('.main-text-start').fadeOut();
+                            freeFall = false;
                             
                         
                         });
                         self.obj.on('mousedown', function(mouseData) {
                             clearAdditions()
                             $('.main-text-start').fadeOut();
+                            freeFall = false;
                             
                         
                         });
+                        self.fadeIn = false
                     }, 1500)
+
                 });
                 this.obj.on('tap', function(mouseData) {
                     $('.main-text-start').fadeIn();
@@ -188,8 +195,10 @@ function init() {
                     self.obj.on('tap', function(mouseData) {
 
                         clearAdditions()
+                        freeFall = false;
                     })
                     $('.main-text-start').fadeOut();
+                    self.fadeIn = false
                 });
             }, 1500);
         }
@@ -368,8 +377,8 @@ function init() {
             // this.obj.lineStyle(0, 0x000000);
             // this.obj.drawRect(0, 0, 3, 3);
             // this.obj.alpha = 0
-            this.obj.x = this.generateRandomDirection(0, innerWidth)
-            this.obj.y = this.generateRandomDirection(0, innerHeight)
+            this.obj.x = centerX/*this.generateRandomDirection(0, innerWidth)*/
+            this.obj.y = centerY/*this.generateRandomDirection(0, innerHeight)*/
             this.obj.initialSpeed = speed + Math.random()
             this.obj.speed = this.obj.initialSpeed
             this.obj.initialDirection = rad(direction)
@@ -392,6 +401,9 @@ function init() {
 
         randomSpeed() {
             return Math.floor(Math.random() * 2) + 1.5;
+        }
+        changeDirection(value) {
+            return this.obj.initialDirection = rad(value)
         }
         moveDot() {
             let {
@@ -495,7 +507,7 @@ function init() {
         }
 
         moveTo(cx, cy, duration) {
-            if (!this.collidable) return
+            // if (!this.collidable) return
 
             let {
                 x,
@@ -673,7 +685,7 @@ function init() {
             this.add = true
             this.obj.on('tap', function() {
                 clearAdditions();
-                $('.main-text-start').fadeOut();
+                $('.main-text-start').fadeOut().css('display', 'none');
             });
             this.obj.on('mousedown', function() {
                 clearAdditions();
@@ -709,6 +721,9 @@ function init() {
             }
         }
     }
+    let rand = () => {
+        return Math.floor(Math.random() * (360 - 1)) + 1   
+    }
     let diamond = new Diamond(diamondTexture);
     let mask = new Mask(maskTexture);
     let diamondMaskObjStart = new GradientMaskStart(diamondMaskStart);
@@ -720,9 +735,10 @@ function init() {
 
     var index = innerWidth / 4
     for (var i = 0; i < 100; i++) {
-        var dot = new Dot(dotTexture);
+        let randomDirection = rand()
+        var dot = new Dot(dotTexture, randomDirection);
         if (i % 3 === 0) {
-            var smallDot = new SmallDot(dotSmallTexture);
+            var smallDot = new SmallDot(dotSmallTexture,randomDirection);
             smallDots.push(smallDot)
             app.stage.addChild(smallDot.obj);
 
@@ -752,29 +768,47 @@ function init() {
             diamondMaskObjStart.decreaseOpacity()
         }
     }, 10000);
-
     function create() {
         dotsArray.forEach(dot => {
             dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
             dot.obj.alpha = 1
-
         });
         smallDots.forEach(dot => {
             dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
             dot.obj.alpha = 1
             dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
         });
+        if(moveToRandomPosition) {
+            setTimeout( () => {
+                moveToRandomPosition = false 
+                freeFall = true
+            }, 2500)
+        }
+        if(!moveToRandomPosition && freeFall) {
+            dotsArray.forEach(dot => {
+                dot.changeDirection(45)
+           
+            });
+            smallDots.forEach(dot => {
+                dot.changeDirection(45)
+            });   
+
+        } else if (!moveToRandomPosition &&  !freeFall) {
+            dotsArray.forEach(dot => {
+                dot.moveTo(centerX, centerY, 100)
+            })
+            smallDots.forEach(dot => {
+                dot.moveTo(centerX, centerY, 100)   
+            })
+            // setTimeout(function() {
+            //     dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
+            //     smallDots.forEach(dot => app.stage.removeChild(dot.obj));
+            // }, 1500)
+        }
         
 
         // if (moveToRandomPosition) {
-        // } else if (!moveToRandomPosition && !moveDiamondToStart) {
-        //     dotsArray.forEach(dot => dot.moveTo(diamond.obj.position.x, diamond.obj.position.y, 10000))
-        //     smallDots.forEach(dot => dot.moveTo(diamond.obj.position.x, diamond.obj.position.y, 10000))
-        //     setTimeout(function() {
-        //         dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
-        //         smallDots.forEach(dot => app.stage.removeChild(dot.obj));
-        //     }, 1500)
-        // }
+        // } 
         // if (!moveToRandomPosition && moveDiamondToStart) {
         //     setTimeout(function() {
         //         $('.slider-container').fadeIn('slow');
