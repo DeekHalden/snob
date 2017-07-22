@@ -10,33 +10,33 @@ $(document).ready(function() {
 
 function init() {
     function clearAdditions(e) {
-        moveToRandomPosition = false;
-        moveDiamondToStart = true;
-        logo.decreaseOpacity();
-        text.decreaseOpacity();
-        $('.main-text-start').fadeOut();
-        $('.slider-container').css({'visibility':'visible'}).animate({'opacity': 1}, 1500);
+        moveToRandomPosition = false
+        moveDiamondToStart = true
+        logo.decreaseOpacity()
+        text.decreaseOpacity()
+        $('.main-text-start').fadeOut()
+        $('.slider-container').css({'visibility':'visible'}).animate({'opacity': 1}, 1500)
         
 
     }
-    const app = new PIXI.Application();
+    const app = new PIXI.Application()
     app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true})
 
-    document.body.appendChild(app.view);
+    document.body.appendChild(app.view)
 
-    // app.renderer.resize(window.innerWidth, window.innerHeight);
-    // app.renderer.backgroundColor = "0xffffff";
-    // app.renderer.transparent = true;
-    app.stage.interactive = true;
-    app.view.classList.add('first-part');
-    let innerWidth = window.innerWidth;
-    let innerHeight = window.innerHeight;
-    let centerX = innerWidth / 2;
-    let centerY = innerHeight / 2;
+    app.renderer.resize(window.innerWidth, window.innerHeight)
+    // app.renderer.backgroundColor = "0xffffff"
+    // app.renderer.transparent = true
+    app.stage.interactive = true
+    app.view.classList.add('first-part')
+    let innerWidth = window.innerWidth
+    let innerHeight = window.innerHeight
+    let centerX = innerWidth / 2
+    let centerY = innerHeight / 2
 
     window.onresize = function (){    
         if(!disableResize) {
-            location.reload();
+            location.reload()
         }
     }
 
@@ -63,24 +63,24 @@ function init() {
     }
 
 
-    const diamondTexture = PIXI.Texture.fromImage(texture0);
-    const diamondMaskStart = PIXI.Texture.fromImage(texture1);
-    const diamondMaskEnd = PIXI.Texture.fromImage(texture2);
-    const maskTexture = PIXI.Texture.fromImage(texture3);
-    const dotTexture = PIXI.Texture.fromImage(texture4);
-    const dotSmallTexture = PIXI.Texture.fromImage(texture5);
-    const logoTexture = new PIXI.Texture.fromImage(texture9);
+    const diamondTexture = PIXI.Texture.fromImage(texture0)
+    const diamondMaskStart = PIXI.Texture.fromImage(texture1)
+    const diamondMaskEnd = PIXI.Texture.fromImage(texture2)
+    const maskTexture = PIXI.Texture.fromImage(texture3)
+    const dotTexture = PIXI.Texture.fromImage(texture4)
+    const dotSmallTexture = PIXI.Texture.fromImage(texture5)
+    const logoTexture = new PIXI.Texture.fromImage(texture9)
 
-    const dotsCount = 100;
+    const dotsCount = 100
     // Variable
-    const dotsArray = [];
-    const smallDots = [];
-    const anchors = [];
-    const timelineDots = [];
-    let moveToRandomPosition;
-    let moveDiamondToStart = false;
-    let freeFall = true;
-    let disableResize = false;
+    const dotsArray = []
+    const smallDots = []
+    const anchors = []
+    const timelineDots = []
+    let moveToRandomPosition
+    let moveDiamondToStart = false
+    let freeFall = true
+    let disableResize = false
 
     // const arrayOfDots = Array.from({ length: dotsCount }, (i, v) => v)
 
@@ -88,22 +88,22 @@ function init() {
 
     class SuperClass {
         constructor(image) {
-            this.obj = new PIXI.Sprite(image);
+            this.obj = new PIXI.Sprite(image)
             this.obj.alpha = 0
-            this.obj.position.x = centerX;
-            this.obj.position.y = centerY;
-            this.obj.anchor.set(.5);
+            this.obj.position.x = centerX
+            this.obj.position.y = centerY
+            this.obj.anchor.set(.5)
 
         }
         moveTo(x, y, duration) {
-            var duration;
-            var speed = 0;
-            var x1 = this.obj.position.x;
+            var duration
+            var speed = 0
+            var x1 = this.obj.position.x
             var y1 = this.obj.position.y
-            var x2 = x;
-            var y2 = y;
-            var dx = x2 - x1;
-            var dy = y2 - y1;
+            var x2 = x
+            var y2 = y
+            var dx = x2 - x1
+            var dy = y2 - y1
             var dist = Math.abs(Math.sqrt(dx * dx + dy * dy))
             if (dist < 100) {
                 duration = 100
@@ -121,9 +121,9 @@ function init() {
     class Anchor extends SuperClass {
         constructor(image, x, y) {
             super(image)
-            this.obj = new PIXI.Sprite(image);
-            this.obj.position.x = x;
-            this.obj.position.y = y;
+            this.obj = new PIXI.Sprite(image)
+            this.obj.position.x = x
+            this.obj.position.y = y
             this.obj.anchor.set(.5)
             this.obj.alpha = 0
         }
@@ -147,60 +147,60 @@ function init() {
         constructor(image) {
             // Just sets up size and assigns the image (through PIXI)
             super(image)
-                // this.obj = new PIXI.Sprite(texture);
-            this.oldX = 0;
+                // this.obj = new PIXI.Sprite(texture)
+            this.oldX = 0
             this.obj.alpha = 0
             this.obj.rotation = -Math.PI / 180 * 45
-            this.obj.interactive = true;
-            this.obj.buttonMode = true;
-            this.obj.defaultCursor = 'pointer';
-            this.scaleTick = .1;
-            this.dragging;
-            this.moving = true;
-            this.oldX = 0;
-            this.direction = '';
-            let self = this;
-            this.interval;
+            this.obj.interactive = true
+            this.obj.buttonMode = true
+            this.obj.defaultCursor = 'pointer'
+            this.scaleTick = .1
+            this.dragging
+            this.moving = true
+            this.oldX = 0
+            this.direction = ''
+            let self = this
+            this.interval
             this.fadeIn = true
             setTimeout(() => {
                 this.obj.on('mouseover', function(mouseData) {
                     if(self.fadeIn === true) {
-                        $('.main-text-start').fadeIn();
+                        $('.main-text-start').fadeIn()
                     }
-                    moveToRandomPosition = false;
-                    logo.increaseOpacity();
+                    moveToRandomPosition = false
+                    logo.increaseOpacity()
                     setTimeout(() => {
                         self.obj.on('tap', function(mouseData) {
                             clearAdditions()
-                            $('.main-text-start').fadeOut();
-                            freeFall = false;
+                            $('.main-text-start').fadeOut()
+                            freeFall = false
                             
                         
-                        });
+                        })
                         self.obj.on('mousedown', function(mouseData) {
                             clearAdditions()
-                            $('.main-text-start').fadeOut();
-                            freeFall = false;
+                            $('.main-text-start').fadeOut()
+                            freeFall = false
                             
                         
-                        });
+                        })
                         self.fadeIn = false
                     }, 1500)
 
-                });
+                })
                 this.obj.on('tap', function(mouseData) {
-                    $('.main-text-start').fadeIn();
-                    moveToRandomPosition = false;
-                    logo.increaseOpacity();
+                    $('.main-text-start').fadeIn()
+                    moveToRandomPosition = false
+                    logo.increaseOpacity()
                     self.obj.on('tap', function(mouseData) {
 
                         clearAdditions()
-                        freeFall = false;
+                        freeFall = false
                     })
-                    $('.main-text-start').fadeOut();
+                    $('.main-text-start').fadeOut()
                     self.fadeIn = false
-                });
-            }, 1500);
+                })
+            }, 1500)
         }
         decreaseOpacity() {
             // rude fadein effect
@@ -219,13 +219,13 @@ function init() {
             }
 
             if (this.moving) {
-                let speed = 0;
-                let x1 = this.obj.position.x;
+                let speed = 0
+                let x1 = this.obj.position.x
                 let y1 = this.obj.position.y
-                let x2 = x;
-                let y2 = y;
-                let dx = x2 - x1;
-                let dy = y2 - y1;
+                let x2 = x
+                let y2 = y
+                let dx = x2 - x1
+                let dy = y2 - y1
 
                 let dist = Math.abs(Math.sqrt(dx * dx + dy * dy))
                 if (dist < 400) {
@@ -242,16 +242,16 @@ function init() {
                 }
                 if (dist <= x) {
                     setTimeout(() => {
-                        this.decreaseOpacity();
+                        this.decreaseOpacity()
                         if ($('canvas')) {
                             
                             $('canvas').css('z-index', 0)
-                            app.ticker.remove(create);
-                            $('.main-text').fadeIn();
-                            $('canvas').remove();
-                            disableResize = true;
+                            app.ticker.remove(create)
+                            $('.main-text').fadeIn()
+                            $('canvas').remove()
+                            disableResize = true
                             $('.menu-toggler').fadeIn()
-                            $('.irs-single').css('opacity', '1', 'important');
+                            $('.irs-single').css('opacity', '1', 'important')
                         }
 
                     }, 1000)
@@ -269,6 +269,9 @@ function init() {
             if (this.obj.scale.x >= .07) {
                 this.obj.scale.x -= .01
                 this.obj.scale.y -= .01
+                $(".dots-wrapper .dot").each(function(i) {
+                    $(this).delay(10 * i).fadeIn(100);
+                });
             } else {
                 this.moveTo(135, centerY, 10000)
             }
@@ -277,7 +280,7 @@ function init() {
 
     class Mask extends SuperClass {
         constructor(image) {
-            super(image);
+            super(image)
             this.obj.alpha = 1
                 // Just sets up size and assigns the image (through PIXI)
         }
@@ -285,11 +288,11 @@ function init() {
 
     class GradientMaskStart extends Mask {
         constructor(image) {
-            super(image);
+            super(image)
             // Just sets up size and assigns the image (through PIXI)
             this.obj.rotation = -Math.PI / 180 * 45
-            this.obj.position.x = centerX;
-            this.obj.position.y = centerY;
+            this.obj.position.x = centerX
+            this.obj.position.y = centerY
             this.obj.alpha = 0
             this.obj.anchor.set(.5)
             this.add = true
@@ -301,9 +304,9 @@ function init() {
                 let interval = setInterval(() => {
                     this.obj.alpha += .05
                     if (this.obj.alpha >= 1) {
-                        clearInterval(interval);
-                        diamondMaskObjEnd.increaseOpacity();
-                        diamondMaskObjStart.decreaseOpacity();
+                        clearInterval(interval)
+                        diamondMaskObjEnd.increaseOpacity()
+                        diamondMaskObjStart.decreaseOpacity()
                     }
                 }, 50)
                 this.add = false
@@ -316,8 +319,8 @@ function init() {
                 let interval = setInterval(() => {
                     this.obj.alpha -= .05
                     if (this.obj.alpha <= 0) {
-                        clearInterval(interval);
-                        diamondMaskObjEnd.decreaseOpacity();
+                        clearInterval(interval)
+                        diamondMaskObjEnd.decreaseOpacity()
                     }
                 }, 50)
                 this.add = true
@@ -333,12 +336,12 @@ function init() {
         increaseOpacity() {
             // rude fadein effect+
             if (this.obj.alpha <= 1 && this.add) {
-                let self = this;
+                let self = this
                 let interval = setInterval(() => {
                     this.obj.alpha += .05
                     if (this.obj.alpha >= 1) {
-                        diamondMaskObjEnd.decreaseOpacity();
-                        clearInterval(interval);
+                        diamondMaskObjEnd.decreaseOpacity()
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = false
@@ -348,11 +351,11 @@ function init() {
         decreaseOpacity() {
             // rude fadein effect
             if (this.obj.alpha >= 0 && !this.add) {
-                let self = this;
+                let self = this
                 let interval = setInterval(() => {
                     this.obj.alpha -= .05
                     if (this.obj.alpha <= 0) {
-                        clearInterval(interval);
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = true
@@ -370,12 +373,12 @@ function init() {
     }
 
     class Dot extends SuperClass {
-        constructor(image, direction=45, speed=4) {
+        constructor(image, direction=45, speed=.5) {
             super(image)
-            // this.obj = new PIXI.Graphics();
+            // this.obj = new PIXI.Graphics()
             // this.obj.beginFill(0x000000)
-            // this.obj.lineStyle(0, 0x000000);
-            // this.obj.drawRect(0, 0, 3, 3);
+            // this.obj.lineStyle(0, 0x000000)
+            // this.obj.drawRect(0, 0, 3, 3)
             // this.obj.alpha = 0
             this.obj.x = centerX/*this.generateRandomDirection(0, innerWidth)*/
             this.obj.y = centerY/*this.generateRandomDirection(0, innerHeight)*/
@@ -385,22 +388,22 @@ function init() {
             this.obj.direction = this.obj.initialDirection
             this.obj.normalizeSpeed = .3
             this.obj.normalizeDirection = rad(2)
-            // this.obj.position.x = centerX;
-            // this.obj.position.y = centerY;
-            // this.obj.speed = this.randomSpeed();
-            // this.obj.xMove = Math.random() >= .5;
-            // this.obj.yMove = Math.random() >= .5;
+            // this.obj.position.x = centerX
+            // this.obj.position.y = centerY
+            // this.obj.speed = this.randomSpeed()
+            // this.obj.xMove = Math.random() >= .5
+            // this.obj.yMove = Math.random() >= .5
             // this.obj.size = 4
-            // this.randomX = Math.floor(Math.random() * (innerWidth - 1) );
-            // this.randomY = Math.floor(Math.random() * (innerHeight - 1) );
+            // this.randomX = Math.floor(Math.random() * (innerWidth - 1) )
+            // this.randomY = Math.floor(Math.random() * (innerHeight - 1) )
             // this.randomDirection = this.generateRandomDirection(0, 360)
         }
         generateRandomDirection(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
+            return Math.floor(Math.random() * (max - min + 1) + min)
         }
 
         randomSpeed() {
-            return Math.floor(Math.random() * 2) + 1.5;
+            return Math.floor(Math.random() * 2) + 1.5
         }
         changeDirection(value) {
             return this.obj.initialDirection = rad(value)
@@ -471,16 +474,16 @@ function init() {
 
 
             // if (moveToRandomPosition && freeFall) {
-            //     var duration = 2000;
-            //     var speed = 0;
-            //     var x1 = this.obj.x;
+            //     var duration = 2000
+            //     var speed = 0
+            //     var x1 = this.obj.x
             //     var y1 = this.obj.y
-            //     var x2 = this.obj.randomX;
-            //     var y2 = this.obj.randomY;
+            //     var x2 = this.obj.randomX
+            //     var y2 = this.obj.randomY
 
 
-            //     var dx = this.obj.randomX - x1;
-            //     var dy = this.obj.randomY - y1;
+            //     var dx = this.obj.randomX - x1
+            //     var dy = this.obj.randomY - y1
 
             //     var dist = Math.abs(Math.sqrt(dx * dx + dy * dy))
 
@@ -489,19 +492,19 @@ function init() {
 
             //     this.obj.position.y += (this.obj.randomY - y1) * speed
             //     if ((this.obj.position.x >= this.obj.randomX - 2 && this.obj.position.x <= this.obj.randomX + 10) && (this.obj.position.y >= this.obj.randomY - 2 && this.obj.position.y <= this.obj.randomY + 10)) {
-            //         freeFall = false;
+            //         freeFall = false
             //     }
 
 
             // }
             // if (!freeFall) {
-            //     this.obj.position.x += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2;
-            //     this.obj.position.y += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2;
+            //     this.obj.position.x += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2
+            //     this.obj.position.y += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2
             //     if (this.obj.position.x >= innerWidth - this.obj.size) {
-            //         this.obj.position.x = (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed / 2;
+            //         this.obj.position.x = (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed / 2
             //     }
             //     if (this.obj.position.y >= innerHeight - this.obj.size) {
-            //         this.obj.position.y = (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed / 2;
+            //         this.obj.position.y = (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed / 2
             //     }
             // }
         }
@@ -535,33 +538,33 @@ function init() {
 
 
     class SmallDot extends Dot {
-        constructor(image, direction, speed=2) {
+        constructor(image, direction, speed=3) {
             super(image, direction, speed)
-            // this.obj = new PIXI.Graphics();
+            // this.obj = new PIXI.Graphics()
             // this.obj.beginFill(0x000000)
-            // this.obj.lineStyle(0, 0x000000);
-            // this.obj.drawRect(0, 0, 1, 1);
-            // this.obj = new PIXI.Graphics();
-            // this.obj.lineStyle(1, 0x000000);  //(thickness, color)
-            // this.obj.drawCircle(0, 0, 1);   //(x,y,radius)
-            // this.obj.endFill(); 
+            // this.obj.lineStyle(0, 0x000000)
+            // this.obj.drawRect(0, 0, 1, 1)
+            // this.obj = new PIXI.Graphics()
+            // this.obj.lineStyle(1, 0x000000)  //(thickness, color)
+            // this.obj.drawCircle(0, 0, 1)   //(x,y,radius)
+            // this.obj.endFill() 
             // this.obj.alpha = 0
             // this.obj.direction = this.generateRandomDirection(0, 360)
-            // this.obj.position.x = centerX;
-            // this.obj.position.y = centerY;
+            // this.obj.position.x = centerX
+            // this.obj.position.y = centerY
             // this.obj.randomX = this.generateRandomDirection(0, innerWidth)
             // this.obj.randomY = this.generateRandomDirection(0, innerHeight)
-            // this.obj.speed = this.randomSpeed();
-            // this.obj.xMove = Math.random() >= .5;
-            // this.obj.yMove = Math.random() >= .5;
+            // this.obj.speed = this.randomSpeed()
+            // this.obj.xMove = Math.random() >= .5
+            // this.obj.yMove = Math.random() >= .5
             // this.obj.size = 4
             // this.magnet = true
-            // this.obj.interactive = true;
-            // this.obj.hitArea = new PIXI.Rectangle(0, 0, 200, 200);
+            // this.obj.interactive = true
+            // this.obj.hitArea = new PIXI.Rectangle(0, 0, 200, 200)
             this.collidable = true
         }
         // randomSpeed() {
-        //     return Math.floor(Math.random() * 1) + 1;
+        //     return Math.floor(Math.random() * 1) + 1
         // }
         collide(cx, cy, radius) {
             if (!this.collidable) return
@@ -601,39 +604,39 @@ function init() {
 
             // console.log(angle)
 
-            // let dx = (this.obj.position.x + 200 / 2) - (x + 100 / 2);
-            // let dy = (this.obj.position.y + 200 / 2) - (y + 100 / 2);
-            // let width = (4 + 200) / 2;
-            // let height = (4 + 200) / 2;
-            // let crossWidth = width * dy;
-            // let crossHeight = height * dx;
-            // let collision = 'none';
+            // let dx = (this.obj.position.x + 200 / 2) - (x + 100 / 2)
+            // let dy = (this.obj.position.y + 200 / 2) - (y + 100 / 2)
+            // let width = (4 + 200) / 2
+            // let height = (4 + 200) / 2
+            // let crossWidth = width * dy
+            // let crossHeight = height * dx
+            // let collision = 'none'
             // //
             // if (Math.abs(dx) >= width && Math.abs(dy) >= height) {
             //     if (crossWidth > crossHeight) {
-            //         collision = (crossWidth > (-crossHeight)) ? 'bottom' : 'left';
+            //         collision = (crossWidth > (-crossHeight)) ? 'bottom' : 'left'
 
             //     } else {
-            //         collision = (crossWidth > -(crossHeight)) ? 'right' : 'top';
+            //         collision = (crossWidth > -(crossHeight)) ? 'right' : 'top'
             //     }
             // }
             // if (collision == 'top') {
-            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed
+            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed
             // }
             // if (collision == 'bottom') {
-            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed
+            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed
             // }
             // if (collision == 'right') {
-            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed
+            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed
             // }
             // if (collision == 'left') {
-            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed;
-            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed;
+            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed
+            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed
             // }
-            // return (collision);
+            // return (collision)
         }
     }
 
@@ -650,7 +653,7 @@ function init() {
                 let interval = setInterval(() => {
                     this.obj.alpha += .05
                     if (this.obj.alpha >= 1) {
-                        clearInterval(interval);
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = false
@@ -659,11 +662,11 @@ function init() {
 
         decreaseOpacity() {
             if (this.obj.alpha >= 1 && !this.add) {
-                let self = this;
+                let self = this
                 let interval = setInterval(() => {
                     this.obj.alpha -= .1
                     if (this.obj.alpha >= 1) {
-                        clearInterval(interval);
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = true
@@ -678,24 +681,24 @@ function init() {
                 fontSize: 24,
                 fill: 0xFFFFFF,
                 align: 'center'
-            });
+            })
             this.obj.alpha = 0
-            this.obj.interactive = true;
-            this.obj.buttonMode = true;
-            this.obj.defaultCursor = 'pointer';
-            this.obj.position.x = x;
-            this.obj.position.y = y;
+            this.obj.interactive = true
+            this.obj.buttonMode = true
+            this.obj.defaultCursor = 'pointer'
+            this.obj.position.x = x
+            this.obj.position.y = y
             this.obj.anchor.set(.5, .5)
             this.add = true
             this.obj.on('tap', function() {
-                clearAdditions();
-                $('.main-text-start').fadeOut().css('display', 'none');
-            });
+                clearAdditions()
+                $('.main-text-start').fadeOut().css('display', 'none')
+            })
             this.obj.on('mousedown', function() {
-                clearAdditions();
-                $('.main-text-start').fadeOut();
-                $('.slider-container').css('visibility','visible');
-            });
+                clearAdditions()
+                $('.main-text-start').fadeOut()
+                $('.slider-container').css('visibility','visible')
+            })
             // this.obj.alpha = 0
         }
 
@@ -705,7 +708,7 @@ function init() {
                 let interval = setInterval(() => {
                     this.obj.alpha += .05
                     if (this.obj.alpha >= 1) {
-                        clearInterval(interval);
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = false
@@ -718,7 +721,7 @@ function init() {
                 let interval = setInterval(() => {
                     this.obj.alpha -= .1
                     if (this.obj.alpha >= 1) {
-                        clearInterval(interval);
+                        clearInterval(interval)
                     }
                 }, 50)
                 this.add = true
@@ -728,7 +731,7 @@ function init() {
     let rand = () => {
         return Math.floor(Math.random() * (360 - 1)) + 1   
     }
-    let diamond = new Diamond(diamondTexture);
+    let diamond = new Diamond(diamondTexture)
     let mask = new Mask(maskTexture);
     let diamondMaskObjStart = new GradientMaskStart(diamondMaskStart);
     let diamondMaskObjEnd = new GradientMaskEnd(diamondMaskEnd);
@@ -740,15 +743,15 @@ function init() {
     var index = innerWidth / 4
     for (var i = 0; i < 100; i++) {
         let randomDirection = rand()
-        var dot = new Dot(dotTexture, randomDirection);
-        if (i % 3 === 0) {
-            var smallDot = new SmallDot(dotSmallTexture,randomDirection);
-            smallDots.push(smallDot)
-            app.stage.addChild(smallDot.obj);
+        var smallDot = new SmallDot(dotTexture,randomDirection);
 
+        if (i % 3 === 0) {
+            var dot = new Dot(dotSmallTexture, randomDirection);
+            dotsArray.push(dot);
+            app.stage.addChild(dot.obj);
         }
-        dotsArray.push(dot);
-        app.stage.addChild(dot.obj);
+        smallDots.push(smallDot)
+        app.stage.addChild(smallDot.obj);
     }
    
     app.stage.addChild(mask.obj);
