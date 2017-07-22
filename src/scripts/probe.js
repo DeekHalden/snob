@@ -169,20 +169,17 @@ function init() {
                     }
                     moveToRandomPosition = false
                     logo.increaseOpacity()
+                    freeFall = false
                     setTimeout(() => {
                         self.obj.on('tap', function(mouseData) {
                             clearAdditions()
                             $('.main-text-start').fadeOut()
-                            freeFall = false
-                            
-                        
+                            moveDiamondToStart = true
                         })
                         self.obj.on('mousedown', function(mouseData) {
                             clearAdditions()
                             $('.main-text-start').fadeOut()
-                            freeFall = false
-                            
-                        
+                            moveDiamondToStart = true
                         })
                         self.fadeIn = false
                     }, 1500)
@@ -192,15 +189,16 @@ function init() {
                     $('.main-text-start').fadeIn()
                     moveToRandomPosition = false
                     logo.increaseOpacity()
+                    freeFall = false
                     self.obj.on('tap', function(mouseData) {
 
                         clearAdditions()
-                        freeFall = false
+                        moveDiamondToStart = true
                     })
                     $('.main-text-start').fadeOut()
                     self.fadeIn = false
                 })
-            }, 1500)
+            }, 5000)
         }
         decreaseOpacity() {
             // rude fadein effect
@@ -372,273 +370,7 @@ function init() {
         return radians * 180 / Math.PI
     }
 
-    class Dot extends SuperClass {
-        constructor(image, direction=45, speed=.5) {
-            super(image)
-            // this.obj = new PIXI.Graphics()
-            // this.obj.beginFill(0x000000)
-            // this.obj.lineStyle(0, 0x000000)
-            // this.obj.drawRect(0, 0, 3, 3)
-            // this.obj.alpha = 0
-            this.obj.x = centerX/*this.generateRandomDirection(0, innerWidth)*/
-            this.obj.y = centerY/*this.generateRandomDirection(0, innerHeight)*/
-            this.obj.initialSpeed = speed + Math.random()
-            this.obj.speed = this.obj.initialSpeed
-            this.obj.initialDirection = rad(direction)
-            this.obj.direction = this.obj.initialDirection
-            this.obj.normalizeSpeed = .3
-            this.obj.normalizeDirection = rad(2)
-            // this.obj.position.x = centerX
-            // this.obj.position.y = centerY
-            // this.obj.speed = this.randomSpeed()
-            // this.obj.xMove = Math.random() >= .5
-            // this.obj.yMove = Math.random() >= .5
-            // this.obj.size = 4
-            // this.randomX = Math.floor(Math.random() * (innerWidth - 1) )
-            // this.randomY = Math.floor(Math.random() * (innerHeight - 1) )
-            // this.randomDirection = this.generateRandomDirection(0, 360)
-        }
-        generateRandomDirection(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
-        randomSpeed() {
-            return Math.floor(Math.random() * 2) + 1.5
-        }
-        changeDirection(value) {
-            return this.obj.initialDirection = rad(value)
-        }
-        moveDot() {
-            let {
-                x,
-                y,
-                speed,
-                direction,
-                initialSpeed,
-                initialDirection,
-                normalizeSpeed,
-                normalizeDirection
-            } = this.obj
-
-            function closest(fr, to, shift) {
-                let res
-                if (fr > to) {
-                    res = fr - shift
-
-                    return res < to ? to : res
-                }
-
-                if (fr < to) {
-                    res = fr + shift
-
-                    return res > to ? to : res
-                }
-            }
-
-            if (speed != initialSpeed) {
-                speed = this.obj.speed = closest(speed, initialSpeed, normalizeSpeed)
-            }
-
-            if (direction != initialDirection) {
-                let [sa, ea, na] = [arad(direction), arad(initialDirection), arad(normalizeDirection)]
-                if (!(sa > ea + 180 || sa < ea)) na = 0 - na
-                // let [lg, lw] = [Math.abs(ea - sa), 360 - Math.abs(ea - sa)]
-                // let current = (lg > lw ? sa + na : sa - na) % 360
-                let current = (sa + na) % 360
-
-                // console.log(inc, dec, current, sa, ea)
-                direction = this.obj.direction = rad(Math.abs(current - ea) > na ? current : ea)
-            }
-
-            let x2 = Math.cos(direction) * speed
-            let y2 = Math.sin(direction) * speed
-
-            x = this.obj.x = x + x2
-            y = this.obj.y = y + y2
-
-            if (x > innerWidth) {
-                this.obj.x = x - innerWidth
-            }
-
-            if (x <= 0) {
-                this.obj.x = innerWidth
-            }
-
-            if (y > innerHeight) {
-                this.obj.y = y - innerHeight
-            }
-
-            if (y <= 0) {
-                this.obj.y = innerHeight
-            }
-
-
-            // if (moveToRandomPosition && freeFall) {
-            //     var duration = 2000
-            //     var speed = 0
-            //     var x1 = this.obj.x
-            //     var y1 = this.obj.y
-            //     var x2 = this.obj.randomX
-            //     var y2 = this.obj.randomY
-
-
-            //     var dx = this.obj.randomX - x1
-            //     var dy = this.obj.randomY - y1
-
-            //     var dist = Math.abs(Math.sqrt(dx * dx + dy * dy))
-
-            //     speed = dist / duration
-            //     this.obj.position.x += (this.obj.randomX - x1) * speed
-
-            //     this.obj.position.y += (this.obj.randomY - y1) * speed
-            //     if ((this.obj.position.x >= this.obj.randomX - 2 && this.obj.position.x <= this.obj.randomX + 10) && (this.obj.position.y >= this.obj.randomY - 2 && this.obj.position.y <= this.obj.randomY + 10)) {
-            //         freeFall = false
-            //     }
-
-
-            // }
-            // if (!freeFall) {
-            //     this.obj.position.x += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2
-            //     this.obj.position.y += 10 / 6 * Math.atan(this.randomDirection) * this.obj.speed / 2
-            //     if (this.obj.position.x >= innerWidth - this.obj.size) {
-            //         this.obj.position.x = (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed / 2
-            //     }
-            //     if (this.obj.position.y >= innerHeight - this.obj.size) {
-            //         this.obj.position.y = (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed / 2
-            //     }
-            // }
-        }
-
-        moveTo(cx, cy, duration) {
-            // if (!this.collidable) return
-
-            let {
-                x,
-                y,
-                speed,
-                direction,
-                initialSpeed,
-                initialDirection,
-                normalizeSpeed,
-                normalizeDirection
-            } = this.obj
-            let dx = cx - x
-            let dy = cy - y
-            let distance = Math.sqrt(dx*dx + dy*dy)
-
-            let angle = arad(Math.acos(dx / distance))
-            if(y > innerHeight / 2) {
-                this.obj.initialDirection = this.obj.direction = -(rad(angle))
-            } else {
-                this.obj.initialDirection = this.obj.direction = rad(angle)
-            }
-            this.obj.initialSpeed = this.obj.speed = distance / duration
-        }
-    }
-
-
-    class SmallDot extends Dot {
-        constructor(image, direction, speed=3) {
-            super(image, direction, speed)
-            // this.obj = new PIXI.Graphics()
-            // this.obj.beginFill(0x000000)
-            // this.obj.lineStyle(0, 0x000000)
-            // this.obj.drawRect(0, 0, 1, 1)
-            // this.obj = new PIXI.Graphics()
-            // this.obj.lineStyle(1, 0x000000)  //(thickness, color)
-            // this.obj.drawCircle(0, 0, 1)   //(x,y,radius)
-            // this.obj.endFill() 
-            // this.obj.alpha = 0
-            // this.obj.direction = this.generateRandomDirection(0, 360)
-            // this.obj.position.x = centerX
-            // this.obj.position.y = centerY
-            // this.obj.randomX = this.generateRandomDirection(0, innerWidth)
-            // this.obj.randomY = this.generateRandomDirection(0, innerHeight)
-            // this.obj.speed = this.randomSpeed()
-            // this.obj.xMove = Math.random() >= .5
-            // this.obj.yMove = Math.random() >= .5
-            // this.obj.size = 4
-            // this.magnet = true
-            // this.obj.interactive = true
-            // this.obj.hitArea = new PIXI.Rectangle(0, 0, 200, 200)
-            this.collidable = true
-        }
-        // randomSpeed() {
-        //     return Math.floor(Math.random() * 1) + 1
-        // }
-        collide(cx, cy, radius) {
-            if (!this.collidable) return
-
-            let {
-                x,
-                y,
-                speed,
-                direction,
-                initialSpeed,
-                initialDirection,
-                normalizeSpeed,
-                normalizeDirection
-            } = this.obj
-            let dx = cx - x
-            let dy = cy - y
-            let distance = Math.sqrt(dx*dx + dy*dy)
-
-            if (distance <= radius && dy > 0) {
-                let angle = arad(Math.acos(dx / distance))
-                if (angle < 0) {
-                    angle = 360 + angle
-                }
-
-                let dir = arad(this.obj.direction)
-
-                // if (!(dir + 30 > angle && dir - 30 < angle)) {
-                // }
-                this.obj.direction = rad((angle + 180) % 360)
-            }
-
-            if (distance <= radius) {
-                this.obj.speed += this.obj.normalizeSpeed * 2
-            }
-
-
-
-            // console.log(angle)
-
-            // let dx = (this.obj.position.x + 200 / 2) - (x + 100 / 2)
-            // let dy = (this.obj.position.y + 200 / 2) - (y + 100 / 2)
-            // let width = (4 + 200) / 2
-            // let height = (4 + 200) / 2
-            // let crossWidth = width * dy
-            // let crossHeight = height * dx
-            // let collision = 'none'
-            // //
-            // if (Math.abs(dx) >= width && Math.abs(dy) >= height) {
-            //     if (crossWidth > crossHeight) {
-            //         collision = (crossWidth > (-crossHeight)) ? 'bottom' : 'left'
-
-            //     } else {
-            //         collision = (crossWidth > -(crossHeight)) ? 'right' : 'top'
-            //     }
-            // }
-            // if (collision == 'top') {
-            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed
-            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed
-            // }
-            // if (collision == 'bottom') {
-            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed
-            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed
-            // }
-            // if (collision == 'right') {
-            //     this.obj.position.x -= (20 / 6) * Math.sin(this.randomDirection) + this.obj.speed
-            //     this.obj.position.y -= (20 / 6) * Math.cos(this.randomDirection) + this.obj.speed
-            // }
-            // if (collision == 'left') {
-            //     this.obj.position.x += (10 / 6) * Math.sin(this.randomDirection) + this.obj.speed
-            //     this.obj.position.y += (10 / 6) * Math.cos(this.randomDirection) + this.obj.speed
-            // }
-            // return (collision)
-        }
-    }
+    
 
     class Logo extends SuperClass {
         constructor(image) {
@@ -728,6 +460,170 @@ function init() {
             }
         }
     }
+
+    class Dot extends SuperClass {
+        constructor(image, direction=45, speed=2) {
+            super(image)
+           
+            this.obj.x = centerX/*this.generateRandomDirection(0, innerWidth)*/
+            this.obj.y = centerY/*this.generateRandomDirection(0, innerHeight)*/
+            this.obj.initialSpeed = speed + Math.random()
+            this.obj.speed = this.obj.initialSpeed
+            this.obj.initialDirection = rad(direction)
+            this.obj.direction = this.obj.initialDirection
+            this.obj.normalizeSpeed = .3
+            this.obj.normalizeDirection = rad(2)
+     
+        }
+        generateRandomDirection(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        randomSpeed() {
+            return Math.floor(Math.random() * 2) + 1.5
+        }
+        changeInitialDirection(value) {
+            return this.obj.initialDirection = rad(45)
+        }
+        moveDot() {
+            let {
+                x,
+                y,
+                speed,
+                direction,
+                initialSpeed,
+                initialDirection,
+                normalizeSpeed,
+                normalizeDirection
+            } = this.obj
+
+            function closest(fr, to, shift) {
+                let res
+                if (fr > to) {
+                    res = fr - shift
+
+                    return res < to ? to : res
+                }
+
+                if (fr < to) {
+                    res = fr + shift
+
+                    return res > to ? to : res
+                }
+            }
+
+            if (speed != initialSpeed) {
+                speed = this.obj.speed = closest(speed, initialSpeed, normalizeSpeed)
+            }
+
+            if (direction != initialDirection) {
+                let [sa, ea, na] = [arad(direction), arad(initialDirection), arad(normalizeDirection)]
+                if (!(sa > ea + 180 || sa < ea)) na = 0 - na
+                // let [lg, lw] = [Math.abs(ea - sa), 360 - Math.abs(ea - sa)]
+                // let current = (lg > lw ? sa + na : sa - na) % 360
+                let current = (sa + na) % 360
+
+                // console.log(inc, dec, current, sa, ea)
+                direction = this.obj.direction = rad(Math.abs(current - ea) > na ? current : ea)
+            }
+
+            let x2 = Math.cos(direction) * speed
+            let y2 = Math.sin(direction) * speed
+
+            x = this.obj.x = x + x2
+            y = this.obj.y = y + y2
+
+            if (x > innerWidth) {
+                this.obj.x = x - innerWidth
+            }
+
+            if (x <= 0) {
+                this.obj.x = innerWidth
+            }
+
+            if (y > innerHeight) {
+                this.obj.y = y - innerHeight
+            }
+
+            if (y <= 0) {
+                this.obj.y = innerHeight
+            }
+
+
+        }
+
+        moveTo(cx, cy, duration) {
+            // if (!this.collidable) return
+
+            let {
+                x,
+                y,
+                speed,
+                direction,
+                initialSpeed,
+                initialDirection,
+                normalizeSpeed,
+                normalizeDirection
+            } = this.obj
+            let dx = cx - x
+            let dy = cy - y
+            let distance = Math.sqrt(dx*dx + dy*dy)
+
+            let angle = arad(Math.acos(dx / distance))
+            if(y > innerHeight / 2) {
+                this.obj.initialDirection = this.obj.direction = -(rad(angle))
+            } else {
+                this.obj.initialDirection = this.obj.direction = rad(angle)
+            }
+            this.obj.initialSpeed = this.obj.speed = distance / duration
+        }
+    }
+
+
+    class SmallDot extends Dot {
+        constructor(image, direction, speed=3.5) {
+            super(image, direction, speed)
+            
+            this.collidable = true
+        }
+        // randomSpeed() {
+        //     return Math.floor(Math.random() * 1) + 1
+        // }
+        collide(cx, cy, radius) {
+            if (!this.collidable) return
+
+            let {
+                x,
+                y,
+                speed,
+                direction,
+                initialSpeed,
+                initialDirection,
+                normalizeSpeed,
+                normalizeDirection
+            } = this.obj
+            let dx = cx - x
+            let dy = cy - y
+            let distance = Math.sqrt(dx*dx + dy*dy)
+
+            if (distance <= radius && dy > 0) {
+                let angle = arad(Math.acos(dx / distance))
+                if (angle < 0) {
+                    angle = 360 + angle
+                }
+
+                let dir = arad(this.obj.direction)
+
+                // if (!(dir + 30 > angle && dir - 30 < angle)) {
+                // }
+                this.obj.direction = rad((angle + 180) % 360)
+            }
+
+            if (distance <= radius) {
+                this.obj.speed += this.obj.normalizeSpeed * 2
+            }
+        }
+    }
     let rand = () => {
         return Math.floor(Math.random() * (360 - 1)) + 1   
     }
@@ -775,32 +671,43 @@ function init() {
             diamondMaskObjStart.decreaseOpacity()
         }
     }, 10000);
+    let changeDirection = false
+    let freemove = true
     function create() {
-        dotsArray.forEach(dot => {
-            dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
-            dot.obj.alpha = 1
-        });
-        smallDots.forEach(dot => {
-            dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
-            dot.obj.alpha = 1
-            dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
-        });
-        if(moveToRandomPosition) {
-            setTimeout( () => {
-                moveToRandomPosition = false 
-                freeFall = true
-            }, 2500)
-        }
-        if(!moveToRandomPosition && freeFall) {
+        if(freemove) {
             dotsArray.forEach(dot => {
-                dot.changeDirection(45)
+                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
+                dot.obj.alpha = 1
+            });
+            smallDots.forEach(dot => {
+                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
+                dot.obj.alpha = 1
+                dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
+            });
+            setTimeout(()=> {
+                freemove = false
+            },2000)
+        }
+        
+        setTimeout( () => {
+            changeDirection = true 
+        
+        }, 2000)
+
+        if(changeDirection) {
+            dotsArray.forEach(dot => {
+                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
+                dot.changeInitialDirection(45)
            
             });
             smallDots.forEach(dot => {
-                dot.changeDirection(45)
+                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
+                dot.changeInitialDirection(45)
+                dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
             });   
+        }
 
-        } else if (!moveToRandomPosition &&  !freeFall) {
+        if (!moveToRandomPosition ) {
             dotsArray.forEach(dot => {
                 dot.moveTo(centerX, centerY, 50)
             })
@@ -810,13 +717,10 @@ function init() {
             setTimeout(function() {
                 dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
                 smallDots.forEach(dot => app.stage.removeChild(dot.obj));
-                moveDiamondToStart = true
+                
             }, 1500)
+            
         }
-        
-
-        // if (moveToRandomPosition) {
-        // } 
         if (!moveToRandomPosition && moveDiamondToStart) {
             setTimeout(function() {
                 $('.slider-container').fadeIn('slow');
@@ -1063,8 +967,8 @@ $("#controls").ionRangeSlider({
         if (data.from >= firstBreakpoint - firstBreakpoint / 2) {
             $('.menu-toggler').addClass('menu-toggler--active')
             $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
-            $('body').animate({'background-color':'#000'}, 5000);
-            $('.slider-container').addClass('slider-container--light');
+            $('.body').addClass('body--active')
+            $('.dot').addClass('dot--light')
         }
         if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
             
@@ -1093,9 +997,9 @@ $("#controls").ionRangeSlider({
         }
 
         if ((data.from <= firstBreakpoint - firstBreakpoint / 2)) {
-            $('body').animate({'background-color':'#ffffff'}, 5000);
+            $('.body').removeClass('body--active')
             $('.menu-toggler').removeClass('menu-toggler--active')
-            $('.slider-container').removeClass('slider-container--light');
+            $('.dot').removeClass('dot--light');
             $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
         }
     },

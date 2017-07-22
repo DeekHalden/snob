@@ -787,6 +787,9 @@ body {
 .body {
   background-color: #fff;
 }
+.body--active {
+  background-color: #000;
+}
 canvas {
   position: absolute;
   top: 0;
@@ -1180,6 +1183,7 @@ a:hover {
 }
 .dots-wrapper {
   width: 100%;
+  z-index: 2;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1192,4 +1196,7 @@ a:hover {
   width: 2px;
   height: 2px;
   border-radius: 50%;
+}
+.dot--light {
+  background-color: #fff;
 }
