@@ -51,14 +51,14 @@ function init() {
         var texture9 = './../images/Logo2kx2k.png'
 
     } else {
-        var texture0 = '/snobV1/images/big-diamond.svg'
-        var texture1 = '/snobV1/images/big-diamond-start.svg'
-        var texture2 = '/snobV1/images/big-diamond-end.svg'
-        var texture3 = '/snobV1/images/mask.png'
-        var texture4 = '/snobV1/images/dot.png'
-        var texture5 = '/snobV1/images/dot--small.png'
-        var texture6 = '/snobV1/images/snob-b-w.png'
-        var texture9 = '/snobV1/images/Logo2kx2k.png'
+        var texture0 = '/snobart/images/big-diamond.svg'
+        var texture1 = '/snobart/images/big-diamond-start.svg'
+        var texture2 = '/snobart/images/big-diamond-end.svg'
+        var texture3 = '/snobart/images/mask.png'
+        var texture4 = '/snobart/images/dot.png'
+        var texture5 = '/snobart/images/dot--small.png'
+        var texture6 = '/snobart/images/snob-b-w.png'
+        var texture9 = '/snobart/images/Logo2kx2k.png'
 
     }
 
@@ -267,8 +267,9 @@ function init() {
             if (this.obj.scale.x >= .07) {
                 this.obj.scale.x -= .01
                 this.obj.scale.y -= .01
+                $(".dots-wrapper").addClass('dots-wrapper--active')
                 $(".dots-wrapper .dot").each(function(i) {
-                    $(this).delay(10 * i).fadeIn(100);
+                    $(this).delay(15 * i).addClass('dot--active').css('display', 'block')
                 });
             } else {
                 this.moveTo(135, centerY, 10000)
@@ -635,8 +636,8 @@ function init() {
     let text = new Text('CLICK TO ENTER WEBSITE', centerX, centerY + 255);
 
     let logo = new Logo(logoTexture);
+   
 
-    var index = innerWidth / 4
     for (var i = 0; i < 100; i++) {
         let randomDirection = rand()
         var smallDot = new SmallDot(dotTexture,randomDirection);
@@ -649,7 +650,6 @@ function init() {
         smallDots.push(smallDot)
         app.stage.addChild(smallDot.obj);
     }
-   
     app.stage.addChild(mask.obj);
     app.stage.addChild(diamond.obj);
     app.stage.addChild(diamondMaskObjStart.obj);
@@ -659,7 +659,7 @@ function init() {
 
     var diamondInterval = setInterval(() => {
         diamond.increaseOpacity()
-    }, 50);
+    }, 35);
     if (diamond.obj.alpha >= 1) {
         clearInterval(diamondInterval);
     }
@@ -686,7 +686,7 @@ function init() {
             });
             setTimeout(()=> {
                 freemove = false
-            },2000)
+            },2500)
         }
         
         setTimeout( () => {
@@ -750,11 +750,12 @@ function init() {
 // GLOBALS
 let globalIn = false;
 let offset = 110;
-let anchorSize = 32 / 4
+let anchorSize = 26
 let anchors = $('.range-slider__anchor');
-let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize;
-let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize;
-let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize;
+let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize /2;
+let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize/ 2;
+let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize /2;
+let breakpoints = [firstBreakpoint, secondBreakpoint, thirdBreakpoint]
 let slides = $('.slide');
 // GLOBALS
 
@@ -783,6 +784,7 @@ const swiperV = new Swiper('.swiper-container-v', {
     parallax: true,
     nested: true,
     speed: 1500,
+    paginationClickable: true,
     onlyExternal: true,
     shortSwipes: false,
     longSwipes: false,
@@ -803,7 +805,7 @@ const swiperV = new Swiper('.swiper-container-v', {
     },
 
     onSlideChangeStart(swiper) {
-        // console.log(swiper)
+        
         if(swiper.activeIndex >= 1 && swiper.activeIndex < 5) {
             $('.menu-toggler').removeClass('menu-toggler--active')
         } else {
@@ -819,10 +821,13 @@ const swiperV = new Swiper('.swiper-container-v', {
             next()
         })
         if(swiper.activeIndex === 1) {
-            console.log(swiper.activeIndex)
         }
         $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--black').addClass('wrapper--black-active')
         // },1000)
+        if(swiper.activeIndex === 5) {
+            $('.swiper-slide--map').addClass('swiper-slide--map-active')
+            $('.map-container').fadeIn(1000)
+        } 
 
     },
     onSlideChangeEnd(swiper) {
@@ -849,26 +854,38 @@ const swiperV = new Swiper('.swiper-container-v', {
 // SWIPER 1
 const swiperH = new Swiper('.swiper-container-h', {
     mousewheelForceToAxis: true,
+    pagination: '.swiperH-pagination',
     effect: 'fade',
+    paginationClickable: true,
     shortSwipes: false,
     onlyExternal: true,
     longSwipes: false,
     parallax: true,
-    
+    onInit() {
+        createTags()
+    },
     onSlideChangeStart(swiper) {
         setTimeout(function() {
-            $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
-            $('.swiper-container-h .swiper-slide--horizontal video')[0].pause();
+            // $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
+            $('.swiper-container-h .swiper-slide--horizontal video').each(function() {
+                $(this)[0].pause()
+            })
         },200)
         let index = $($('.swiper-container-h .swiper-container-v .swiper-slide-active'))
         index.find('.swiper-slide__text--active')
             .removeClass('swiper-slide__text--active')
-
+        if( ($('.swiper-container-h .swiper-slide--horizontal video').duration === 
+             $('.swiper-container-h .swiper-slide--horizontal video').currentTime ) && 
+             $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length > 0 ) {
+                
+                
+                 $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].currentTime = 0
+            }
     },
     onTransitionEnd(swiper) {
         if($('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length) {
             $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').fadeIn();
-            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play();
+            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play()
         }
         $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
             .addClass('swiper-slide__text--active')
@@ -880,6 +897,47 @@ const swiperH = new Swiper('.swiper-container-h', {
     
 });
 // SWIPER 1
+function createTags() {
+    const bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),'+
+                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),'+
+                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
+    const pagslides = $('.swiper-slide--horizontal:nth-child(2),'+
+                     ' .swiper-slide--horizontal:nth-child(4),'+
+                     ' .swiper-slide--horizontal:nth-child(6)')
+    let names = []
+    pagslides.each(function(i) {
+        names.push($(this).data('name'))
+    })
+    bullets.each(function(i){
+        $(this).text(names[i])
+        $(this).attr('id',  i)
+
+    })
+    
+    bullets.click(function(e) {
+        $('.menu-toggler').addClass('menu-toggler--active')
+        $('.dot').addClass('dot--light')
+        let target = e.target
+        let id = target.id
+        
+        
+        if(+id === $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active').data('id')) return   
+        if(id === '0') {
+            slider.update({from : breakpoints[id] - 1 })
+        } 
+        if(id === '1') {
+
+            slider.update({from : breakpoints[id]  + 5 })
+        } 
+        if(id === '2') {
+            slider.update({from : breakpoints[id]  + 15 })
+        }
+        $('.irs-single').css('opacity', '1', 'important')
+        $('.menu-close').trigger('click')
+    })
+}
+
+
 
 
 // MENU SWIPER
@@ -920,7 +978,7 @@ $('.menu-toggler').on('click',function() {
     
     swiperV1.slideTo(0);
     $('.swiper-container-vertical1').addClass('swiper-container--active')
-    $(this).fadeOut('fast');
+    $(this).fadeOut(1);
     $('.menu-close').fadeIn();
 });
 
@@ -935,7 +993,7 @@ $('.menu-close').on('click', function() {
         $('.swiper-container-vertical1').addClass('swiper-container--active')
     }
 
-    $('.menu-close').fadeOut();
+    $('.menu-close').fadeOut(1);
     $('.menu-toggler').fadeIn();
 });
 

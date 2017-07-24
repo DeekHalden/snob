@@ -81,10 +81,10 @@
     font-size: 10px; line-height: 1.333;
     text-shadow: none;
     padding: 1px 5px;
-    top: 43.7%;
+    top: 43.5%;
     cursor: pointer;
-    background: url('./../images/big-diamond.svg') no-repeat center;
-    background-size: 20px 20px !important;
+    background: #af9358;
+    background-size: 24px 24px !important;
     transform: rotate(-45deg) translateY(-50%);
     font-size: 0;
     width: 20px !important;

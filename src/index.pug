@@ -6,9 +6,10 @@ head
     title Effective JavaScript: Frogger
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="css/bundle.min.css")
--var data = [{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
+-var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container(style="visibility:hidden;opacity:0")
+    .slider-container
+        //- (style="visibility:hidden;opacity:0")
         .dots-wrapper
             -for(var i = 0; i < 100; i++)
                 .dot
@@ -25,7 +26,13 @@ body.body
             +e.INPUT(type="text" id="controls" name="controls" value="").range
         .swiper-container.swiper-container-vertical1
             .swiper-wrapper
-                .swiper-slide.menu-wrapper
+                +b.swiper-slide.swiper-slide--menu-wrapper
+                    .container
+                        +e.section.section--left
+                            .swiperH-pagination
+
+                        +e.section.section--center
+                        +e.section.section--right
                 .swiper-slide.active
                     .swiper-container.swiper-container-h
                         .swiper-wrapper
@@ -33,7 +40,7 @@ body.body
                                 h2.text We are not snobs, we are just better than everyone else. Be our guest
 
                             each el, i in data 
-                                +b.swiper-slide.swiper-slide--horizontal
+                                +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
                                     .swiper-container(class='swiper-container-v--' + i).swiper-container-v
                                         .swiper-wrapper
                                             +b.swiper-slide
@@ -53,31 +60,41 @@ body.body
                                                     +e.content
                                                         +e.H3.description(data-swiper-parallax="-100%") Lorem ipsum
                                                         +e.P(data-swiper-parallax="-100%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-100%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax="-100%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            span consequat.
                                             +b.swiper-slide
                                                 .wrapper.wrapper--black
                                                     +e.content
                                                         +e.img-wrapper(data-swiper-parallax="-1000%")
+                                                            +e.mask
                                                             +e.img(src="./images/redhead.png")
                                                         +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
                                                         +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            span consequat.
                                             +b.swiper-slide
                                                 .wrapper.wrapper--black
                                                     +e.content
                                                         +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
                                                         +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            span consequat.
                                             +b.swiper-slide
                                                 .wrapper.wrapper--black
                                                     +e.content
                                                         +e.img-wrapper(data-swiper-parallax="-1000%")
-                                                            +e.img(src="./images/redhead.png")
+                                                            +e.mask
+                                                            +e.IMG(src="./images/redhead.png").img
                                                         +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
                                                         +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            span consequat.
                                             +b.swiper-slide.swiper-slide--map
-                                                p map
+                                                +b.map-container
+                                                    +e.IMG(src="./images/map.png").bg-img
+                                                    -for(let i =0; i < 10; i++)
+                                                        +e.dot.icon-stop2
+
                                         .swiperV-pagination
                                 +b.swiper-slide
     .main-text-start
