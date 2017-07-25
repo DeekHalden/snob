@@ -6,9 +6,7 @@ import * as PIXI from 'pixi.js'
 import ionRangeSlider from 'ion-rangeslider'
 import { validate, validator } from 'jquery-validation'
 
-$(document).ready(function() {
-    init()
-});
+
 
 function init() {
     function clearAdditions(e) {
@@ -745,41 +743,9 @@ function init() {
     }, 1000)
 }
 
-
-
-
-
-// GLOBALS
-let globalIn = false;
-let offset = 110;
-let anchorSize = 26
-let anchors = $('.range-slider__anchor');
-let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize /2;
-let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize/ 2;
-let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize /2;
-let breakpoints = [firstBreakpoint, secondBreakpoint, thirdBreakpoint]
-let slides = $('.slide');
-// GLOBALS
-
-
-// 1ST SLIDE TEXT SMOOTH MIVING
-function slideText(element, startValue, endValue, computedNow, valueNow) {
-    let percent = 0
-    percent = (computedNow * 2.4) * 100 / endValue;
-    let value = -100;
-    value += percent * 2;
-    // if(valueNow <= )
-    translateText(element, value);
-}
-function translateText(element, value) {
-    $(element).children('.text').css('right', value + '%')
-}
-// 1ST SLIDE TEXT SMOOTH MIVING
-
-
-
-// SWIPER 2-6
-const swiperV = new Swiper('.swiper-container-v', {
+$(document).ready(function() {
+    init()
+    const swiperV = new Swiper('.swiper-container-v', {
     direction: 'vertical',
     pagination: '.swiperV-pagination',
     mousewheelControl: true,
@@ -1267,6 +1233,41 @@ let createTags = (function () {
         $('.menu-close').trigger('click')
     })
 })();
+});
+
+
+
+// GLOBALS
+let globalIn = false;
+let offset = 110;
+let anchorSize = 26
+let anchors = $('.range-slider__anchor');
+let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize /2;
+let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize/ 2;
+let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize /2;
+let breakpoints = [firstBreakpoint, secondBreakpoint, thirdBreakpoint]
+let slides = $('.slide');
+// GLOBALS
+
+
+// 1ST SLIDE TEXT SMOOTH MIVING
+function slideText(element, startValue, endValue, computedNow, valueNow) {
+    let percent = 0
+    percent = (computedNow * 2.4) * 100 / endValue;
+    let value = -100;
+    value += percent * 2;
+    // if(valueNow <= )
+    translateText(element, value);
+}
+function translateText(element, value) {
+    $(element).children('.text').css('right', value + '%')
+}
+// 1ST SLIDE TEXT SMOOTH MIVING
+
+
+
+// SWIPER 2-6
+
 
 // RANGE HANDLERS
 

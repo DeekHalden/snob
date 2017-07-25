@@ -1145,7 +1145,7 @@ a:hover {
 }
 .swiperH-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:after {
   opacity: 1;
-  background: #af9358;
+  background-image: -ms-radial-gradient(50% 50%, circle closest-side, #e0c387 0%, rgba(175,147,88,0) 100%);
 }
 .swiper-slide {
   height: 100%;
