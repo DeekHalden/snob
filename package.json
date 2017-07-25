@@ -37,6 +37,7 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
+    "autosize": "^4.0.0",
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
     "bemto.pug": "^2.1.0",

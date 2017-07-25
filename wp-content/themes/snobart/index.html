@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html></html>
 <head>
   <meta charset="UTF-8"/>
@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/bundle.min.css"/>
 </head>
 <body class="body">
-  <div class="slider-container">
+  <div class="slider-container" style="visibility:hidden;opacity:0;">
     <div class="dots-wrapper">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -124,24 +124,46 @@
     </div>
     <div class="swiper-container swiper-container-vertical1">
       <div class="swiper-wrapper">
-        <div class="swiper-slide swiper-slide--menu-wrapper">
-          <div class="container">
-            <div class="swiper-slide__section section--left">
+        <div class="swiper-slide swiper-slide swiper-slide--menu-wrapper">
+          <div class="swiper-slide__menu-wrapper container">
+            <div class="swiper-slide__section swiper-slide__section swiper-slide__section--left">
               <div class="swiperH-pagination"></div>
             </div>
-            <div class="swiper-slide__section section--center">
+            <div class="swiper-slide__section swiper-slide__section swiper-slide__section--center">
+              <h2>SnobArts is web-design and mobile applications development studio</h2>
+              <div class="swiper-slide__main-text">
+                <p> Rabotaem pizdato, delaem ot dushi. Dorogo, konechno, nu a hooli Do adipisicing ex minim ut elit consequat velit ut.</p>
+                <p>Sunt culpa cillum sint magna in dolore reprehenderit ut excepteur exercitation ex nostrud sit incididunt dolor anim esse velit velit dolore occaecat tempor ut dolor ex dolor dolor aliquip sint velit. Ad minim ad adipisicing sit laboris qui exercitation est adipisicing magna anim proident et duis duis est.</p>
+              </div>
             </div>
-            <div class="swiper-slide__section section--right">
+            <div class="swiper-slide__section swiper-slide__section swiper-slide__section--right">
+              <form class="swiper-slide__form" id="contact-form">
+                <h2>your message for snob</h2>
+                <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__name" id="contact__name" placeholder="YOUR NAME" type="text" autocomplete="off"/>
+                </div>
+                <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__email" id="contact__email" placeholder="YOUR EMAIL" type="email" autocomplete="off"/>
+                </div>
+                <div class="swiper-slide__form-control"><textarea class="swiper-slide__input" name="contact__message" id="contact__message" placeholder="YOUR WORDS" style="overflow:hidden; resize:none;height:26px;" autocomplete="off"></textarea>
+                </div>
+                <div class="swiper-slide__form-control">
+                  <button class="swiper-slide__input swiper-slide__input swiper-slide__input--submit" type="submit">
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
         <div class="swiper-slide active">
           <div class="swiper-container swiper-container-h">
             <div class="swiper-wrapper">
-              <div class="swiper-slide swiper-slide--horizontal">
-                <h2 class="text">We are not snobs, we are just better than everyone else. Be our guest</h2>
+              <div class="swiper-slide swiper-slide swiper-slide--horizontal">
+                <div class="text">
+                  <h2>We are not snobs</h2>
+                  <h2>We are just better than everyone else. </h2>
+                  <h2>Be our guest</h2>
+                </div>
               </div>
-              <div class="swiper-slide swiper-slide--horizontal" data-id="0" data-name="MOBILE APPLICATIONS">
+              <div class="swiper-slide swiper-slide swiper-slide--horizontal" data-id="0" data-name="MOBILE APPLICATIONS">
                 <div class="swiper-container swiper-container-v--0 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -165,8 +187,8 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--first">
-                      <div class="wrapper wrapper--black">
+                    <div class="swiper-slide swiper-slide swiper-slide--first">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-100%">Lorem ipsum
                           </h3>
@@ -178,7 +200,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -194,7 +216,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-1000%">Lorem ipsum
                           </h3>
@@ -206,7 +228,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -221,27 +243,45 @@
                         </div>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--map">
-                      <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
-                        <div class="map-container__dot icon-stop2">
+                    <div class="swiper-slide swiper-slide swiper-slide--map">
+                      <div class="wrapper wrapper--black">
+                        <div class="swiper-slide__content">
+                          <h3>over the world</h3>
+                          <div class="swiper-slide__dot-description">
+                            <p>Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>88</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="0">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>0lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="1">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>1lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="2">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>2lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="3">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>3lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="4">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>4lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="5">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>5lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="6">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>6lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="7">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>7lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="8">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>8lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="9">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>9lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                          </div>
                         </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
+                        <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
+                          <div class="map-container__dot icon-stop2" data-id="0">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="1">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="2">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="3">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="4">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="5">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="6">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="7">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="8">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="9">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -251,7 +291,7 @@
               </div>
               <div class="swiper-slide">
               </div>
-              <div class="swiper-slide swiper-slide--horizontal" data-id="1" data-name="WEB DEVELOPMENT">
+              <div class="swiper-slide swiper-slide swiper-slide--horizontal" data-id="1" data-name="WEB DEVELOPMENT">
                 <div class="swiper-container swiper-container-v--1 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -275,8 +315,8 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--first">
-                      <div class="wrapper wrapper--black">
+                    <div class="swiper-slide swiper-slide swiper-slide--first">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-100%">Lorem ipsum
                           </h3>
@@ -288,7 +328,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -304,7 +344,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-1000%">Lorem ipsum
                           </h3>
@@ -316,7 +356,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -331,27 +371,45 @@
                         </div>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--map">
-                      <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
-                        <div class="map-container__dot icon-stop2">
+                    <div class="swiper-slide swiper-slide swiper-slide--map">
+                      <div class="wrapper wrapper--black">
+                        <div class="swiper-slide__content">
+                          <h3>over the world</h3>
+                          <div class="swiper-slide__dot-description">
+                            <p>Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>88</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="0">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>0lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="1">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>1lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="2">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>2lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="3">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>3lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="4">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>4lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="5">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>5lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="6">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>6lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="7">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>7lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="8">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>8lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="9">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>9lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                          </div>
                         </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
+                        <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
+                          <div class="map-container__dot icon-stop2" data-id="0">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="1">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="2">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="3">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="4">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="5">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="6">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="7">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="8">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="9">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -361,7 +419,7 @@
               </div>
               <div class="swiper-slide">
               </div>
-              <div class="swiper-slide swiper-slide--horizontal" data-id="2" data-name="DESIGN">
+              <div class="swiper-slide swiper-slide swiper-slide--horizontal" data-id="2" data-name="DESIGN">
                 <div class="swiper-container swiper-container-v--2 swiper-container-v">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -383,8 +441,8 @@
                       <div class="swiper-slide__goto-wrapper" data-swiper-parallax="0"><a class="swiper-slide__goto">learn more</a>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--first">
-                      <div class="wrapper wrapper--black">
+                    <div class="swiper-slide swiper-slide swiper-slide--first">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-100%">Lorem ipsum
                           </h3>
@@ -396,7 +454,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -412,7 +470,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <h3 class="swiper-slide__description" data-swiper-parallax="-1000%">Lorem ipsum
                           </h3>
@@ -424,7 +482,7 @@
                       </div>
                     </div>
                     <div class="swiper-slide">
-                      <div class="wrapper wrapper--black">
+                      <div class="wrapper wrapper--white">
                         <div class="swiper-slide__content">
                           <div class="swiper-slide__img-wrapper" data-swiper-parallax="-1000%">
                             <div class="swiper-slide__mask">
@@ -439,27 +497,45 @@
                         </div>
                       </div>
                     </div>
-                    <div class="swiper-slide swiper-slide--map">
-                      <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
-                        <div class="map-container__dot icon-stop2">
+                    <div class="swiper-slide swiper-slide swiper-slide--map">
+                      <div class="wrapper wrapper--black">
+                        <div class="swiper-slide__content">
+                          <h3>over the world</h3>
+                          <div class="swiper-slide__dot-description">
+                            <p>Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>88</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="0">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>0lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="1">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>1lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="2">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>2lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="3">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>3lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="4">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>4lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="5">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>5lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="6">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>6lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="7">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>7lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="8">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>8lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                            <p data-id="9">Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor <span>9lorem</span>minim velit id.<span>11</span>minim velit id.</p>
+                          </div>
                         </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
-                        </div>
-                        <div class="map-container__dot icon-stop2">
+                        <div class="map-container"><img class="map-container__bg-img" src="./images/map.png" alt="" role="presentation"/>
+                          <div class="map-container__dot icon-stop2" data-id="0">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="1">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="2">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="3">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="4">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="5">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="6">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="7">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="8">
+                          </div>
+                          <div class="map-container__dot icon-stop2" data-id="9">
+                          </div>
                         </div>
                       </div>
                     </div>

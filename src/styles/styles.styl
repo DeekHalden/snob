@@ -168,7 +168,7 @@ a
     bottom 0px
     right auto
     left 0
-    width 470px
+    width 400px
     height 100%
     background-color #000
     transform translateX(0) 
@@ -177,9 +177,9 @@ a
     align-items center
     display flex
     transition .5s linear all
-    left -470px
+    left -400px
     &--active
-        background #000 url('./../images/indicator.png') no-repeat 126px center
+        background #000 url('./../images/indicator.png') no-repeat 91px center
         left 0
     // &:after
     //     content ''
@@ -225,8 +225,6 @@ a
                 left: -68px;
                 top: 77px;
 .swiperH-pagination
-    width 30%
-    position static
     .swiper-pagination-bullet
         display block
         width auto
@@ -239,7 +237,7 @@ a
         padding-right 40px
         letter-spacing 5px
         & + .swiper-pagination-bullet 
-            margin-top 140px
+            margin-top 150px
             
         &:after
             opacity .2
@@ -253,6 +251,8 @@ a
             
         &:first-child, &:nth-child(3), &:nth-child(5), &:nth-child(7)
             display none
+        &:nth-child(2)
+            margin-top 0 !important
         &.swiper-pagination-bullet-active
             &:after
                 opacity 1
@@ -267,7 +267,26 @@ a
         background-color #000
     &--map
         background-color #fff  !important
-        transition 1s linear all
+        transition 4s linear all
+        .swiper-slide
+            &__content
+                pointer-events none
+                width 100%
+                height 100%
+                &--active
+                    color #fff
+            &__dot-description
+                position absolute
+                right 48%
+                bottom 100px
+                transform translateX(50%)
+                width 900px
+                p
+                    text-align right
+                    &:not(:first-child)
+                        display none
+                    
+        
     &--map-active
         background-color #000 !important
     
@@ -281,10 +300,16 @@ a
             // transform  translateX(50%)
         &--active-top
             top -100%
-        &--black
+        &--white
             right -100%
             position absolute
-        &--black-active
+        &--white-active
+            right 30%
+            right 0
+        &--black
+            right -100%
+            background-color #000
+        &--black--active
             right 30%
             right 0
     &--menu-wrapper
@@ -349,8 +374,7 @@ a
             color $gold
     .text
         font-weight 100
-        font-size 30px  
-        line-height 22px      
+        line-height 10px      
         color inherit
         position absolute
         right -105%
@@ -360,6 +384,10 @@ a
         width: 100%
         border-bottom 9px solid #af9358
         border-radius 5px
+        h2
+            margin 0
+            font-size 30px  
+            display inline-block
         &--active
             transition 1.5s linear all
             right -105% !important
@@ -401,7 +429,7 @@ a
         color inherit
         line-height 54px
         position relative
-        margin-right -30px
+        // margin-right -30px
         &:after
             visibility visible
             left 0
@@ -419,6 +447,7 @@ a
         margin-left auto
         margin-right 7vw
         transition-delay 0s
+        z-index 1
         transition 1s linear all
         &--active
             color #000
@@ -458,6 +487,99 @@ a
                 width 100%
                 bottom 0
                 z-index -1
+    &__menu-wrapper
+        position absolute
+        top 50%
+        left 50%
+        transform translateY(-50%) translateX(-50%)
+        
+    &__section
+        width 33%
+        display block
+        float left
+        &--left
+            padding-right 30px
+            margin-top 10px
+        &--center
+            padding 0 20px
+            border-left 2px solid $gold
+            border-right 2px solid $gold
+            color #fff
+            text-align left
+            h2
+                margin-top 0
+                font-size 30px
+            p
+                line-height 1.72
+                font-size 17px
+                font-weight 100
+        &--right
+            padding 0 20px
+    &__main-text
+        height 243px
+        overflow hidden
+    &__form
+        width 100%
+        h2
+            color #fff
+            text-transform uppercase
+            text-align left
+            letter-spacing 4px
+    &__form-control
+        margin-top 40px
+        width 100%
+    &__input
+        color #fff
+        width 100%
+        border none
+        background-color transparent 
+        border-bottom 3px solid  rgba(255,255,255,.3)
+        transition 1.5s linear border-bottom 
+        &:-webkit-autofill 
+            background-color rgba(255,255,255, 0)
+        &--active
+            border-bottom 3px solid  $gold
+        &--submit
+            // transform rotate(45deg)
+            // cursor pointer
+            border-bottom none
+            display none
+            background url('./../images/angle-down.png') no-repeat center
+            width 30px
+            height 30px
+            transition .5s linear all
+            &:hover
+                opacity .7
+            // position relative
+            // &:after
+            //     content ''
+            //     position absolute
+            //     width 40px 
+            //     height 40px
+            //     background-image: linear-gradient(45deg, $gold, rgba($gold, .4));
+            //     transition .5s linear all
+            //     opacity 1    
+            // &:before
+            //     content ''
+            //     position absolute
+            //     width 40px 
+            //     height 40px
+            //     background-image: linear-gradient(45deg, rgba($gold, .4), $gold);
+            //     transition .5s linear all
+            //     opacity 0
+            // &:hover
+            //     &:after
+            //         opacity 0
+            //     &:before
+            //         opacity 1
+                    
+            
+        &:focus
+            outline none
+    textarea 
+        height 26px
+    //     overflow hidden
+            
 .map-container
     display none
     // background #000 url('./../images/map.png') no-repeat center
@@ -465,13 +587,14 @@ a
     // height 700px
     position absolute
     top 50%
-    right 7vw 
-    transform translateY(-50%)
+    right 50% 
+    transform translateY(-50%) translateX(50%)
     &__bg-img
         display block
         
         max-height 500px
     &__dot
+        display none
         position absolute
         transform rotate(45deg)
         color $gold
@@ -515,33 +638,15 @@ a
         &:nth-child(11)
             left 42.3%
             top 17.5%
-
-@media(max-width 1500px)
-    .swiperV-pagination
-        width 100px    
-        &--active
-            background #000 url('./../images/indicator.png') no-repeat 16px center
-        .swiper-pagination-bullet
-            &.swiper-pagination-bullet-active
-                &:before
-                    left: -14px;
-                    top: 24px;
-@media(max-width 1024px)
-    .swiperV-pagination
-        width 50px
-        background #000
-    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet
-        display none
- 
-
-
+// main dots
 .dots-wrapper
     z-index: 2
     position: absolute
     top 50%
     transform translateY(-50%) translateX(-50%)
-    width 0
+    width 0%
     left 50%
+    
     transition 1.5s linear all
     &--active
         width 100%
@@ -560,11 +665,43 @@ a
     position absolute
     left 50%
     transform translateX(-50%)
+    position static
     &--active
-        position static
         margin 0 calc( (100% / 100 / 2) - 1px)
         transform translateX(0%)
     &--light 
         background-color #fff
+// main dots
+
+            
+@media(max-width 1500px)
+    .swiperV-pagination
+        width 100px    
+        &--active
+            background #000 url('./../images/indicator.png') no-repeat 16px center
+        .swiper-pagination-bullet
+            &.swiper-pagination-bullet-active
+                &:before
+                    left: -14px;
+                    top: 24px;
+                    
+@media(max-width 1426px)
+    .swiperH-pagination
+        .swiper-pagination-bullet
+            & +  .swiper-pagination-bullet
+                margin-top 217px
+    .swiper-slide
+        &__main-text
+            height 330px
+            
+@media(max-width 1024px)
+    .swiperV-pagination
+        width 50px
+        background #000
+    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet
+        display none
+ 
+
+
 
 

@@ -1,8 +1,10 @@
 const jQuery = require('jquery')
 const $ = require('jquery')
+const autosize = require('autosize')
 import { swiper } from 'swiper'
 import * as PIXI from 'pixi.js'
 import ionRangeSlider from 'ion-rangeslider'
+import { validate, validator } from 'jquery-validation'
 
 $(document).ready(function() {
     init()
@@ -194,8 +196,8 @@ function init() {
 
                         clearAdditions()
                         moveDiamondToStart = true
+                        $('.main-text-start').fadeOut()
                     })
-                    $('.main-text-start').fadeOut()
                     self.fadeIn = false
                 })
             }, 5000)
@@ -788,6 +790,16 @@ const swiperV = new Swiper('.swiper-container-v', {
     onlyExternal: true,
     shortSwipes: false,
     longSwipes: false,
+    breakpoints: {
+        1367: {
+            onlyExternal: false,
+            longSwipes: true,
+            shortSwipes: true,
+            mousewheelForceToAxis: false,
+            parallax: false
+            
+        },  
+    },   
     onSlidePrevEnd(swiper) {
         if(swiper.activeIndex === 0) {
             $('.swiper-container').removeClass('swiper-container--active')
@@ -808,9 +820,15 @@ const swiperV = new Swiper('.swiper-container-v', {
         
         if(swiper.activeIndex >= 1 && swiper.activeIndex < 5) {
             $('.menu-toggler').removeClass('menu-toggler--active')
+            $('.map-container').fadeOut(1000)
+            $('.swiper-slide--map').removeClass('swiper-slide--map-active')
+            $('.swiper-slide-active .wrapper--black').removeClass('wrapper--black-active')
+            $(".swiper-slide-active .map-container__dot").each(function(i) {
+                $(this).delay(500 * i).fadeOut()
+            });
         } else {
             $('.menu-toggler').addClass('menu-toggler--active')
-            $('.wrapper').removeClass('wrapper--black-active')
+            $('.wrapper').removeClass('wrapper--white-active')
         }
         $('.swiperV-pagination').addClass('swiperV-pagination--active');
         
@@ -822,13 +840,9 @@ const swiperV = new Swiper('.swiper-container-v', {
         })
         if(swiper.activeIndex === 1) {
         }
-        $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--black').addClass('wrapper--black-active')
+        $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
         // },1000)
-        if(swiper.activeIndex === 5) {
-            $('.swiper-slide--map').addClass('swiper-slide--map-active')
-            $('.map-container').fadeIn(1000)
-        } 
-
+        
     },
     onSlideChangeEnd(swiper) {
         let content = $('.swiper-slide--horizontal.swiper-slide-active .swiper-slide-active').find('.swiper-slide__content');
@@ -844,12 +858,32 @@ const swiperV = new Swiper('.swiper-container-v', {
             $('.swiper-pagination-bullet').removeClass('swiper-pagination-bullet--active')
         }
         
+    },
+    onTransitionEnd(swiper) {
+        if(swiper.activeIndex === 5) {
+            $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--black').addClass('wrapper--black-active')
+            $('.swiper-slide--map').addClass('swiper-slide--map-active')
+            $('.map-container').fadeIn(4000)
+            setTimeout(function() {
+                $(".swiper-slide-active .swiper-slide-active .map-container__dot").each(function(i) {
+                    $(this).delay(500 * i).fadeIn(500)
+                })
+            },4000)
+            let lastIndex = 0
+            $('.swiper-slide-active .swiper-slide-active .map-container__dot').hover(function(e) {
+                let id = $(this).data('id')
+                if(id === lastIndex) return
+                $('.swiper-slide__dot-description p').css('display', 'none')
+                $('.swiper-slide__dot-description p[data-id='+id+']').fadeIn(500)
+                lastIndex = id
+            })
+        } 
+
     }
     
 
 });
 // SWIPER 2-6
-
 
 // SWIPER 1
 const swiperH = new Swiper('.swiper-container-h', {
@@ -861,8 +895,18 @@ const swiperH = new Swiper('.swiper-container-h', {
     onlyExternal: true,
     longSwipes: false,
     parallax: true,
+    breakpoints: {
+        1367: {
+            onlyExternal: false,
+            longSwipes: true,
+            shortSwipes: true,
+            mousewheelForceToAxis: false,
+            parallax: false
+            
+        }
+    },
     onInit() {
-        createTags()
+        
     },
     onSlideChangeStart(swiper) {
         setTimeout(function() {
@@ -897,45 +941,6 @@ const swiperH = new Swiper('.swiper-container-h', {
     
 });
 // SWIPER 1
-function createTags() {
-    const bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),'+
-                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),'+
-                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
-    const pagslides = $('.swiper-slide--horizontal:nth-child(2),'+
-                     ' .swiper-slide--horizontal:nth-child(4),'+
-                     ' .swiper-slide--horizontal:nth-child(6)')
-    let names = []
-    pagslides.each(function(i) {
-        names.push($(this).data('name'))
-    })
-    bullets.each(function(i){
-        $(this).text(names[i])
-        $(this).attr('id',  i)
-
-    })
-    
-    bullets.click(function(e) {
-        $('.menu-toggler').addClass('menu-toggler--active')
-        $('.dot').addClass('dot--light')
-        let target = e.target
-        let id = target.id
-        
-        
-        if(+id === $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active').data('id')) return   
-        if(id === '0') {
-            slider.update({from : breakpoints[id] - 1 })
-        } 
-        if(id === '1') {
-
-            slider.update({from : breakpoints[id]  + 5 })
-        } 
-        if(id === '2') {
-            slider.update({from : breakpoints[id]  + 15 })
-        }
-        $('.irs-single').css('opacity', '1', 'important')
-        $('.menu-close').trigger('click')
-    })
-}
 
 
 
@@ -961,10 +966,9 @@ function createTags() {
         swiper.slideTo(2, 0)
     },
     onSlidePrevEnd(swiper) {
-        // $('.swiper-container').removeClass('swiper-container--active')
+        
     },
     onSlideNextStart(swiper) {
-        // $('.swiper-container').addClass('swiper-container--active')
         
     },
     onSlideChangeEnd(swiper) {
@@ -1104,6 +1108,15 @@ $("#controls").ionRangeSlider({
 });
 
 let slider = $("#controls").data("ionRangeSlider");
+// $(window).resize(function() {
+//     if($(window).width() < 1366) {
+//         slider.destroy()
+//     }
+// })
+
+// if($(window).width() < 1366) {
+//     slider.destroy()
+// }
 
 $('.irs-single')
     .hover(function() {
@@ -1115,6 +1128,145 @@ $('.irs-single')
     $('.range-slider__anchors').removeClass('range-slider__anchors--important');
 
 });
+
+
+$('#contact__name, #contact__email').on('keydown keyup', function(e) {
+    var max = 50
+    if (e.which < 0x20) {
+        // e.which < 0x20, then it's not a printable character
+        // e.which === 0 - Not a character
+        return // Do nothing
+    }
+    if (this.value.length == max) {
+        e.preventDefault()
+    } else if (this.value.length > max) {
+        // Maximum exceeded
+        this.value = this.value.substring(0, max)
+    }
+})
+
+$('#contact__message').on('keydown keyup', function(e) {
+    var max = 500
+    // this.style.height = (25+this.scrollHeight)+"px"
+    if (e.which < 0x20) {
+        // e.which < 0x20, then it's not a printable character
+        // e.which === 0 - Not a character
+        return // Do nothing
+    }
+    if (this.value.length == max) {
+        e.preventDefault()
+    } else if (this.value.length > max) {
+        // Maximum exceeded
+        this.value = this.value.substring(0, max)
+    }
+});
+
+autosize($('#contact__message'))
+
+$.validator.addMethod("alpha", function(value, element) {
+    return this.optional(element) || value == value.match(/^[a-zA-Zа-яА-Я ]+$/);
+});
+
+$.validator.addMethod("emailMethod", function(value, element) {
+    let isEmail = this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value);
+    return isEmail
+});
+
+$('#contact-form').validate({
+    debug: true,
+    rules: {
+        contact__name: {
+            required: true,
+            alpha: true
+        },
+        contact__email: {
+            required: true,
+            emailMethod: true
+        },
+        contact__message: {
+            required: true
+        }
+    },
+    messages: {
+        contact__name: "",
+        contact__email: "",
+        contact__message: ""
+    },
+    submitHandler(form) {
+        let data = $(form).serialize();
+            $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: data,
+                })
+                .done(function() {
+                    form.reset();
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+    }
+});
+
+$("#contact__name, #contact__email, #contact__message").on('keydown keyup mouseup',function () {
+    if ($(this).valid() == true ) {
+        $(this).addClass('swiper-slide__input--active')
+    } else {
+        $(this).removeClass('swiper-slide__input--active')
+    }
+    if($('#contact-form').valid()) {
+        $('.swiper-slide__input--submit').fadeIn()
+    } else {
+        $('.swiper-slide__input--submit').fadeOut()
+
+    }
+})
+let createTags = (function () {
+    const bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),'+
+                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),'+
+                      '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
+    const pagslides = $('.swiper-slide--horizontal:nth-child(2),'+
+                     ' .swiper-slide--horizontal:nth-child(4),'+
+                     ' .swiper-slide--horizontal:nth-child(6)')
+    let names = []
+    pagslides.each(function(i) {
+        names.push($(this).data('name'))
+    })
+    bullets.each(function(i){
+        $(this).text(names[i])
+        $(this).attr('id',  i)
+
+    })
+    
+    bullets.click(function(e) {
+        $('.menu-toggler').addClass('menu-toggler--active')
+        $('.dot').addClass('dot--light')
+        let target = e.target
+        let id = target.id
+        
+        
+        if(+id === $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active').data('id')) return   
+        if(id === '0') {
+            slider.update({from : breakpoints[id] - 1 })
+        } 
+        if(id === '1') {
+
+            slider.update({from : breakpoints[id]  + 5 })
+        } 
+        if(id === '2') {
+            slider.update({from : breakpoints[id]  + 15 })
+        }
+        for(let i =0; i < swiperV.length; i++) {
+            swiperV[i].slideTo(0, 0)
+        }
+        $('.irs-single').css('opacity', '1', 'important')
+        $('.menu-close').trigger('click')
+    })
+})();
 
 // RANGE HANDLERS
 

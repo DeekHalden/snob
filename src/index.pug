@@ -1,15 +1,19 @@
-<!DOCTYPE html>
 include ../node_modules/bemto.pug/bemto
+-
+  set_bemto_settings({
+    prefix: '',
+    element: '__',
+    modifier: '--'
+  })
 html
 head
-    meta(charset="UTF-8")
+    meta(charset='UTF-8')
     title Effective JavaScript: Frogger
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" href="css/bundle.min.css")
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='css/bundle.min.css')
 -var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container
-        //- (style="visibility:hidden;opacity:0")
+    .slider-container(style='visibility:hidden;opacity:0')
         .dots-wrapper
             -for(var i = 0; i < 100; i++)
                 .dot
@@ -23,77 +27,113 @@ body.body
                 +e.anchor
                 +e.anchor
 
-            +e.INPUT(type="text" id="controls" name="controls" value="").range
+            +e.INPUT(type='text' id='controls' name='controls' value='').range
         .swiper-container.swiper-container-vertical1
             .swiper-wrapper
                 +b.swiper-slide.swiper-slide--menu-wrapper
-                    .container
-                        +e.section.section--left
+                    +e.menu-wrapper.container
+                        +e.section.swiper-slide__section--left
                             .swiperH-pagination
 
-                        +e.section.section--center
-                        +e.section.section--right
+                        +e.section.swiper-slide__section--center
+                            h2 SnobArts is web-design and mobile applications development studio
+                            +e.main-text
+                                p  Rabotaem pizdato, delaem ot dushi. Dorogo, konechno, nu a hooli Do adipisicing ex minim ut elit consequat velit ut.
+                                p Sunt culpa cillum sint magna in dolore reprehenderit ut excepteur exercitation ex nostrud sit incididunt dolor anim esse velit velit dolore occaecat tempor ut dolor ex dolor dolor aliquip sint velit. Ad minim ad adipisicing sit laboris qui exercitation est adipisicing magna anim proident et duis duis est.
+                        +e.section.swiper-slide__section--right
+                            +e.FORM.form(id='contact-form')
+                                h2 your message for snob
+                                +e.form-control
+                                    +e.INPUT.input(name='contact__name' id='contact__name' placeholder='YOUR NAME' type='text' autocomplete="off")
+                                +e.form-control
+                                    +e.INPUT.input(name='contact__email' id='contact__email' placeholder='YOUR EMAIL' type='email' autocomplete="off")
+                                +e.form-control
+                                    +e.TEXTAREA.input(name='contact__message' id='contact__message' placeholder='YOUR WORDS' style="overflow:hidden; resize:none;height:26px;" autocomplete="off")
+                                +e.form-control
+                                    +e.BUTTON.input.swiper-slide__input--submit(type='submit')
+
                 .swiper-slide.active
                     .swiper-container.swiper-container-h
                         .swiper-wrapper
                             +b.swiper-slide.swiper-slide--horizontal
-                                h2.text We are not snobs, we are just better than everyone else. Be our guest
+                                .text
+                                    h2 We are not snobs
+                                    h2 We are just better than everyone else. 
+                                    h2 Be our guest
 
                             each el, i in data 
                                 +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
                                     .swiper-container(class='swiper-container-v--' + i).swiper-container-v
                                         .swiper-wrapper
                                             +b.swiper-slide
-                                                .video-cont(data-swiper-parallax="0")
-                                                    video.video(width="320" height="240"  )
-                                                        source(src=el.src type="video/mp4")
+                                                .video-cont(data-swiper-parallax='0')
+                                                    video.video(width='320' height='240'  )
+                                                        source(src=el.src type='video/mp4')
                                                 +e.head-description
                                                     each h3 in el.description
                                                         +e.H3.description=h3
                                                 +e.text()
                                                     each p in el.paragraph
-                                                        +e.P.paragraph(data-swiper-parallax="100")=p
-                                                +e.goto-wrapper(data-swiper-parallax="0")
+                                                        +e.P.paragraph(data-swiper-parallax='100')=p
+                                                +e.goto-wrapper(data-swiper-parallax='0')
                                                     +e.A.goto learn more
                                             +b.swiper-slide.swiper-slide--first
-                                                .wrapper.wrapper--black
+                                                .wrapper.wrapper--white
                                                     +e.content
-                                                        +e.H3.description(data-swiper-parallax="-100%") Lorem ipsum
-                                                        +e.P(data-swiper-parallax="-100%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-100%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                        +e.H3.description(data-swiper-parallax='-100%') Lorem ipsum
+                                                        +e.P(data-swiper-parallax='-100%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax='-100%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
                                             +b.swiper-slide
-                                                .wrapper.wrapper--black
+                                                .wrapper.wrapper--white
                                                     +e.content
-                                                        +e.img-wrapper(data-swiper-parallax="-1000%")
+                                                        +e.img-wrapper(data-swiper-parallax='-1000%')
                                                             +e.mask
-                                                            +e.img(src="./images/redhead.png")
-                                                        +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            +e.img(src='./images/redhead.png')
+                                                        +e.H3.description(data-swiper-parallax='-1000%') Lorem ipsum
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
                                             +b.swiper-slide
-                                                .wrapper.wrapper--black
+                                                .wrapper.wrapper--white
                                                     +e.content
-                                                        +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                        +e.H3.description(data-swiper-parallax='-1000%') Lorem ipsum
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
                                             +b.swiper-slide
-                                                .wrapper.wrapper--black
+                                                .wrapper.wrapper--white
                                                     +e.content
-                                                        +e.img-wrapper(data-swiper-parallax="-1000%")
+                                                        +e.img-wrapper(data-swiper-parallax='-1000%')
                                                             +e.mask
-                                                            +e.IMG(src="./images/redhead.png").img
-                                                        +e.H3.description(data-swiper-parallax="-1000%") Lorem ipsum
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
-                                                        +e.P(data-swiper-parallax="-1000%") Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
+                                                            +e.IMG(src='./images/redhead.png').img
+                                                        +e.H3.description(data-swiper-parallax='-1000%') Lorem ipsum
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
+                                                        +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
                                             +b.swiper-slide.swiper-slide--map
-                                                +b.map-container
-                                                    +e.IMG(src="./images/map.png").bg-img
-                                                    -for(let i =0; i < 10; i++)
-                                                        +e.dot.icon-stop2
+                                                .wrapper.wrapper--black
+                                                    +e.content
+                                                        h3 over the world
+
+                                                        +e.dot-description
+                                                            p Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                                                span 88
+                                                                | minim velit id.
+                                                                span 11
+                                                                | minim velit id.
+                                                            -for(let i =0; i < 10; i++)
+                                                                p(data-id=i) Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                                                    span=i+'lorem'
+                                                                    | minim velit id.
+                                                                    span 11
+                                                                    | minim velit id.
+                                                            
+
+                                                    +b.map-container
+                                                        +e.IMG(src='./images/map.png').bg-img
+                                                        -for(let i =0; i < 10; i++)
+                                                            +e.dot.icon-stop2(data-id=i)
 
                                         .swiperV-pagination
                                 +b.swiper-slide
@@ -101,6 +141,6 @@ body.body
         p Click to enter website
     .main-text
         p DRAG THE DIAMOND RIGHT
-    script(src="./scripts/probe.js")
+    script(src='./scripts/probe.js')
 
 
