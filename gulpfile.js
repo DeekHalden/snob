@@ -24,7 +24,7 @@ const gulp = require('gulp'),
 
 
 gulp.task('styles', () => {
-    return gulp.src('src/**/styles.styl')
+    return gulp.src('src/**/mob.styl')
         .pipe(stylus({
             'include css': true
         }))
@@ -33,7 +33,7 @@ gulp.task('styles', () => {
             message: "Error: <%= error.message %>",
             title: "Error running something"
         }))
-        .pipe(rename('bundle.min.css'))
+        .pipe(rename('mobile.bundle.min.css'))
         .pipe(gulp.dest('wp-content/themes/snobart/css'))
         .pipe(browserSync.reload({
             stream: true
@@ -75,15 +75,15 @@ gulp.task('images', function() {
 
 gulp.task('js', function() {
     const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-    return gulp.src('./src/scripts/probe.js')
-        .pipe(concat('probe.js'))
+    return gulp.src('./src/scripts/mobile.probe.js')
+        .pipe(concat('mobile.probe.js'))
         .pipe(webpackStream({
             entry: {
-                app: './src/scripts/probe.js',
+                app: './src/scripts/mobile.probe.js',
             },
             output: {
                 path: path.resolve(__dirname, './src/scripts/client/'),
-                filename: 'probe.js',
+                filename: 'mobile.probe.js',
             },
             module: {
                 loaders: [{

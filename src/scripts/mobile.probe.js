@@ -7,7 +7,6 @@ import ionRangeSlider from 'ion-rangeslider'
 import { validate, validator } from 'jquery-validation'
 
 
-
 function init() {
     function clearAdditions(e) {
         moveToRandomPosition = false
@@ -15,10 +14,11 @@ function init() {
         logo.decreaseOpacity()
         text.decreaseOpacity()
         $('.main-text-start').fadeOut()
-        $('.slider-container').css({ 'visibility': 'visible' }).animate({ 'opacity': 1 }, 1500)
+        
 
 
     }
+    console.log(window.innerWidth)
     const app = new PIXI.Application()
     app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true})
 
@@ -41,7 +41,7 @@ function init() {
     }
 
     if (!!window.MSInputMethodContext && !!document.documentMode) {
-        if (location.pathname === '/') {
+        if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
             var texture0 = './../images/big-diamond.png'
             var texture1 = './../images/big-diamond-start.png'
             var texture2 = './../images/big-diamond-end.png'
@@ -52,7 +52,7 @@ function init() {
         }
 
     } else {
-        if (location.pathname === '/') {
+        if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
             var texture0 = './../images/big-diamond.svg'
             var texture1 = './../images/big-diamond-start.svg'
             var texture2 = './../images/big-diamond-end.svg'
@@ -66,7 +66,7 @@ function init() {
 
     }
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
         var texture3 = './../images/mask.png'
         var texture4 = './../images/dot.png'
         var texture5 = './../images/dot--small.png'
@@ -110,6 +110,8 @@ function init() {
             this.obj.position.x = centerX
             this.obj.position.y = centerY
             this.obj.anchor.set(.5)
+            this.obj.scale.x = .5
+            this.obj.scale.y = .5
 
         }
         moveTo(x, y, duration) {
@@ -165,7 +167,6 @@ function init() {
             // Just sets up size and assigns the image (through PIXI)
             super(image)
             // this.obj = new PIXI.Sprite(texture)
-            this.oldX = 0
             this.obj.alpha = 0
             this.obj.rotation = -Math.PI / 180 * 45
             this.obj.interactive = true
@@ -174,7 +175,6 @@ function init() {
             this.scaleTick = .1
             this.dragging
             this.moving = true
-            this.oldX = 0
             this.direction = ''
             let self = this
             this.interval
@@ -203,7 +203,9 @@ function init() {
 
                 })
                 this.obj.on('tap', function(mouseData) {
-                    $('.main-text-start').fadeIn()
+                    if (self.fadeIn === true) {
+                       $('.main-text-start').fadeIn()
+                    }
                     moveToRandomPosition = false
                     logo.increaseOpacity()
                     freeFall = false
@@ -229,7 +231,7 @@ function init() {
             this.obj.alpha += .05
         }
         moveTo(x, y, duration) {
-            if (this.obj.position.x <= x + 10) {
+            if (this.obj.position.y >= y + 10) {
                 this.moving = false
             }
 
@@ -253,9 +255,11 @@ function init() {
                     duration = duration / 4
                 }
                 if (dist < 100) {
-                    duration = duration / 5
+                    duration = duration / 7
                 }
-                if (dist <= x) {
+                if (dist <= 10) {
+                    $('.main-container').addClass('main-container--active')
+                    $('.intro').delay(1000).fadeIn(1000)
                     setTimeout(() => {
                         this.decreaseOpacity()
                         if ($('canvas')) {
@@ -281,15 +285,15 @@ function init() {
 
         }
         scale() {
-            if (this.obj.scale.x >= .07) {
+            if (this.obj.scale.x >= .01) {
                 this.obj.scale.x -= .01
                 this.obj.scale.y -= .01
-                $(".dots-wrapper").addClass('dots-wrapper--active')
-                $(".dots-wrapper .dot").each(function(i) {
-                    $(this).delay(15 * i).addClass('dot--active').css('display', 'block')
-                });
+                // $(".dots-wrapper").addClass('dots-wrapper--active')
+                // $(".dots-wrapper .dot").each(function(i) {
+                //     $(this).delay(15 * i).addClass('dot--active').css('display', 'block')
+                // });
             } else {
-                this.moveTo(135, centerY, 10000)
+                this.moveTo(centerX, innerHeight - 80, 20000)
             }
         }
     }
@@ -447,7 +451,7 @@ function init() {
             this.obj.on('mousedown', function() {
                 clearAdditions()
                 $('.main-text-start').fadeOut()
-                $('.slider-container').css('visibility', 'visible')
+                $('.main-container').css('visibility', 'visible')
             })
             // this.obj.alpha = 0
         }
@@ -741,7 +745,7 @@ function init() {
         }
         if (!moveToRandomPosition && moveDiamondToStart) {
             setTimeout(function() {
-                $('.slider-container').fadeIn('slow');
+                
                 clearInterval(interval);
                 app.stage.removeChild(dot.obj);
                 app.stage.removeChild(mask.obj);
@@ -761,554 +765,17 @@ function init() {
     }, 1000)
 }
 
+function initSecondPart() {
+
+}
+
+
 $(document).ready(function() {
-    // init()
-   
-    // SWIPER 2-6
-
-    // SWIPER 1
-    const swiperH = new Swiper('.swiper-container-h', {
-        mousewheelForceToAxis: true,
-        pagination: '.swiperH-pagination',
-        effect: 'fade',
-        paginationClickable: true,
-        shortSwipes: false,
-        onlyExternal: true,
-        longSwipes: false,
-        parallax: true,
-        breakpoints: {
-            1367: {
-                onlyExternal: false,
-                longSwipes: true,
-                shortSwipes: true,
-                mousewheelForceToAxis: false,
-                parallax: false
-
-            }
-        },
-        onInit() {
-
-        },
-        onSlideChangeStart(swiper) {
-            setTimeout(function() {
-                // $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
-                $('.swiper-container-h .swiper-slide--horizontal video').each(function() {
-                    $(this)[0].pause()
-                })
-            }, 200)
-            let index = $($('.swiper-container-h .swiper-container-v .swiper-slide-active'))
-            index.find('.swiper-slide__text--active')
-                .removeClass('swiper-slide__text--active')
-            if (($('.swiper-container-h .swiper-slide--horizontal video').duration ===
-                    $('.swiper-container-h .swiper-slide--horizontal video').currentTime) &&
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length > 0) {
-
-
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].currentTime = 0
-            }
-        },
-        onTransitionEnd(swiper) {
-            if ($('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length) {
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').fadeIn();
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play()
-            }
-            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
-                .addClass('swiper-slide__text--active')
-        },
-        onTransitionStart(swiper) {
-            $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide__text')
-                .removeClass('swiper-slide__text--active')
-        }
-
+    init()
+    initSecondPart()
+    const swiperH = new Swiper('.main-container', {
+        
+        pagination: '.swiper-pagination',
+        paginationClickable: true
     });
-    // SWIPER 1
-
-
-
-
-    // MENU SWIPER
-
-    // MENU SWIPER
-
-
-    // MENU ACTIONS
-    $('.menu-toggler').on('click', function() {
-
-        swiperV1.slideTo(0);
-        $('.swiper-container-vertical1').addClass('swiper-container--active')
-        $(this).fadeOut(1);
-        $('.menu-close').fadeIn();
-    });
-
-    $('.menu-close').on('click', function() {
-
-        swiperV1.slideTo(2);
-
-        if (swiperV[0].activeIndex === 0 || swiperV[1].activeIndex === 0 || swiperV[2].activeIndex === 0) {
-            $('.swiper-container-vertical1').removeClass('swiper-container--active')
-        }
-        if (swiperV[0].activeIndex >= 1 || swiperV[1].activeIndex >= 1 || swiperV[2].activeIndex >= 1) {
-            $('.swiper-container-vertical1').addClass('swiper-container--active')
-        }
-
-        $('.menu-close').fadeOut(1);
-        $('.menu-toggler').fadeIn();
-    });
-
-    $('.swiper-slide__goto').on('click', function() {
-        let index = $(this).closest('.swiper-container-v').attr('class').split(' ')[1].split('--')[1]
-
-        swiperV[index].slideNext();
-    });
-
-    // MENU ACTIONS
-
-    // RANGE HANDLERS
-    if ($(window).width() > 1366) {
-         const swiperV = new Swiper('.swiper-container-v', {
-        direction: 'vertical',
-        pagination: '.swiperV-pagination',
-        mousewheelControl: true,
-        parallax: true,
-        nested: true,
-        speed: 1500,
-        paginationClickable: true,
-        onlyExternal: true,
-        shortSwipes: false,
-        longSwipes: false,
-        breakpoints: {
-            1367: {
-                onlyExternal: false,
-                longSwipes: true,
-                shortSwipes: true,
-                mousewheelForceToAxis: false,
-                parallax: false
-
-            },
-        },
-        onSlidePrevEnd(swiper) {
-            if (swiper.activeIndex === 0) {
-                $('.swiper-container').removeClass('swiper-container--active')
-            }
-
-        },
-        onSlidePrevStart(swiper) {
-            if (swiper.activeIndex === 0) {
-                $('.swiperV-pagination').removeClass('swiperV-pagination--active');
-            }
-
-        },
-        onSlideNextStart(swiper) {
-            $('.swiper-container').addClass('swiper-container--active')
-        },
-
-        onSlideChangeStart(swiper) {
-
-            if (swiper.activeIndex >= 1 && swiper.activeIndex < 5) {
-                $('.menu-toggler').removeClass('menu-toggler--active')
-                $('.map-container').fadeOut(1000)
-                $('.swiper-slide--map').removeClass('swiper-slide--map-active')
-                $('.swiper-slide-active .wrapper--black').removeClass('wrapper--black-active')
-                $(".swiper-slide-active .map-container__dot").each(function(i) {
-                    $(this).fadeOut()
-                });
-            } else {
-                $('.menu-toggler').addClass('menu-toggler--active')
-                $('.wrapper').removeClass('wrapper--white-active')
-            }
-            $('.swiperV-pagination').addClass('swiperV-pagination--active');
-
-            let contentNotActive = $('.swiper-slide--horizontal.swiper-slide-active .swiper-slide').find('.swiper-slide__content');
-            // setTimeout(function() {
-            $(contentNotActive).delay(1000).queue(function(next) {
-                $(this).removeClass('swiper-slide__content--active').removeClass('swiper-slide__content--active-top')
-                next()
-            })
-            if (swiper.activeIndex === 1) {}
-            $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
-            // },1000)
-
-
-        },
-        onSlideChangeEnd(swiper) {
-            let content = $('.swiper-slide--horizontal.swiper-slide-active .swiper-slide-active').find('.swiper-slide__content');
-            if (swiper.activeIndex >= 1 && swiper.activeIndex <= 6) {
-
-                $(content).addClass('swiper-slide__content--active')
-                $('.swiper-pagination-bullet').delay(1000).queue(function(next) {
-                    $(this).addClass('swiper-pagination-bullet--active')
-                    next()
-                })
-
-            } else {
-                $('.swiper-pagination-bullet').removeClass('swiper-pagination-bullet--active')
-            }
-            if (swiper.activeIndex === 5) {
-                $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--black').addClass('wrapper--black-active')
-                $('.swiper-slide--map').fadeIn(2000)
-                $(content).fadeIn(2000)
-                $('.map-container').fadeIn(2000)
-                setTimeout(function() {
-                    $(".swiper-slide-active .swiper-slide-active .map-container__dot").each(function(i) {
-                        $(this).delay(500 * i).fadeIn(500)
-                    })
-                }, 4000)
-                let lastIndex = 0
-                $('.swiper-slide-active .swiper-slide-active .map-container__dot').hover(function(e) {
-                    let id = $(this).data('id')
-                    if (id === lastIndex) return
-                    $('.swiper-slide__dot-description p').css('display', 'none')
-                    $('.swiper-slide__dot-description p[data-id=' + id + ']').fadeIn(500)
-                    lastIndex = id
-                })
-            }
-
-        },
-        onTransitionEnd(swiper) {}
-
-
-    });
-        const swiperV1 = new Swiper('.swiper-container-vertical1', {
-            direction: 'vertical',
-            mousewheelControl: false,
-            parallax: true,
-            nested: true,
-            speed: 1500,
-            onlyExternal: true,
-            shortSwipes: false,
-            longSwipes: false,
-            onSlidePrevStart(swiper) {
-                if (swiper.activeIndex === 0) {
-                    $('.swiper-container-vertical1').addClass('swiper-container--active')
-                    $('.menu-toggler').addClass('menu-toggler--close')
-
-                }
-            },
-            onInit(swiper) {
-                swiper.slideTo(2, 0)
-            },
-            onSlidePrevEnd(swiper) {
-
-            },
-            onSlideNextStart(swiper) {
-
-            },
-            onSlideChangeEnd(swiper) {}
-        });
-        $("#controls").ionRangeSlider({
-            type: "single",
-            min: 0,
-            max: window.innerWidth - 280,
-            from: 0,
-            keyboard: true,
-            hide_min_max: true,
-            onStart: function(data) {},
-            onChange: function(data) {
-                $('.main-text').fadeOut();
-                let computedNow = data.from
-                $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                if (data.from < firstBreakpoint) {
-                    slideText($('.swiper-slide--horizontal')[0], data.min, firstBreakpoint, data.from, data.from);
-                }
-                if (data.from >= firstBreakpoint - firstBreakpoint / 2) {
-                    $('.menu-toggler').addClass('menu-toggler--active')
-                    $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
-                    $('.body').addClass('body--active')
-                    $('.dot').addClass('dot--light')
-                }
-                if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
-
-                    swiperH.slideTo(1, 1500)
-
-
-                }
-                if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
-                    swiperH.slideTo(3, 1500)
-
-
-                }
-                if (data.from >= thirdBreakpoint - 10 && data.from <= thirdBreakpoint + 10) {
-                    swiperH.slideTo(5, 1500)
-
-                }
-                if (data.from >= firstBreakpoint + 10 && data.from < secondBreakpoint - 10) {
-                    swiperH.slideTo(2, 0)
-
-                } else if (data.from >= secondBreakpoint + 10 && data.from < thirdBreakpoint - 10) {
-                    swiperH.slideTo(4, 0)
-                } else if (data.from >= thirdBreakpoint + 20) {
-                    swiperH.slideTo(7, 0)
-                } else if (data.from < firstBreakpoint - 10) {
-                    swiperH.slideTo(0, 0)
-                }
-
-                if ((data.from <= firstBreakpoint - firstBreakpoint / 2)) {
-                    $('.body').removeClass('body--active')
-                    $('.menu-toggler').removeClass('menu-toggler--active')
-                    $('.dot').removeClass('dot--light');
-                    $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
-                }
-            },
-            onFinish: function(data) {
-                $('.range-slider__anchors').removeClass('range-slider__anchors--important')
-                if (data.from <= firstBreakpoint / 2) {
-                    $('.menu').removeClass('menu--active')
-                    $('.irs-single').css('left', 0)
-                    slider.update({ from: 0 })
-                    $('.text').addClass('text--active')
-                    setTimeout(function() {
-                        $('.text').removeClass('text--active').css('right', -100 + '%')
-                    }, 1000)
-                    $('.irs-single').addClass('active')
-                } else if ((data.from >= firstBreakpoint / 2 && data.from <= firstBreakpoint) ||
-                    (data.from > firstBreakpoint && data.from <= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2))) {
-                    slider.update({ from: firstBreakpoint - 1 })
-                    swiperH.slideTo(1, 1500)
-                    $('.irs-single').addClass('active')
-                } else if ((data.from >= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2) && data.from < secondBreakpoint) ||
-                    (data.from > secondBreakpoint && data.from <= secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2))) {
-                    slider.update({ from: secondBreakpoint + 5 })
-                    swiperH.slideTo(3, 1500)
-                    $('.irs-single').addClass('active')
-                } else if (data.from > secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2)) {
-                    slider.update({ from: thirdBreakpoint + 15 })
-                    swiperH.slideTo(5, 1500)
-                    $('.irs-single').addClass('active')
-                }
-                $('.irs-single')
-                    .hover(function() {
-                        $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                        globalIn = true;
-                    })
-
-                    .on('mouseout', function() {
-                        $('.range-slider__anchors').removeClass('range-slider__anchors--important');
-
-                    });
-            },
-            onUpdate: function(data) {
-
-            }
-        });
-        let slider = $("#controls").data("ionRangeSlider");
-
-        $('.irs-single')
-            .hover(function() {
-                $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                globalIn = true;
-            })
-
-            .on('mouseout', function() {
-                $('.range-slider__anchors').removeClass('range-slider__anchors--important');
-
-            });
-    }
-
-
-    // $(window).resize(function() {
-    //     if($(window).width() < 1366) {
-    //         slider.destroy()
-    //     }
-    // })
-
-    // if($(window).width() < 1366) {
-    //     slider.destroy()
-    // }
-
-
-    $('#contact__name, #contact__email').on('keydown keyup', function(e) {
-        var max = 50
-        if (e.which < 0x20) {
-            // e.which < 0x20, then it's not a printable character
-            // e.which === 0 - Not a character
-            return // Do nothing
-        }
-        if (this.value.length == max) {
-            e.preventDefault()
-        } else if (this.value.length > max) {
-            // Maximum exceeded
-            this.value = this.value.substring(0, max)
-        }
-    })
-
-    $('#contact__message').on('keydown keyup', function(e) {
-        var max = 500
-        // this.style.height = (25+this.scrollHeight)+"px"
-        if (e.which < 0x20) {
-            // e.which < 0x20, then it's not a printable character
-            // e.which === 0 - Not a character
-            return // Do nothing
-        }
-        if (this.value.length == max) {
-            e.preventDefault()
-        } else if (this.value.length > max) {
-            // Maximum exceeded
-            this.value = this.value.substring(0, max)
-        }
-    });
-
-    autosize($('#contact__message'))
-
-    $.validator.addMethod("alpha", function(value, element) {
-        return this.optional(element) || value == value.match(/^[a-zA-Zа-яА-Я ]+$/);
-    });
-
-    $.validator.addMethod("emailMethod", function(value, element) {
-        let isEmail = this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value);
-        return isEmail
-    });
-
-    $('#contact-form').validate({
-        debug: true,
-        rules: {
-            contact__name: {
-                required: true,
-                alpha: true
-            },
-            contact__email: {
-                required: true,
-                emailMethod: true
-            },
-            contact__message: {
-                required: true
-            }
-        },
-        messages: {
-            contact__name: "",
-            contact__email: "",
-            contact__message: ""
-        },
-        submitHandler(form) {
-            let data = $(form).serialize();
-            $.ajax({
-                    url: '',
-                    type: 'POST',
-                    data: data,
-                })
-                .done(function() {
-                    form.reset();
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-        }
-    });
-
-    $("#contact__name, #contact__email, #contact__message").on('keydown keyup mouseup', function() {
-        if ($(this).valid() == true) {
-            $(this).addClass('swiper-slide__input--active')
-        } else {
-            $(this).removeClass('swiper-slide__input--active')
-        }
-        if ($('#contact-form').valid()) {
-            $('.swiper-slide__input--submit').fadeIn()
-        } else {
-            $('.swiper-slide__input--submit').fadeOut()
-
-        }
-    })
-    let createTags = (function() {
-        const bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' +
-            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
-            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
-        const pagslides = $('.swiper-slide--horizontal:nth-child(2),' +
-            ' .swiper-slide--horizontal:nth-child(4),' +
-            ' .swiper-slide--horizontal:nth-child(6)')
-        let names = []
-        pagslides.each(function(i) {
-            names.push($(this).data('name'))
-        })
-        bullets.each(function(i) {
-            $(this).text(names[i])
-            $(this).attr('id', i)
-
-        })
-
-        bullets.click(function(e) {
-            $('.menu-toggler').addClass('menu-toggler--active')
-            $('.dot').addClass('dot--light')
-            let target = e.target
-            let id = target.id
-
-
-            if (+id === $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active').data('id')) return
-            if (id === '0') {
-                slider.update({ from: breakpoints[id] - 1 })
-            }
-            if (id === '1') {
-
-                slider.update({ from: breakpoints[id] + 5 })
-            }
-            if (id === '2') {
-                slider.update({ from: breakpoints[id] + 15 })
-            }
-            for (let i = 0; i < swiperV.length; i++) {
-                swiperV[i].slideTo(0, 0)
-            }
-            $('.irs-single').css('opacity', '1', 'important')
-            $('.menu-close').trigger('click')
-        })
-    })();
-});
-
-
-
-// GLOBALS
-let globalIn = false;
-let offset = 110;
-let anchorSize = 26
-let anchors = $('.range-slider__anchor');
-let firstBreakpoint = $(anchors[1]).offset().left - offset - anchorSize / 2;
-let secondBreakpoint = $(anchors[2]).offset().left - offset - anchorSize / 2;
-let thirdBreakpoint = $(anchors[3]).offset().left - offset - anchorSize / 2;
-let breakpoints = [firstBreakpoint, secondBreakpoint, thirdBreakpoint]
-let slides = $('.slide');
-// GLOBALS
-
-
-// 1ST SLIDE TEXT SMOOTH MIVING
-function slideText(element, startValue, endValue, computedNow, valueNow) {
-    let percent = 0
-    percent = (computedNow * 2.4) * 100 / endValue;
-    let value = -100;
-    value += percent * 2;
-    // if(valueNow <= )
-    translateText(element, value);
-}
-
-function translateText(element, value) {
-    $(element).children('.text').css('right', value + '%')
-}
-// 1ST SLIDE TEXT SMOOTH MIVING
-
-
-
-// SWIPER 2-6
-
-
-// RANGE HANDLERS
-
-
-window.$ = $
-window.jQuery = jQuery
-
-
-// var directionX;
-// document.addEventListener('mousemove', function(event) {
-//     directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-// });
-// var lastX;
-// $(document).bind('touchmove', function(e) {
-//     var currentX = e.originalEvent.touches[0].clientX;
-//     if (currentX > lastX) {
-//         directionX = 1;
-//     } else if (currentX < lastX) {
-//         // moved up
-//         directionX = -1;
-//     }
-//     lastX = currentX;
-// });
+})

@@ -13,7 +13,8 @@ head
     link(rel='stylesheet' href='css/bundle.min.css')
 -var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container(style='visibility:hidden;opacity:0')
+    .slider-container
+        //- (style='visibility:hidden;opacity:0')
         .dots-wrapper
             -for(var i = 0; i < 100; i++)
                 .dot
@@ -136,6 +137,7 @@ body.body
                                                             +e.dot.icon-stop2(data-id=i)
 
                                         .swiperV-pagination
+
                                 +b.swiper-slide
     .main-text-start
         p Click to enter website

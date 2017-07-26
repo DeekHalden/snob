@@ -1,5 +1,5 @@
 $gold = #af9358
-
+$grad = #353638
 $transition = .5s ease all
 @font-face 
     font-family Roboto-reg
@@ -45,7 +45,7 @@ a
     &:hover
         color $gold
 .menu-close, .menu-toggler
-    display: none
+    // display: none
     z-index 10
     position absolute
     top 50px
@@ -139,9 +139,9 @@ a
         &:nth-child(2)    
             left 27.9%
         &:nth-child(3)
-            right 27.9%
+            right 28%
         &:nth-child(4)
-            right 1px
+            right 2px
 
 
 .swiper-container 
@@ -178,7 +178,9 @@ a
     display flex
     transition .5s linear all
     left -400px
+    opacity 0
     &--active
+        opacity 1
         background #000 url('./../images/indicator.png') no-repeat 91px center
         left 0
     // &:after
@@ -190,7 +192,7 @@ a
     //     top 50%
     //     transform translateY(-50%)
     //     left 123px
-    .swiper-pagination-bullet   
+    .swiper-pagination-bullet
         transition .5s ease all
         position relative
         background-color #fff
@@ -201,16 +203,37 @@ a
         transform rotate(45deg)
         opacity 0
         margin 50px 0 !important
-        &--active
+        
+        &--active:not(.swiper-pagination-bullet-active)
             opacity .2
+            transition .5s ease all
         &:first-child
-            display none
+            margin 0 !important
+            background transparent url('./../images/angle-down.png') no-repeat center
+            
+            background-size contain
+            position absolute
+            width 30px
+            height 30px
+            top 15px 
+            left 50%
+            opacity 1
+            transform translateX(-50%) rotate(180deg)
+            &:before
+                content ''
+            &:hover
+                opacity .7
+
+
         &.swiper-pagination-bullet-active
             transition .5s ease all
             background: url('./../images/big-diamond.svg') no-repeat center;
             background-size: 20px 20px !important;
             position relative
-            opacity 1
+            opacity 0
+            &.swiper-pagination-bullet--active
+                transition .5s ease all
+                opacity 1
             &:before
                 z-index 2
                 transition .5s ease all
@@ -224,6 +247,15 @@ a
                 transform: rotate(45deg);
                 left: -68px;
                 top: 77px;
+.go-top
+    position absolute
+    top 10px
+    color #fff
+    z-index 123
+    display none
+    left 30px
+    cursor pointer
+    
 .swiperH-pagination
     .swiper-pagination-bullet
         display block
@@ -254,9 +286,14 @@ a
         &:nth-child(2)
             margin-top 0 !important
         &.swiper-pagination-bullet-active
-            &:after
+            &:before
                 opacity 1
-                background-image: -ms-radial-gradient( 50% 50%, circle closest-side, rgb(224,195,135) 0%, rgba(175,147,88,0) 100%);
+                z-index -2
+                background-color $gold
+            &:after
+                z-index -1
+                opacity 1
+                background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
             
 .swiper-slide
     height 100%
@@ -273,8 +310,10 @@ a
                 pointer-events none
                 width 100%
                 height 100%
+                opacity 0
                 &--active
                     color #fff
+                    opacity 1
             &__dot-description
                 position absolute
                 right 48%
@@ -438,7 +477,18 @@ a
             bottom 10px
             width calc(100% - 30px)
             height 9px 
-            background-color #af9358
+            background-color  $gold
+        &:before
+            z-index 1
+            visibility visible
+            left 0
+            content ''
+            position absolute
+            bottom 10px
+            width calc(100% - 30px)
+            height 9px 
+            background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
+            
     &__content
         padding-top 150px
         position relative
@@ -461,15 +511,25 @@ a
             color inherit
             margin-bottom 80px
             &:after
+                z-index -2
+                visibility: visible;
+                left: 0;
+                content: '';
+                position: absolute;
+                bottom: 34px;
+                width: 150%;
+                height: 20px;
+                background-color: #af9358;
+            &:before
                 z-index -1
                 visibility: visible;
                 left: 0;
                 content: '';
                 position: absolute;
                 bottom: 34px;
-                width: 200%;
+                width: 150%;
                 height: 20px;
-                background-color: #af9358;
+                background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
             
         p
             color inherit
@@ -486,7 +546,12 @@ a
             &:after
                 width 100%
                 bottom 0
+                z-index -2
+            &:before
+                width 100%
+                bottom 0
                 z-index -1
+                background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
     &__menu-wrapper
         position absolute
         top 50%
@@ -646,8 +711,8 @@ a
     transform translateY(-50%) translateX(-50%)
     width 0%
     left 50%
-    
     transition 1.5s linear all
+    width 100%
     &--active
         width 100%
     // display flex
@@ -655,9 +720,10 @@ a
     
 .dot 
     margin 0
-    display none
+    // display none
     float left
     background-color: black
+    background-size contain
     width: 2px
     height: 2px
     border-radius 50%
@@ -666,6 +732,8 @@ a
     left 50%
     transform translateX(-50%)
     position static
+    
+    margin 0 calc( (100% / 100 / 2) - 1px)
     &--active
         margin 0 calc( (100% / 100 / 2) - 1px)
         transform translateX(0%)

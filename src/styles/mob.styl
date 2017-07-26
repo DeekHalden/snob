@@ -1,0 +1,91 @@
+$gold = #af9358
+$grad = #353638
+$transition = .5s ease all
+@font-face 
+    font-family Roboto-reg
+    src url(./../fonts/Roboto-Regular.ttf)
+    
+*
+    box-sizing border-box
+
+@import "./icomoon.css" 
+@import "./normalize.css" 
+@import "./swiper.min.css"
+@import "grid"
+
+body 
+    width 100%;
+    text-align center
+    overflow-x hidden
+canvas
+    position: absolute
+    top 0
+    bottom 0
+    left 0
+    z-index 1
+.main-container
+    overflow hidden
+    visibility hidden
+    background-color #000
+    // position absolute
+    // height 100%
+    &--active
+        visibility visible;
+        overflow auto;
+        
+.main-text-start
+    text-transform uppercase
+    font-size 14px
+    display none
+    position absolute
+    top calc(50% + 255px)
+    left 50% 
+    transform translateX(-50%) translateY(-50%)
+    cursor pointer
+.swiper-slide, .swiper-wrapper
+    background-color black
+    height auto
+    width 100%
+.intro
+    position relative
+    background-color #000
+    // display none
+    &__logo
+        display block
+        max-width 100%
+    &__text
+        margin-top -70px
+        h2
+            font-size 16px
+            font-weight 100
+            color #fff
+            text-align left
+            letter-spacing 4px
+            line-height 26px
+    &__enter
+        display block
+        margin 0 auto 
+        padding-bottom 40px
+        bottom 80px
+        left 50%
+        // position absolute
+
+        img
+            display block
+            transform  rotate(-45deg)
+            width 56px
+            margin 0 auto
+            
+@media(orientation: portrait) 
+    .intro
+        min-height 100vh
+        &__enter
+            transform  translateX(-50%) translateY(50%) 
+            position absolute
+
+        
+@media(orientation: landscape) 
+    .intro
+        &__logo
+            margin 0 auto
+            max-width 69%    
