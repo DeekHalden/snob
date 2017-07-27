@@ -4,7 +4,10 @@ $transition = .5s ease all
 @font-face 
     font-family Roboto-reg
     src url(./../fonts/Roboto-Regular.ttf)
-    
+@font-face 
+    font-family Times-new-roman
+    src url(./../fonts/times-new-roman.ttf)
+$times = Times-new-roman
 *
     box-sizing border-box
 
@@ -13,7 +16,8 @@ $transition = .5s ease all
 @import "./swiper.min.css"
 @import "grid"
 
-body 
+body
+    font-family Roboto-reg 
     width 100%;
     text-align center
     overflow-x hidden
@@ -27,10 +31,11 @@ canvas
     overflow hidden
     visibility hidden
     background-color #000
+    position relative
     // position absolute
     // height 100%
+    visibility visible;
     &--active
-        visibility visible;
         overflow auto;
         
 .main-text-start
@@ -46,10 +51,67 @@ canvas
     background-color black
     height auto
     width 100%
+.swiper-slide
+    position relative
+    h3, p
+        letter-spacing 2px
+        color #fff
+        font-family $times
+    &__text
+        width 100%
+        color $gold
+        margin-top 10px
+        p
+            text-transform uppercase
+            display inline-block
+            font-size 14px
+            margin 0
+    &__head-description
+        h3
+            letter-spacing 9px
+            text-align left
+            font-size 26px
+            font-weight 100
+            text-transform uppercase
+    &__face-cont
+        margin-top 20px
+    &__face
+        display block
+        height 200px
+        margin 0 auto
+    &__main-wrapper
+        min-height 100vh
+    &__additional-wrapper
+        margin-top 120px
+    &__goto-wrapper
+        z-index 12
+        position absolute
+        top 420px
+        left 50%
+        width 0
+        transform translateX(-50%)
+        background  url('./../images/downarrow.png') no-repeat center
+        width 30px
+        height 60px
+        background-size contain
+    &__goto
+        display block
+        width 100%
+        height 100%
+        // &:after
+        //     content ''
+        //     position absolute
+        //     bottom -50px
+        //     left 50%
+        //     transform translateX(-50%)
+        
+        
+    
 .intro
     position relative
     background-color #000
     // display none
+    // height 100% 
     &__logo
         display block
         max-width 100%
@@ -69,12 +131,66 @@ canvas
         bottom 80px
         left 50%
         // position absolute
-
         img
             display block
             transform  rotate(-45deg)
             width 56px
             margin 0 auto
+.swiper-pagination
+    pointer-events none
+    width 100%
+    top -100px
+    position absolute
+    height 25%
+    display flex 
+    align-items center
+    background-color transparent
+    transition 0s
+    top 250px
+    height 260px
+    &--active
+        top 290px
+    .swiper-wrapper
+        pointer-events auto
+        align-items center
+        width 100%
+        overflow visible
+        background-color transparent
+        .swiper-slide-active
+            width 56px 
+            height 56px 
+            position relative
+            &:before
+                top 0
+                left 0
+                position absolute
+                content ''
+                background url('./../images/big-diamond.svg') no-repeat center
+                background-size contain
+                width 56px 
+                transform rotate(-45deg)
+                height 56px 
+
+            
+    &__swiper-slide
+        background url('./../images/mob.png') no-repeat center
+        background-size 14px
+        // width value
+        width 56px 
+        
+        height 56px 
+            
+        &.swiper-slide-next, &.swiper-slide-prev
+            background-size 28px
+            width 56px 
+            height 56px 
+        &.swiper-slide-next
+            background-position right center
+        &.swiper-slide-prev
+            background-position left center
+            
+        
+        
             
 @media(orientation: portrait) 
     .intro
@@ -89,3 +205,6 @@ canvas
         &__logo
             margin 0 auto
             max-width 69%    
+    .swiper-slide
+        &__additional-wrapper
+            margin-top 220px

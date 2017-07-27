@@ -23,7 +23,7 @@ const gulp = require('gulp'),
 
 
 
-gulp.task('styles', () => {
+gulp.task('styles:tablet', () => {
     return gulp.src('src/**/mob.styl')
         .pipe(stylus({
             'include css': true
@@ -34,6 +34,23 @@ gulp.task('styles', () => {
             title: "Error running something"
         }))
         .pipe(rename('mobile.bundle.min.css'))
+        .pipe(gulp.dest('wp-content/themes/snobart/css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+
+gulp.task('styles:index', () => {
+    return gulp.src('src/**/styles.styl')
+        .pipe(stylus({
+            'include css': true
+        }))
+        // .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+        .on("error", notify.onError({
+            message: "Error: <%= error.message %>",
+            title: "Error running something"
+        }))
+        .pipe(rename('bundle.min.css'))
         .pipe(gulp.dest('wp-content/themes/snobart/css'))
         .pipe(browserSync.reload({
             stream: true
@@ -73,7 +90,7 @@ gulp.task('images', function() {
 })
 
 
-gulp.task('js', function() {
+gulp.task('js:tablet', function() {
     const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
     return gulp.src('./src/scripts/mobile.probe.js')
         .pipe(concat('mobile.probe.js'))
@@ -84,6 +101,45 @@ gulp.task('js', function() {
             output: {
                 path: path.resolve(__dirname, './src/scripts/client/'),
                 filename: 'mobile.probe.js',
+            },
+            module: {
+                loaders: [{
+                    test: /\.js$/,
+                    // excluding some local linked packages.
+                    // for normal use cases only node_modules is needed.
+                    exclude: /node_modules|vue\/src|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015']
+                        }
+                    }
+
+                }],
+                // postLoaders: [
+                //     {
+                //         include: '/node_modules/pixi.js',
+                //         loader: 'transform?brfs'
+                //     }
+                // ]
+
+            }
+        }, webpack))
+        
+        .pipe(gulp.dest('wp-content/themes/snobart/scripts'));
+});
+
+gulp.task('js:index', function() {
+    const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+    return gulp.src('./src/scripts/probe.js')
+        .pipe(concat('probe.js'))
+        .pipe(webpackStream({
+            entry: {
+                app: './src/scripts/probe.js',
+            },
+            output: {
+                path: path.resolve(__dirname, './src/scripts/client/'),
+                filename: 'probe.js',
             },
             module: {
                 loaders: [{
@@ -125,9 +181,11 @@ gulp.task('indexTemplate', function() {
         .pipe(gulp.dest('wp-content/themes/snobart'))
 });
 
-gulp.task('styles-watch', ['styles'], reload);
+gulp.task('styles:index-watch', ['styles:index'], reload);
+gulp.task('styles:tablet-watch', ['styles:tablet'], reload);
 gulp.task('pug-watch', ['indexTemplate'], reload);
-gulp.task('js-watch', ['js'], reload);
+gulp.task('js:index-watch', ['js:index'], reload);
+gulp.task('js:tablet-watch', ['js:tablet'], reload);
 
 gulp.task('browserSync', function() {
     browserSync.init({
@@ -141,10 +199,16 @@ gulp.task('browserSync', function() {
 /**
  * Serve and watch the pug files for changes
  */
-gulp.task('default', ['indexTemplate', 'js', 'styles', 'browserSync', 'images'], function() {
-    gulp.watch(['src/**/*.styl', 'src/**/*.css'], ['styles-watch']);
+gulp.task('index', ['indexTemplate', 'js:index', 'styles:index', 'browserSync'], function() {
+    gulp.watch(['src/**/*.styl', 'src/**/*.css'], ['styles:index-watch']);
     gulp.watch('src/**/*.pug', ['pug-watch']);
-    gulp.watch('src/**/*.js', ['js-watch']);
+    gulp.watch('src/**/*.js', ['js:index-watch']);
 });
 
-gulp.task('build',['js:build','styles:build']);
+
+gulp.task('tablet', ['indexTemplate', 'js:tablet', 'styles:tablet', 'browserSync'], function() {
+    gulp.watch(['src/**/*.styl', 'src/**/*.css'], ['styles:tablet-watch']);
+    gulp.watch('src/**/*.pug', ['pug-watch']);
+    gulp.watch('src/**/*.js', ['js:tablet-watch']);
+});
+

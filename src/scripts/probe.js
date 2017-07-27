@@ -20,7 +20,7 @@ function init() {
 
     }
     const app = new PIXI.Application()
-    app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true})
+    app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true })
 
     document.body.appendChild(app.view)
 
@@ -493,10 +493,6 @@ function init() {
             this.obj.normalizeDirection = rad(2)
 
         }
-        generateRandomDirection(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
         randomSpeed() {
             return Math.floor(Math.random() * 2) + 1.5
         }
@@ -537,11 +533,9 @@ function init() {
             if (direction != initialDirection) {
                 let [sa, ea, na] = [arad(direction), arad(initialDirection), arad(normalizeDirection)]
                 if (!(sa > ea + 180 || sa < ea)) na = 0 - na
-                // let [lg, lw] = [Math.abs(ea - sa), 360 - Math.abs(ea - sa)]
-                // let current = (lg > lw ? sa + na : sa - na) % 360
+
                 let current = (sa + na) % 360
 
-                // console.log(inc, dec, current, sa, ea)
                 direction = this.obj.direction = rad(Math.abs(current - ea) > na ? current : ea)
             }
 
@@ -736,7 +730,7 @@ function init() {
                 dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
                 smallDots.forEach(dot => app.stage.removeChild(dot.obj));
 
-            }, 1500)
+            }, 1900)
 
         }
         if (!moveToRandomPosition && moveDiamondToStart) {
@@ -763,7 +757,7 @@ function init() {
 
 $(document).ready(function() {
     // init()
-   
+
     // SWIPER 2-6
 
     // SWIPER 1
@@ -778,11 +772,9 @@ $(document).ready(function() {
         parallax: true,
         breakpoints: {
             1367: {
-                onlyExternal: false,
-                longSwipes: true,
-                shortSwipes: true,
+                onlyExternal: true,
                 mousewheelForceToAxis: false,
-                parallax: false
+                parallax: true
 
             }
         },
@@ -796,6 +788,8 @@ $(document).ready(function() {
                     $(this)[0].pause()
                 })
             }, 200)
+            $('.swiper-container-h .swiper-slide--horizontal .swiper-slide__head-description').fadeOut()
+            $('.swiper-container-h .swiper-slide--horizontal .swiper-slide video').fadeOut()
             let index = $($('.swiper-container-h .swiper-container-v .swiper-slide-active'))
             index.find('.swiper-slide__text--active')
                 .removeClass('swiper-slide__text--active')
@@ -808,12 +802,16 @@ $(document).ready(function() {
             }
         },
         onTransitionEnd(swiper) {
-            if ($('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length) {
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').fadeIn();
-                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play()
-            }
             $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide-active .swiper-slide__text')
                 .addClass('swiper-slide__text--active')
+            if ($('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').length) {
+                setTimeout(function() {
+                    $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video')[0].play()
+                    
+                },2000)
+                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active video').delay(1000).fadeIn(2000)
+                $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide__head-description').delay(1000).fadeIn(1000);
+            }
         },
         onTransitionStart(swiper) {
             $('.swiper-container-h .swiper-slide--horizontal.swiper-slide-active .swiper-slide__text')
@@ -864,8 +862,8 @@ $(document).ready(function() {
     // MENU ACTIONS
 
     // RANGE HANDLERS
-    if ($(window).width() > 1366) {
-         const swiperV = new Swiper('.swiper-container-v', {
+
+    const swiperV = new Swiper('.swiper-container-v', {
         direction: 'vertical',
         pagination: '.swiperV-pagination',
         mousewheelControl: true,
@@ -882,7 +880,7 @@ $(document).ready(function() {
                 longSwipes: true,
                 shortSwipes: true,
                 mousewheelForceToAxis: false,
-                parallax: false
+                parallax: true
 
             },
         },
@@ -894,7 +892,7 @@ $(document).ready(function() {
         },
         onSlidePrevStart(swiper) {
             if (swiper.activeIndex === 0) {
-                $('.swiperV-pagination').removeClass('swiperV-pagination--active');
+                $('.swiperV-pagination').fadeOut(0).removeClass('swiperV-pagination--active');
             }
 
         },
@@ -910,13 +908,13 @@ $(document).ready(function() {
                 $('.swiper-slide--map').removeClass('swiper-slide--map-active')
                 $('.swiper-slide-active .wrapper--black').removeClass('wrapper--black-active')
                 $(".swiper-slide-active .map-container__dot").each(function(i) {
-                    $(this).fadeOut()
+                    $(this).fadeOut(0)
                 });
             } else {
                 $('.menu-toggler').addClass('menu-toggler--active')
                 $('.wrapper').removeClass('wrapper--white-active')
             }
-            $('.swiperV-pagination').addClass('swiperV-pagination--active');
+            $('.swiperV-pagination').addClass('swiperV-pagination--active').fadeIn();
 
             let contentNotActive = $('.swiper-slide--horizontal.swiper-slide-active .swiper-slide').find('.swiper-slide__content');
             // setTimeout(function() {
@@ -924,7 +922,9 @@ $(document).ready(function() {
                 $(this).removeClass('swiper-slide__content--active').removeClass('swiper-slide__content--active-top')
                 next()
             })
-            if (swiper.activeIndex === 1) {}
+            if (swiper.activeIndex === 0) {
+                $('.swiper-slide__text').addClass('swiper-slide__text--active')
+            }
             $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
             // },1000)
 
@@ -968,141 +968,140 @@ $(document).ready(function() {
 
 
     });
-        const swiperV1 = new Swiper('.swiper-container-vertical1', {
-            direction: 'vertical',
-            mousewheelControl: false,
-            parallax: true,
-            nested: true,
-            speed: 1500,
-            onlyExternal: true,
-            shortSwipes: false,
-            longSwipes: false,
-            onSlidePrevStart(swiper) {
-                if (swiper.activeIndex === 0) {
-                    $('.swiper-container-vertical1').addClass('swiper-container--active')
-                    $('.menu-toggler').addClass('menu-toggler--close')
-
-                }
-            },
-            onInit(swiper) {
-                swiper.slideTo(2, 0)
-            },
-            onSlidePrevEnd(swiper) {
-
-            },
-            onSlideNextStart(swiper) {
-
-            },
-            onSlideChangeEnd(swiper) {}
-        });
-        $("#controls").ionRangeSlider({
-            type: "single",
-            min: 0,
-            max: window.innerWidth - 280,
-            from: 0,
-            keyboard: true,
-            hide_min_max: true,
-            onStart: function(data) {},
-            onChange: function(data) {
-                $('.main-text').fadeOut();
-                let computedNow = data.from
-                $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                if (data.from < firstBreakpoint) {
-                    slideText($('.swiper-slide--horizontal')[0], data.min, firstBreakpoint, data.from, data.from);
-                }
-                if (data.from >= firstBreakpoint - firstBreakpoint / 2) {
-                    $('.menu-toggler').addClass('menu-toggler--active')
-                    $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
-                    $('.body').addClass('body--active')
-                    $('.dot').addClass('dot--light')
-                }
-                if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
-
-                    swiperH.slideTo(1, 1500)
-
-
-                }
-                if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
-                    swiperH.slideTo(3, 1500)
-
-
-                }
-                if (data.from >= thirdBreakpoint - 10 && data.from <= thirdBreakpoint + 10) {
-                    swiperH.slideTo(5, 1500)
-
-                }
-                if (data.from >= firstBreakpoint + 10 && data.from < secondBreakpoint - 10) {
-                    swiperH.slideTo(2, 0)
-
-                } else if (data.from >= secondBreakpoint + 10 && data.from < thirdBreakpoint - 10) {
-                    swiperH.slideTo(4, 0)
-                } else if (data.from >= thirdBreakpoint + 20) {
-                    swiperH.slideTo(7, 0)
-                } else if (data.from < firstBreakpoint - 10) {
-                    swiperH.slideTo(0, 0)
-                }
-
-                if ((data.from <= firstBreakpoint - firstBreakpoint / 2)) {
-                    $('.body').removeClass('body--active')
-                    $('.menu-toggler').removeClass('menu-toggler--active')
-                    $('.dot').removeClass('dot--light');
-                    $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
-                }
-            },
-            onFinish: function(data) {
-                $('.range-slider__anchors').removeClass('range-slider__anchors--important')
-                if (data.from <= firstBreakpoint / 2) {
-                    $('.menu').removeClass('menu--active')
-                    $('.irs-single').css('left', 0)
-                    slider.update({ from: 0 })
-                    $('.text').addClass('text--active')
-                    setTimeout(function() {
-                        $('.text').removeClass('text--active').css('right', -100 + '%')
-                    }, 1000)
-                    $('.irs-single').addClass('active')
-                } else if ((data.from >= firstBreakpoint / 2 && data.from <= firstBreakpoint) ||
-                    (data.from > firstBreakpoint && data.from <= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2))) {
-                    slider.update({ from: firstBreakpoint - 1 })
-                    swiperH.slideTo(1, 1500)
-                    $('.irs-single').addClass('active')
-                } else if ((data.from >= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2) && data.from < secondBreakpoint) ||
-                    (data.from > secondBreakpoint && data.from <= secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2))) {
-                    slider.update({ from: secondBreakpoint + 5 })
-                    swiperH.slideTo(3, 1500)
-                    $('.irs-single').addClass('active')
-                } else if (data.from > secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2)) {
-                    slider.update({ from: thirdBreakpoint + 15 })
-                    swiperH.slideTo(5, 1500)
-                    $('.irs-single').addClass('active')
-                }
-                $('.irs-single')
-                    .hover(function() {
-                        $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                        globalIn = true;
-                    })
-
-                    .on('mouseout', function() {
-                        $('.range-slider__anchors').removeClass('range-slider__anchors--important');
-
-                    });
-            },
-            onUpdate: function(data) {
+    const swiperV1 = new Swiper('.swiper-container-vertical1', {
+        direction: 'vertical',
+        mousewheelControl: false,
+        parallax: true,
+        nested: true,
+        speed: 1500,
+        onlyExternal: true,
+        shortSwipes: false,
+        longSwipes: false,
+        onSlidePrevStart(swiper) {
+            if (swiper.activeIndex === 0) {
+                $('.swiper-container-vertical1').addClass('swiper-container--active')
+                $('.menu-toggler').addClass('menu-toggler--close')
 
             }
+        },
+        onInit(swiper) {
+            swiper.slideTo(2, 0)
+        },
+        onSlidePrevEnd(swiper) {
+
+        },
+        onSlideNextStart(swiper) {
+
+        },
+        onSlideChangeEnd(swiper) {}
+    });
+    $("#controls").ionRangeSlider({
+        type: "single",
+        min: 0,
+        max: window.innerWidth - 280,
+        from: 0,
+        keyboard: true,
+        hide_min_max: true,
+        onStart: function(data) {},
+        onChange: function(data) {
+            $('.main-text').fadeOut();
+            let computedNow = data.from
+            $('.range-slider__anchors').addClass('range-slider__anchors--important');
+            if (data.from < firstBreakpoint) {
+                slideText($('.swiper-slide--horizontal')[0], data.min, firstBreakpoint, data.from, data.from);
+            }
+            if (data.from >= firstBreakpoint - firstBreakpoint / 2) {
+                $('.menu-toggler').addClass('menu-toggler--active')
+                $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
+                $('.body').addClass('body--active')
+                $('.dot').addClass('dot--light')
+            }
+            if (data.from >= firstBreakpoint - 10 && data.from <= firstBreakpoint + 10) {
+
+                swiperH.slideTo(1, 1500)
+
+
+            }
+            if (data.from >= secondBreakpoint - 10 && data.from <= secondBreakpoint + 10) {
+                swiperH.slideTo(3, 1500)
+
+
+            }
+            if (data.from >= thirdBreakpoint - 10 && data.from <= thirdBreakpoint + 10) {
+                swiperH.slideTo(5, 1500)
+
+            }
+            if (data.from >= firstBreakpoint + 10 && data.from < secondBreakpoint - 10) {
+                swiperH.slideTo(2, 0)
+
+            } else if (data.from >= secondBreakpoint + 10 && data.from < thirdBreakpoint - 10) {
+                swiperH.slideTo(4, 0)
+            } else if (data.from >= thirdBreakpoint + 20) {
+                swiperH.slideTo(7, 0)
+            } else if (data.from < firstBreakpoint - 10) {
+                swiperH.slideTo(0, 0)
+            }
+
+            if ((data.from <= firstBreakpoint - firstBreakpoint / 2)) {
+                $('.body').removeClass('body--active')
+                $('.menu-toggler').removeClass('menu-toggler--active')
+                $('.dot').removeClass('dot--light');
+                $('.range-slider__anchor').addClass('range-slider__anchor--bordered')
+            }
+        },
+        onFinish: function(data) {
+            $('.range-slider__anchors').removeClass('range-slider__anchors--important')
+            if (data.from <= firstBreakpoint / 2) {
+                $('.menu').removeClass('menu--active')
+                $('.irs-single').css('left', 0)
+                slider.update({ from: 0 })
+                $('.text').addClass('text--active')
+                setTimeout(function() {
+                    $('.text').removeClass('text--active').css('right', -100 + '%')
+                }, 1000)
+                $('.irs-single').addClass('active')
+            } else if ((data.from >= firstBreakpoint / 2 && data.from <= firstBreakpoint) ||
+                (data.from > firstBreakpoint && data.from <= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2))) {
+                slider.update({ from: firstBreakpoint - 1 })
+                swiperH.slideTo(1, 1500)
+                $('.irs-single').addClass('active')
+            } else if ((data.from >= firstBreakpoint + ((secondBreakpoint - firstBreakpoint) / 2) && data.from < secondBreakpoint) ||
+                (data.from > secondBreakpoint && data.from <= secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2))) {
+                slider.update({ from: secondBreakpoint + 6 })
+                swiperH.slideTo(3, 1500)
+                $('.irs-single').addClass('active')
+            } else if (data.from > secondBreakpoint + ((thirdBreakpoint - secondBreakpoint) / 2)) {
+                slider.update({ from: thirdBreakpoint + 15 })
+                swiperH.slideTo(5, 1500)
+                $('.irs-single').addClass('active')
+            }
+            $('.irs-single')
+                .hover(function() {
+                    $('.range-slider__anchors').addClass('range-slider__anchors--important');
+                    globalIn = true;
+                })
+
+                .on('mouseout', function() {
+                    $('.range-slider__anchors').removeClass('range-slider__anchors--important');
+
+                });
+        },
+        onUpdate: function(data) {
+
+        }
+    });
+    let slider = $("#controls").data("ionRangeSlider");
+
+    $('.irs-single')
+        .hover(function() {
+            $('.range-slider__anchors').addClass('range-slider__anchors--important');
+            globalIn = true;
+        })
+
+        .on('mouseout', function() {
+            $('.range-slider__anchors').removeClass('range-slider__anchors--important');
+
         });
-        let slider = $("#controls").data("ionRangeSlider");
-
-        $('.irs-single')
-            .hover(function() {
-                $('.range-slider__anchors').addClass('range-slider__anchors--important');
-                globalIn = true;
-            })
-
-            .on('mouseout', function() {
-                $('.range-slider__anchors').removeClass('range-slider__anchors--important');
-
-            });
-    }
 
 
     // $(window).resize(function() {

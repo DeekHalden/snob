@@ -11,32 +11,44 @@ head
     title Effective JavaScript: Frogger
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet' href='css/mobile.bundle.min.css')
--var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
+-var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'MOBILE APPLICATIONS'},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'WEB DEVELOPMENT'},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'DESIGN'}]
 body.body
     .main-container.swiper-container
+        //- +b.intro.swiper-slide.container
+        //-     +e.IMG(src="./images/logo-mob.svg").logo
+        //-     +e.text
+        //-         h2 We are not snobs <br>
+        //-             | We are just better than everyone else. <br>
+        //-             | Be our guest
+        //-     +e.enter
+        //-         IMG(src="./images/big-diamond.svg")
         .swiper-wrapper
-            +b.intro.swiper-slide.container
-                +e.IMG(src="./images/logo-mob.svg").logo
-                +e.text
-                    h2 We are not snobs <br>
-                        | We are just better than everyone else. <br>
-                        | Be our guest
-                +e.enter
-                    IMG(src="./images/big-diamond.svg")
+            //- (style="display:none")
             each el, i in data 
-                +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
-                    .video-cont(data-swiper-parallax='0')
-                        video.video(width='320' height='240'  )
-                            source(src=el.src type='video/mp4')
-                    +e.head-description
-                        each h3 in el.description
-                            +e.H3.description=h3
-                    +e.text()
-                        each p in el.paragraph
-                            +e.P.paragraph(data-swiper-parallax='100')=p
-                    +e.goto-wrapper(data-swiper-parallax='0')
-                        +e.A.goto learn more
-            .swiper-pagination
+                +b.swiper-slide.swiper-slide--horizontal.container(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
+                    +e.main-wrapper
+                        +e.text()
+                            +e.P.paragraph(data-swiper-parallax-x='-100%')=el.paragraph
+                        +e.face-cont(data-swiper-parallax='0')
+                            +e.IMG(src="./images/face.png").face
+                            
+                        +e.head-description
+                            +e.H3.description='oleg sosino-vichevskiy'
+                        +e.goto-wrapper
+                            +e.A.goto(href='#additional-wrapper--' + i) 
+                    +e.additional-wrapper(id='additional-wrapper--' + i)
+                        -for(let i =0; i < 10; i++)
+                            +e.head-description
+                                each h3 in el.description
+                                    +e.H3.description=h3
+        +b.swiper-pagination.swiper-container
+            .swiper-wrapper
+                +e.swiper-slide.swiper-slide
+                    
+                +e.swiper-slide.swiper-slide
+                    
+                +e.swiper-slide.swiper-slide
+                    
 
     .main-text-start
         p Click to enter website

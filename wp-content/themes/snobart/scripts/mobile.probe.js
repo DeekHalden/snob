@@ -40023,13 +40023,13 @@ function init() {
 
     if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
         var texture3 = './../images/mask.png';
-        var texture4 = './../images/dot.png';
+        var texture4 = './../images/dot2x.png';
         var texture5 = './../images/dot--small.png';
         var texture6 = './../images/snob-b-w.png';
         var texture9 = './../images/Logo2kx2k.png';
     } else {
         var texture3 = '/snobart/images/mask.png';
-        var texture4 = '/snobart/images/dot.png';
+        var texture4 = '/snobart/images/dot2x.png';
         var texture5 = '/snobart/images/dot--small.png';
         var texture6 = '/snobart/images/snob-b-w.png';
         var texture9 = '/snobart/images/Logo2kx2k.png';
@@ -40549,7 +40549,7 @@ function init() {
 
         function Dot(image) {
             var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 45;
-            var speed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+            var speed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : .5;
 
             _classCallCheck(this, Dot);
 
@@ -40688,7 +40688,7 @@ function init() {
         _inherits(SmallDot, _Dot);
 
         function SmallDot(image, direction) {
-            var speed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3.5;
+            var speed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1.5;
 
             _classCallCheck(this, SmallDot);
 
@@ -40861,16 +40861,48 @@ function init() {
     }, 1000);
 }
 
-function initSecondPart() {}
+function initSecondPart() {
+    var swiperH = new Swiper('.main-container', {
+        paginationClickable: true,
+        parallax: true,
+        onlyExternal: true,
+        effect: 'slide'
+    });
+    var swiperPagination = new Swiper('.swiper-pagination', {
+        slideToClickedSlide: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        touchRatio: 0.2,
+        paginationClickable: true,
+        // onlyExternal: true,
+        effect: 'slide'
+
+    });
+    $('.intro__enter').on('click', function (e) {
+        e.preventDefault();
+        swiperH.slideTo(0, 1500);
+        $(this).parent().fadeOut();
+        $('.swiper-wrapper').fadeIn();
+        $('.swiper-pagination').addClass('swiper-pagination--active');
+    });
+
+    $('.swiper-slide__goto-wrapper').click(function (e) {
+        console.log(1);
+    });
+    swiperH.params.control = swiperPagination;
+    swiperPagination.params.control = swiperH;
+    $(document).on('click', '.swiper-slide__goto', function (event) {
+        event.preventDefault();
+
+        $('html, body').animate({
+            scrollTop: $($.attr(this, 'href')).offset().top
+        }, 500);
+    });
+}
 
 $(document).ready(function () {
-    init();
+    // init()
     initSecondPart();
-    var swiperH = new Swiper('.main-container', {
-
-        pagination: '.swiper-pagination',
-        paginationClickable: true
-    });
 });
 
 /***/ }),

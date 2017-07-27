@@ -68,13 +68,13 @@ function init() {
 
     if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
         var texture3 = './../images/mask.png'
-        var texture4 = './../images/dot.png'
+        var texture4 = './../images/dot2x.png'
         var texture5 = './../images/dot--small.png'
         var texture6 = './../images/snob-b-w.png'
         var texture9 = './../images/Logo2kx2k.png'
     } else {
         var texture3 = '/snobart/images/mask.png'
-        var texture4 = '/snobart/images/dot.png'
+        var texture4 = '/snobart/images/dot2x.png'
         var texture5 = '/snobart/images/dot--small.png'
         var texture6 = '/snobart/images/snob-b-w.png'
         var texture9 = '/snobart/images/Logo2kx2k.png'
@@ -484,7 +484,7 @@ function init() {
     }
 
     class Dot extends SuperClass {
-        constructor(image, direction = 45, speed = 2) {
+        constructor(image, direction = 45, speed = .5) {
             super(image)
 
             this.obj.x = centerX /*this.generateRandomDirection(0, innerWidth)*/
@@ -603,7 +603,7 @@ function init() {
 
 
     class SmallDot extends Dot {
-        constructor(image, direction, speed = 3.5) {
+        constructor(image, direction, speed = 1.5) {
             super(image, direction, speed)
 
             this.collidable = true
@@ -766,16 +766,47 @@ function init() {
 }
 
 function initSecondPart() {
+    const swiperH = new Swiper('.main-container', {
+        paginationClickable: true,
+        parallax: true,
+        onlyExternal: true,
+        effect: 'slide'
+    });
+    const swiperPagination = new Swiper('.swiper-pagination', {
+        slideToClickedSlide: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        touchRatio: 0.2,
+        paginationClickable: true,
+        // onlyExternal: true,
+        effect: 'slide',
+        
+    });
+    $('.intro__enter').on('click', function(e) {
+        e.preventDefault()
+        swiperH.slideTo(0,1500)
+        $(this).parent().fadeOut()
+        $('.swiper-wrapper').fadeIn()
+        $('.swiper-pagination').addClass('swiper-pagination--active')
+    })
+
+    $('.swiper-slide__goto-wrapper').click(function(e) {
+        console.log(1)
+    })
+    swiperH.params.control = swiperPagination;
+    swiperPagination.params.control = swiperH;
+    $(document).on('click', '.swiper-slide__goto', function(event){
+        event.preventDefault()
+
+        $('html, body').animate({
+            scrollTop: $( $.attr(this, 'href') ).offset().top
+        }, 500)
+    })
 
 }
 
 
 $(document).ready(function() {
-    init()
+    // init()
     initSecondPart()
-    const swiperH = new Swiper('.main-container', {
-        
-        pagination: '.swiper-pagination',
-        paginationClickable: true
-    });
 })

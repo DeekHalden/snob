@@ -84,7 +84,7 @@
     top: 43.5%;
     cursor: pointer;
     background-color: #af9358;
-    background-image: linear-gradient( 90deg, rgba(53,54,56,.45) 0%, rgba(255,255,255,.45) 100%);
+    background-image: linear-gradient( 45deg, rgba(53,54,56,.45) 0%, rgba(255,255,255,.45) 100%);
     background-size: 24px 24px !important;
     transform: rotate(-45deg) translateY(-50%);
     font-size: 0;
