@@ -13,8 +13,7 @@ head
     link(rel='stylesheet' href='css/bundle.min.css')
 -var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container
-        //- (style='visibility:hidden;opacity:0')
+    .slider-container(style='visibility:hidden;opacity:0')
         .dots-wrapper
             -for(var i = 0; i < 100; i++)
                 .dot
@@ -33,8 +32,7 @@ body.body
             .swiper-wrapper
                 +b.swiper-slide.swiper-slide--menu-wrapper
                     +e.menu-wrapper.container
-                        +e.section.swiper-slide__section--left
-                            .swiperH-pagination
+                        +e.section.swiper-slide__section--left.swiperH-pagination
 
                         +e.section.swiper-slide__section--center
                             h2 SnobArts is web-design and mobile applications development studio

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html></html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Effective JavaScript: Frogger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/bundle.min.css"/>
+  <style>
+    li {
+        transition: .2s ease all
+    }
+    li.active {
+        display: block !important;
+        color: red;
+        opacity: 1 !important;
+    }
+    li.fade {
+        opacity: 0;
+        display: none
+    }
+    
+  </style>
+</head>
+<body class="body" data-list="{&quot;A&quot;:[{&quot;title&quot;:&quot;Aa&quot;,&quot;link&quot;:&quot;http://google.com&quot;},{&quot;title&quot;:&quot;Ab&quot;,&quot;link&quot;:&quot;http://google.com&quot;}],&quot;B&quot;:[{&quot;title&quot;:&quot;Bbsdf&quot;,&quot;link&quot;:&quot;http://google.com&quot;}],&quot;s&quot;:[{&quot;title&quot;:&quot;sfsdf&quot;,&quot;link&quot;:&quot;http://google.com&quot;}],&quot;c&quot;:[{&quot;title&quot;:&quot;cdsgvsdf&quot;,&quot;link&quot;:&quot;http://google.com&quot;}],&quot;q&quot;:[{&quot;title&quot;:&quot;qqq&quot;,&quot;link&quot;:&quot;http://google.com&quot;}],&quot;a&quot;:[{&quot;title&quot;:&quot;aaaafsdf&quot;,&quot;link&quot;:&quot;http://google.com&quot;}]}">
+  <input type="text" onkeyup="loopOverObject()"/>
+  <input type="submit"/>
+  <ul>
+    <p>A</p>
+    <li>Aa</li>
+    <li>Ab</li>
+    <p>B</p>
+    <li>Bbsdf</li>
+    <p>s</p>
+    <li>sfsdf</li>
+    <p>c</p>
+    <li>cdsgvsdf</li>
+    <p>q</p>
+    <li>qqq</li>
+    <p>a</p>
+    <li>aaaafsdf</li>
+  </ul>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>
+    const LIST = $('.body').data('list')
+    function loopOverObject() {
+        let searchQuery = $('input[type="text"]').val()
+        console.log(searchQuery)
+        for (let key in LIST) {
+            if (LIST.hasOwnProperty(key)) {
+                let displayedResult = LIST[key].filter(function(el) {
+                    let searchValue = el.title.toLowerCase();
+                    //console.log(searchValue);
+                    //- console.log(searchValue)
+                    return searchValue.indexOf(searchQuery) !== -1;
+                });
+                //- console.log(displayedResult)
+    
+                for (let i = 0; i < displayedResult.length; i++) {
+                    $('li.keyword').each(function() {
+                        if ($(this).text() === displayedResult[i]) {
+                            $('li.keyword').addClass('fade');
+                            $(this).addClass('active');
+    
+                        } else {
+    
+    
+                        }
+    
+                    })
+                }
+    
+            }
+        }
+    }
+  </script>
+</body>

@@ -11,8 +11,14 @@ head
     title Effective JavaScript: Frogger
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet' href='css/mobile.bundle.min.css')
--var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'MOBILE APPLICATIONS'},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'WEB DEVELOPMENT'},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'DESIGN'}]
+-var data = [{src: './images/stas.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'MOBILE APPLICATIONS'},{src: './images/ole.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'WEB DEVELOPMENT'},{src: './images/xu.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'DESIGN'}]
+-let slidesData = [{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],img:'./images/stas.png'},{title:'gathering',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.']},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.']},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],imgBottom:'./images/redhead.png'},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],imgBottom:'./images/redhead.png'}]
 body.body
+    +b.text()
+        +e.A.goto(href='#additional-wrapper--0--0')  
+            img(src="./images/top-gold.png") 
+        +e.P.paragraph='bla'
+        +e.left
     .main-container.swiper-container
         //- +b.intro.swiper-slide.container
         //-     +e.IMG(src="./images/logo-mob.svg").logo
@@ -25,22 +31,49 @@ body.body
         .swiper-wrapper
             //- (style="display:none")
             each el, i in data 
-                +b.swiper-slide.swiper-slide--horizontal.container(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
-                    +e.main-wrapper
-                        +e.text()
-                            +e.P.paragraph(data-swiper-parallax-x='-100%')=el.paragraph
-                        +e.face-cont(data-swiper-parallax='0')
-                            +e.IMG(src="./images/face.png").face
-                            
-                        +e.head-description
-                            +e.H3.description='oleg sosino-vichevskiy'
-                        +e.goto-wrapper
-                            +e.A.goto(href='#additional-wrapper--' + i) 
-                    +e.additional-wrapper(id='additional-wrapper--' + i)
-                        -for(let i =0; i < 10; i++)
+                +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
+                    +e.main-wrapper(id='additional-wrapper--' + i + '--0')
+                        +e.main-content
+                            +e.face-cont
+                                +e.IMG(src=el.src).face
+                                
                             +e.head-description
-                                each h3 in el.description
-                                    +e.H3.description=h3
+                                +e.H2.description='oleg sosinovichevskiy'
+                                +e.P.role='php-lead developer'
+                            +e.A.goto(href='#additional-wrapper--' + i + '--1') 
+                    each el, index in slidesData
+                        +e.additional-wrapper(id='additional-wrapper--' + i + '--'  + (index + 1))
+                            +e.text-wrapper.container
+                                +e.H2=el.title
+
+                                if(el.img)
+                                    +e.IMG(src=el.img).small-face
+                                each p in el.text
+                                    +e.P=p
+                            if(el.imgBottom)
+                                +e.img-wrapper
+                                    +e.img-mask
+                                    +e.IMG(src=el.imgBottom).img-fluid
+                            -if(index !== 5) 
+                                +e.A.goto(href='#additional-wrapper--' + i + '--' + (index + 2))
+                    +e.additional-wrapper--map(id='additional-wrapper--' + 0 + '--' + 6)
+                        +b.map-container
+                            +e.content
+                                +e.dot-description
+                                    p Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                        span 88
+                                        | minim velit id.
+                                        span 11
+                                        | minim velit id.
+                                    -for(let i =0; i < 10; i++)
+                                        p(data-id=i) Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                            span=i+'lorem'
+                                            | minim velit id.
+                                            span 11
+                                            | minim velit id.
+                            +e.IMG(src='./images/map.png').bg-img
+                            -for(let i =0; i < 10; i++)
+                                +e.dot.icon-stop2(data-id=i)
         +b.swiper-pagination.swiper-container
             .swiper-wrapper
                 +e.swiper-slide.swiper-slide
