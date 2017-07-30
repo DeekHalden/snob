@@ -775,6 +775,7 @@ $(document).ready(function() {
         onlyExternal: true,
         longSwipes: false,
         parallax: true,
+
         breakpoints: {
             1367: {
                 onlyExternal: true,
@@ -783,6 +784,26 @@ $(document).ready(function() {
 
             }
         },
+        paginationBulletRender: function (swiper, index, className) {
+            let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' +
+            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
+            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
+            let pagslides = $('.swiper-slide--horizontal')
+            let names = []
+            pagslides.each(function(i) {
+                names.push($(this).data('name'))
+            })
+            
+            return '<span class="' + className + '">' + names[index] + '</span>';
+            
+            // bullets.each(function(i) {
+            //     // $(this).text(names[i])
+            //     $(this).attr('id', i)
+
+            // })
+
+        },
+
         onInit() {
 
         },
@@ -1224,7 +1245,6 @@ $(document).ready(function() {
     })
 
     function createTags() {
-        console.log(1)
         let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' +
             '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
             '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
@@ -1236,7 +1256,7 @@ $(document).ready(function() {
             names.push($(this).data('name'))
         })
         bullets.each(function(i) {
-            $(this).text(names[i])
+            // $(this).text(names[i])
             $(this).attr('id', i)
 
         })

@@ -882,8 +882,8 @@ select:focus {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 @media (min-width: 576px) {
   .container {
@@ -1456,11 +1456,12 @@ a:hover {
 .swiper-slide__content {
   position: relative;
   color: transparent;
-  width: 920px;
+  max-width: 1180px;
   padding-top: 120px;
   margin-left: auto;
   margin-right: 230px;
   transition-delay: 0s;
+  text-align: right;
   z-index: 1;
   transition: 1s linear all;
 }
@@ -1473,8 +1474,8 @@ a:hover {
   letter-spacing: 30px;
   z-index: 1;
   text-align: right;
+  max-width: 100%;
   color: inherit;
-  margin-left: 180px;
   margin-bottom: 80px;
   font-weight: normal;
 }
@@ -1496,6 +1497,8 @@ a:hover {
   background-image: linear-gradient(360deg, #af9358, rgba(255,255,255,0.55) 100%);
 }
 .swiper-slide__content p {
+  padding-right: 30px;
+  font-family: Times-new-roman;
   color: inherit;
   text-align: left;
   font-size: 17px;
@@ -1769,6 +1772,19 @@ a:hover {
   .swiperV-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active:after {
     left: -32px;
   }
+  .swiper-slide__section--center h2 {
+    font-size: 20px;
+  }
+  .swiper-slide__section--center p {
+    font-size: 14px;
+  }
+  .swiper-slide__text {
+    font-size: 80px;
+  }
+  .swiper-slide__text p {
+    line-height: 80px;
+    height: 80px;
+  }
   .swiper-slide__content {
     margin: 0 7% 0 auto;
   }
@@ -1777,6 +1793,9 @@ a:hover {
   }
   .swiper-slide__img {
     width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: 0%;
   }
   .swiper-slide--map .swiper-slide__content {
     transition: 0.5s;

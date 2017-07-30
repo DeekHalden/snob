@@ -40870,6 +40870,7 @@ $(document).ready(function () {
         onlyExternal: true,
         longSwipes: false,
         parallax: true,
+
         breakpoints: {
             1367: {
                 onlyExternal: true,
@@ -40878,6 +40879,23 @@ $(document).ready(function () {
 
             }
         },
+        paginationBulletRender: function paginationBulletRender(swiper, index, className) {
+            var bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' + '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' + '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)');
+            var pagslides = $('.swiper-slide--horizontal');
+            var names = [];
+            pagslides.each(function (i) {
+                names.push($(this).data('name'));
+            });
+
+            return '<span class="' + className + '">' + names[index] + '</span>';
+
+            // bullets.each(function(i) {
+            //     // $(this).text(names[i])
+            //     $(this).attr('id', i)
+
+            // })
+        },
+
         onInit: function onInit() {},
         onSlideChangeStart: function onSlideChangeStart(swiper) {
             setTimeout(function () {
@@ -41271,7 +41289,6 @@ $(document).ready(function () {
     });
 
     function createTags() {
-        console.log(1);
         var bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' + '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' + '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)');
         var pagslides = $('.swiper-slide--horizontal:nth-child(2),' + ' .swiper-slide--horizontal:nth-child(4),' + ' .swiper-slide--horizontal:nth-child(6)');
         var names = [];
@@ -41279,7 +41296,7 @@ $(document).ready(function () {
             names.push($(this).data('name'));
         });
         bullets.each(function (i) {
-            $(this).text(names[i]);
+            // $(this).text(names[i])
             $(this).attr('id', i);
         });
 
