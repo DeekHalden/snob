@@ -699,13 +699,13 @@ function init() {
             });
             setTimeout(() => {
                 freemove = false
-            }, 2500)
+            }, 3000)
         }
 
         setTimeout(() => {
             changeDirection = true
 
-        }, 2000)
+        }, 2500)
 
         if (changeDirection) {
             dotsArray.forEach(dot => {
@@ -1211,6 +1211,7 @@ $(document).ready(function() {
             contact__message: ""
         },
         submitHandler(form) {
+            $('.flip-container__wrapper').addClass('flip-container__wrapper--active')
             let data = $(form).serialize();
             $.ajax({
                     url: '',
@@ -1229,6 +1230,14 @@ $(document).ready(function() {
                 });
         }
     });
+
+    $('.card__button').on('click',function(e) {
+        e.preventDefault()
+        $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active')
+        $('#contact-form')[0].reset();
+        $('.swiper-slide__input--active').removeClass('swiper-slide__input--active')
+        $('.swiper-slide__input.swiper-slide__input--submit').fadeOut()
+    })
 
     $("#contact__name, #contact__email, #contact__message").on('keydown keyup mouseup', function() {
         if ($(this).valid() == true) {

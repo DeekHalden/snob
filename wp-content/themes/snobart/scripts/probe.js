@@ -40794,12 +40794,12 @@ function init() {
             });
             setTimeout(function () {
                 freemove = false;
-            }, 2500);
+            }, 3000);
         }
 
         setTimeout(function () {
             changeDirection = true;
-        }, 2000);
+        }, 2500);
 
         if (changeDirection) {
             dotsArray.forEach(function (dot) {
@@ -41259,6 +41259,7 @@ $(document).ready(function () {
             contact__message: ""
         },
         submitHandler: function submitHandler(form) {
+            $('.flip-container__wrapper').addClass('flip-container__wrapper--active');
             var data = $(form).serialize();
             $.ajax({
                 url: '',
@@ -41273,6 +41274,14 @@ $(document).ready(function () {
                 console.log("complete");
             });
         }
+    });
+
+    $('.card__button').on('click', function (e) {
+        e.preventDefault();
+        $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active');
+        $('#contact-form')[0].reset();
+        $('.swiper-slide__input--active').removeClass('swiper-slide__input--active');
+        $('.swiper-slide__input.swiper-slide__input--submit').fadeOut();
     });
 
     $("#contact__name, #contact__email, #contact__message").on('keydown keyup mouseup', function () {

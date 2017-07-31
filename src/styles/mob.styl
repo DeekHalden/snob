@@ -23,7 +23,7 @@ body
     font-family Roboto-reg 
     width 100%;
     text-align center
-    overflow-x hidden
+    overflow hidden
 canvas
     position: absolute
     top 0
@@ -33,38 +33,265 @@ canvas
 .main-container
     overflow hidden
     visibility hidden
-    background-color #000
+    background-color transparent
     position relative
     // position absolute
     // height 100%
     visibility visible;
     &--active
-        overflow auto;
+        background-color #000
+        overflow-y auto;
         
 .main-text-start
     text-transform uppercase
     font-size 14px
     display none
     position absolute
-    top calc(50% + 255px)
+    top calc(50% + 135px)
     left 50% 
     transform translateX(-50%) translateY(-50%)
     cursor pointer
+    z-index 12334
 .swiper-slide, .swiper-wrapper
     background-color black
     height auto
     width 100%
+.swiper-wrapper
+    opacity 0
+    &--active
+        opacity 1
+.menu
+    padding-top 40px
+    color #fff
+    display none
+    font-family $times
+    top 0
+    width 100%
+    background-color #000
+    letter-spacing 2px
+    
+        
+        
+    &__menu-wrapper
+        padding 0 25px
+    &__form
+        width 100%
+        h2
+            margin-top 5px
+            font-family $times
+            color #fff
+            text-transform uppercase
+            text-align left
+            font-weight 100
+            font-size 21px
+            letter-spacing 4px
+    &__form-control
+        margin-top 40px
+        width 100%
+    &__input
+        color #fff
+        width 100%
+        border none
+        padding-left 10px
+        background-color transparent 
+        border-bottom 3px solid  rgba(255,255,255,.3)
+        transition 1.5s linear border-bottom 
+        &:-webkit-autofill 
+            background-color rgba(255,255,255, 0)
+        &--active
+            border-bottom 3px solid  $gold
+        &--submit
+            // transform rotate(45deg)
+            // cursor pointer
+            border-bottom none
+            display none
+            background url('./../images/angle-down.png') no-repeat center
+            width 30px
+            height 30px
+            transition .5s linear all
+            &:hover
+                opacity .7
+        &:focus
+            outline none
+    textarea 
+        height 26px 
+    &__section
+        &--center
+            position relative
+            padding 20px 0
+            border-top 2px solid $gold
+            border-bottom 2px solid $gold
+            button
+                background-color transparent
+                border none
+                text-transform uppercase
+                
+                &:focus 
+                    outline none
+                span 
+                    position absolute
+                    left -5px
+                    top 13px
+                    font-size 32px
+                    color $gold
+        &--right 
+            margin-top 20px
+            h2
+                text-align justify
+                font-size 14px
+    &__main-text
+        margin-top 20px
+        display none
+        text-align justify
+        h2
+            margin-bottom 20px
+            font-size 16px
+            span 
+                display block
+                font-size 28px
+        p
+            margin-bottom 20px
+            
+.flip-container 
+    perspective: 1000px;
+    
+    &__wrapper
+        min-height 70vh
+        transition: 0.6s
+        transform-style: preserve-3d
+        position: relative
+        // transform: rotateY(180deg);
+        &--active 
+            transform: rotateY(180deg);
+    &__front, &__back
+        width 100%
+        
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    &__front
+        z-index: 2;
+        /* for firefox 31 */
+        transform: rotateY(0deg);
+    &__back
+        display none
+        height 300px
+        border 2px solid $gold
+        border-radius 2px
+        transform: rotateY(180deg);
+        transition .3s linear all
+        transition-delay .3s
+        &--active
+            display block
+        
+    /*&:hover .flip-container__wrapper
+        transform: rotateY(180deg);*/
+.card
+    font-family $times
+    height 100%
+    position relative
+    color #fff
+    &__title
+        width 100%
+        padding 0 10px
+        top 50%
+        transform translateY(-50%) translateX(-50%)
+        position absolute
+    
+        left 50% 
+        text-align center
+        letter-spacing 2px
+        
+        h2
+            text-align center
+            margin-bottom 40px
+            text-transform uppercase
+        p
+            margin-bottom 120px
+    &__button
+        left 50%
+        transform translateX(-50%)
+        position absolute
+        bottom 40px
+        letter-spacing 2px
+        width 180px
+        padding 10px
+        background-color transparent
+        text-transform uppercase
+        border 2px solid $gold
+        transition $transition 
+        &:hover 
+            color  $gold
+            
+.swiperH-pagination
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    .swiper-pagination-bullet
+        display block
+        width auto
+        height 20px
+        color #fff
+        margin-bottom 20px
+        opacity 1
+        background none
+        position relative
+        text-align left
+        padding-left 40px
+        letter-spacing 5px
+        font-size 11px
+        line-height 18px
+            
+        &:after
+            content ''
+            opacity .2
+            position absolute
+            background #fff
+            width 20px
+            left 0
+            top 0
+            height 20px
+            transform rotate(45deg)
+        &.swiper-pagination-bullet-active
+            &:before
+                content ''
+                left 0
+                position absolute
+                top 0
+                width 20px
+                height 20px
+                opacity 1
+                z-index 1
+                background $gold
+                transform rotate(45deg)
+            &:after
+                z-index -1
+                opacity 1
+                background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
 .text
+    display none
     z-index 132
     position fixed
+    top 0
     width 100%
     color $gold
     padding 10px 0
     background-color #000
     transition .2s linear all
-
     &:before, &:after
         transition .2s linear all
+    &__menu-toggler
+        width 32px 
+        height 32px 
+        background-color transparent
+        position absolute
+        right 0px
+        top 0px
+        border none 
+        &:focus
+            outline none
     &__left
         display none
         background-color #000
@@ -77,6 +304,13 @@ canvas
         &:before, &:after
             content ''
             transition .2s linear all
+    &--passive
+        &:before, &:after
+            opacity 0
+        .text__left
+            &:before, &:after
+                opacity 0
+        
     &--active
         &:before, &:after
             content ''
@@ -95,7 +329,7 @@ canvas
         .text__left
             
             &:before, &:after
-                top 32px
+                top 34px
                 content ''
                 position absolute
                 right 0
@@ -111,6 +345,9 @@ canvas
     p
         text-transform uppercase
         display inline-block
+        font-family $times
+        letter-spacing 2px 
+        color #fff
         font-size 14px
         margin 0
     &__goto
@@ -193,7 +430,7 @@ canvas
             z-index 1
             letter-spacing 4px
         p
-            margin-bottom 40px
+            padding-bottom 40px
             line-height 2em
             text-align left
             letter-spacing 2px
@@ -223,15 +460,21 @@ canvas
                 
                 // padding-top 80px
                 margin-bottom 40px
-                &:after
+                &:after, &:before
                     z-index -1
                     content ''
                     position absolute
-                    width 200%
+                    width 100%
                     height 4px
                     left 0
                     bottom 5px
+                    
+                &:after
                     background-image linear-gradient(90deg, rgba($gold, 1), rgba($gold, .45))
+                    
+                &:before
+                    z-index -2
+                    background-image: linear-gradient(360deg, #af9358, rgba(255,255,255,0.55) 100%);
 
     &__small-face
         opacity .35
@@ -262,6 +505,39 @@ canvas
         
         margin 0 auto
         background-size contain
+    &__content
+        position relative
+        pointer-events none
+        width 100%
+        height 100%
+        z-index 1
+        h3
+            padding-top 100px
+            color #fff
+            text-transform uppercase
+            font-family $times
+            letter-spacing 4px 
+            font-weight normal
+    &__dot-description
+        color #fff
+        position absolute
+        right 48%
+        bottom 0
+        transform translateX(50%)
+        width 80%
+        
+        p
+            margin-bottom 10px
+            text-align right
+            &:not(:first-child)
+                display none
+            span
+                @extends .swiper-slide__additional-wrapper:not(:nth-of-type(2)) h2
+                letter-spacing: inherit;
+                position relative
+                height: auto;
+                line-height: inherit;
+                display: inline;
         
         // &:after
         //     content ''
@@ -285,22 +561,9 @@ canvas
         display block
         max-height 170px
         // height 100%
-    &__content
-        position relative
-        pointer-events none
-        width 100%
-        height 100%
-    &__dot-description
-        position absolute
-        right 48%
-        bottom 100px
-        transform translateX(50%)
-        width 900px
-        p
-            text-align right
-            &:not(:first-child)
-                display none
+    
     &__dot
+        display none
         transform rotate(45deg)
         position absolute
         color $gold
@@ -348,8 +611,8 @@ canvas
 .intro
     position relative
     background-color #000
-    // display none
-    // height 100% 
+    display none
+    height 100vh 
     &__logo
         display block
         max-width 100%
@@ -366,7 +629,7 @@ canvas
         display block
         margin 0 auto 
         padding-bottom 40px
-        bottom 80px
+        bottom 140px
         left 50%
         // position absolute
         img
@@ -384,7 +647,6 @@ canvas
     align-items center
     background-color transparent
     transition 0s
-    top 240px
     height 260px
     &--active
         top 240px
@@ -446,7 +708,10 @@ canvas
     .intro
         &__logo
             margin 0 auto
-            max-width 69%    
+            max-width 70%    
+    .flip-container
+        &__wrapper
+            min-height: 100vh
     .swiper-slide
         &__main-content
             top 50%
@@ -467,3 +732,160 @@ canvas
                     text-align center
             &:last-child
                 margin-top 0
+        &__content
+            h3
+                padding-top 20px
+        &__dot-description
+            bottom 0
+
+@media(orientation: portrait) and (min-width 360px) 
+    .swiper-pagination
+        top 370px
+    .swiper-slide
+        &__main-wrapper 
+            .swiper-slide
+                &__goto
+                    bottom -200px
+    .swiper-slide
+        &__additional-wrapper
+            &:nth-of-type(2) , &:nth-of-type(3) ,&:nth-of-type(4)
+                .swiper-slide
+                    &__goto
+                        bottom  30px
+@media(orientation landscape) and (min-width 577px)
+    .swiper-slide
+        &__dot-description
+            transform: translateX(50%) translateY(50%)
+@media (min-width 720px) 
+    .menu
+        padding 70px 130px 0
+        &__menu-wrapper
+            width auto
+        &__section
+            &--center
+                button
+                    span 
+                        top 10px
+                        left  16px
+                        font-size 40px
+            &--left, &--right 
+                padding 0 25px 
+            
+        
+    .swiperH-pagination 
+        .swiper-pagination-bullet
+            font-size 16px
+    .swiper-slide
+        &__text-wrapper
+            &--active
+                padding-left 40px
+        &__main-wrapper, &__additional-wrapper
+            height calc(100vh - 37px)
+            overflow hidden
+        &__main-wrapper
+            .swiper-slide
+                &__goto
+                    bottom -100px
+        &__additional-wrapper
+            margin-top 40px
+            min-height initial
+            height calc(100vh - 75px)
+            h2
+                font-size 16px
+                display inline-block
+                text-align center
+                width auto
+                padding-left 0
+                margin-bottom 70px
+            &:not(:nth-of-type(2))
+                h2
+                    &:before, &:after
+                        width 400%
+                        bottom 3px
+            &:nth-of-type(2)
+                h2
+                    top 500px
+                p
+                    position relative
+                    top -120px 
+                    line-height 1.403
+                    height 190px
+                    overflow hidden
+            p
+                margin-bottom 40px
+            &--map
+                min-height 100vh
+                margin-top 0
+                
+        &__main-content
+            width 100%
+            top 50%
+        &__head-description
+            top -190px
+            h2
+                width 540px
+                margin 0 auto
+                text-align center
+            p
+                margin 0 auto
+                width 540px
+                font-size 18px
+        &__content
+            h3
+                font-size 16px
+        &__face
+            height auto
+            max-width 100%
+        &__small-face
+            margin 0 auto
+            height auto
+            max-width 100%
+        &__img-wrapper
+            position absolute
+            bottom 0
+        &__dot-description
+            p
+                font-size 20px
+                span
+                    &:after
+                        bottom 4px
+                        width 100%
+    .text
+        padding 30px 0
+        p
+            letter-spacing 4px
+            font-size 16px
+        &__goto
+            left 27px 
+            top 29px
+            img
+                width 32px
+                display block
+        &__menu-toggler
+            font-size 32px
+            right 20px
+            top 19px
+        &__left
+            width 50px
+        &--active
+            &:before, &:after
+                left 47px 
+            .text__left
+                &:before, &:after 
+                    top 73px
+    .swiper-pagination
+        top 762px
+@media (min-width 720px) and (orientation landscape)
+    .swiper-slide
+        &__main-wrapper
+            .swiper-slide
+                &__goto
+                    bottom 0px
+    .swiper-pagination
+        top 525px
+@media(min-width 720px)
+    .map-container
+        &__bg-img
+            max-height 400px
+            
+            

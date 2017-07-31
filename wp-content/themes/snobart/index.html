@@ -135,20 +135,34 @@
                 <p>Sunt culpa cillum sint magna in dolore reprehenderit ut excepteur exercitation ex nostrud sit incididunt dolor anim esse velit velit dolore occaecat tempor ut dolor ex dolor dolor aliquip sint velit. Ad minim ad adipisicing sit laboris qui exercitation est adipisicing magna anim proident et duis duis est.</p>
               </div>
             </div>
-            <div class="swiper-slide__section swiper-slide__section swiper-slide__section--right">
-              <form class="swiper-slide__form" id="contact-form">
-                <h2>your message for snob</h2>
-                <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__name" id="contact__name" placeholder="YOUR NAME" type="text" autocomplete="off"/>
+            <div class="swiper-slide__section swiper-slide__section swiper-slide__section--right flip-container">
+              <div class="flip-container__wrapper">
+                <div class="flip-container__front">
+                  <form class="swiper-slide__form" id="contact-form">
+                    <h2>your message for snob</h2>
+                    <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__name" id="contact__name" placeholder="YOUR NAME" type="text" autocomplete="off"/>
+                    </div>
+                    <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__email" id="contact__email" placeholder="YOUR EMAIL" type="email" autocomplete="off"/>
+                    </div>
+                    <div class="swiper-slide__form-control"><textarea class="swiper-slide__input" name="contact__message" id="contact__message" placeholder="YOUR WORDS" style="overflow:hidden; resize:none;height:26px;" autocomplete="off"></textarea>
+                    </div>
+                    <div class="swiper-slide__form-control">
+                      <button class="swiper-slide__input swiper-slide__input swiper-slide__input--submit" type="submit">
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="swiper-slide__form-control"><input class="swiper-slide__input" name="contact__email" id="contact__email" placeholder="YOUR EMAIL" type="email" autocomplete="off"/>
+                <div class="flip-container__back">
+                  <div class="card">
+                    <div class="card__title">
+                      <h2>WE GOT YOU</h2>
+                      <p>Soon you'll hear more from us.</p>
+                    </div>
+                    <button class="card__button">Send another message?
+                    </button>
+                  </div>
                 </div>
-                <div class="swiper-slide__form-control"><textarea class="swiper-slide__input" name="contact__message" id="contact__message" placeholder="YOUR WORDS" style="overflow:hidden; resize:none;height:26px;" autocomplete="off"></textarea>
-                </div>
-                <div class="swiper-slide__form-control">
-                  <button class="swiper-slide__input swiper-slide__input swiper-slide__input--submit" type="submit">
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

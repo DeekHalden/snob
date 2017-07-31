@@ -39,17 +39,26 @@ body.body
                             +e.main-text
                                 p  Rabotaem pizdato, delaem ot dushi. Dorogo, konechno, nu a hooli Do adipisicing ex minim ut elit consequat velit ut.
                                 p Sunt culpa cillum sint magna in dolore reprehenderit ut excepteur exercitation ex nostrud sit incididunt dolor anim esse velit velit dolore occaecat tempor ut dolor ex dolor dolor aliquip sint velit. Ad minim ad adipisicing sit laboris qui exercitation est adipisicing magna anim proident et duis duis est.
-                        +e.section.swiper-slide__section--right
-                            +e.FORM.form(id='contact-form')
-                                h2 your message for snob
-                                +e.form-control
-                                    +e.INPUT.input(name='contact__name' id='contact__name' placeholder='YOUR NAME' type='text' autocomplete="off")
-                                +e.form-control
-                                    +e.INPUT.input(name='contact__email' id='contact__email' placeholder='YOUR EMAIL' type='email' autocomplete="off")
-                                +e.form-control
-                                    +e.TEXTAREA.input(name='contact__message' id='contact__message' placeholder='YOUR WORDS' style="overflow:hidden; resize:none;height:26px;" autocomplete="off")
-                                +e.form-control
-                                    +e.BUTTON.input.swiper-slide__input--submit(type='submit')
+                        +e.section.swiper-slide__section--right.flip-container
+                            .flip-container__wrapper
+                                .flip-container__front
+                                    +e.FORM.form(id='contact-form')
+                                        h2 your message for snob
+                                        +e.form-control
+                                            +e.INPUT.input(name='contact__name' id='contact__name' placeholder='YOUR NAME' type='text' autocomplete="off")
+                                        +e.form-control
+                                            +e.INPUT.input(name='contact__email' id='contact__email' placeholder='YOUR EMAIL' type='email' autocomplete="off")
+                                        +e.form-control
+                                            +e.TEXTAREA.input(name='contact__message' id='contact__message' placeholder='YOUR WORDS' style="overflow:hidden; resize:none;height:26px;" autocomplete="off")
+                                        +e.form-control
+                                            +e.BUTTON.input.swiper-slide__input--submit(type='submit')
+                                .flip-container__back
+                                    +b.card
+                                        +e.title
+                                            h2 WE GOT YOU
+                                            p Soon you'll hear more from us.
+                                        +e.BUTTON.button Send another message?
+
 
                 .swiper-slide.active
                     .swiper-container.swiper-container-h

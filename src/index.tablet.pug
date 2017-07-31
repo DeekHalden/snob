@@ -12,34 +12,67 @@ head
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet' href='css/mobile.bundle.min.css')
 -var data = [{src: './images/stas.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'MOBILE APPLICATIONS'},{src: './images/ole.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'WEB DEVELOPMENT'},{src: './images/xu.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'DESIGN'}]
--let slidesData = [{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],img:'./images/stas.png'},{title:'gathering',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.']},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.']},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],imgBottom:'./images/redhead.png'},{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],imgBottom:'./images/redhead.png'}]
+-let slidesData = [{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],img:'./images/stas.png'},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'}]
 body.body
+    +b.menu
+        +e.menu-wrapper.container
+            +e.section--left.swiperH-pagination
+
+            +e.section--center
+                button 
+                    span.icon-arrow_down
+                    | More about snobs
+                +e.main-text
+                    h2 
+                        span SnobArts is 
+                        | web-design and mobile applications development studio
+                    p  Rabotaem pizdato, delaem ot dushi. Dorogo, konechno, nu a hooli Do adipisicing ex minim ut elit consequat velit ut.
+                    p Sunt culpa cillum sint magna in dolore reprehenderit ut excepteur exercitation ex nostrud sit incididunt dolor anim esse velit velit dolore occaecat tempor ut dolor ex dolor dolor aliquip sint velit. Ad minim ad adipisicing sit laboris qui exercitation est adipisicing magna anim proident et duis duis est.
+            +e.section--right.flip-container
+                .flip-container__wrapper
+                    .flip-container__front
+                        +e.FORM.form(id='contact-form')
+                            h2 your message for snob
+                            +e.form-control
+                                +e.INPUT.input(name='contact__name' id='contact__name' placeholder='YOUR NAME' type='text' autocomplete="off")
+                            +e.form-control
+                                +e.INPUT.input(name='contact__email' id='contact__email' placeholder='YOUR EMAIL' type='email' autocomplete="off")
+                            +e.form-control
+                                +e.TEXTAREA.input(name='contact__message' id='contact__message' placeholder='YOUR WORDS' style="overflow:hidden; resize:none;height:26px;" autocomplete="off")
+                            +e.form-control
+                                +e.BUTTON.input.menu__input--submit(type='submit')
+                    .flip-container__back
+                        +b.card
+                            +e.title
+                                h2 WE GOT YOU
+                                p Soon you'll hear more from us.
+                            +e.BUTTON.button Send another message?
     +b.text()
         +e.A.goto(href='#additional-wrapper--0--0')  
             img(src="./images/top-gold.png") 
+        +e.BUTTON.menu-toggler.icon-menu
         +e.P.paragraph='bla'
         +e.left
     .main-container.swiper-container
-        //- +b.intro.swiper-slide.container
-        //-     +e.IMG(src="./images/logo-mob.svg").logo
-        //-     +e.text
-        //-         h2 We are not snobs <br>
-        //-             | We are just better than everyone else. <br>
-        //-             | Be our guest
-        //-     +e.enter
-        //-         IMG(src="./images/big-diamond.svg")
-        .swiper-wrapper
-            //- (style="display:none")
+        +b.intro.swiper-slide.container
+            +e.IMG(src="./images/logo-mob.svg").logo
+            +e.text
+                h2 We are not snobs <br>
+                    | We are just better than everyone else. <br>
+                    | Be our guest
+            +e.enter
+                IMG(src="./images/big-diamond.svg")
+        .swiper-wrapper(style="display:none")
             each el, i in data 
                 +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
-                    +e.main-wrapper(id='additional-wrapper--' + i + '--0')
+                    +e.main-wrapper.container(id='additional-wrapper--' + i + '--0')
                         +e.main-content
                             +e.face-cont
                                 +e.IMG(src=el.src).face
                                 
                             +e.head-description
                                 +e.H2.description='oleg sosinovichevskiy'
-                                +e.P.role='php-lead developer'
+                                +e.P.role='lead PHP developer'
                             +e.A.goto(href='#additional-wrapper--' + i + '--1') 
                     each el, index in slidesData
                         +e.additional-wrapper(id='additional-wrapper--' + i + '--'  + (index + 1))
@@ -57,20 +90,21 @@ body.body
                             -if(index !== 5) 
                                 +e.A.goto(href='#additional-wrapper--' + i + '--' + (index + 2))
                     +e.additional-wrapper--map(id='additional-wrapper--' + 0 + '--' + 6)
-                        +b.map-container
-                            +e.content
-                                +e.dot-description
-                                    p Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
-                                        span 88
+                        +e.content
+                            h3 over the world
+                            +e.dot-description
+                                p Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                    span 88
+                                    | minim velit id.
+                                    span 11
+                                    | minim velit id.
+                                -for(let i =0; i < 10; i++)
+                                    p(data-id=i) Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
+                                        span=i+'lorem'
                                         | minim velit id.
                                         span 11
                                         | minim velit id.
-                                    -for(let i =0; i < 10; i++)
-                                        p(data-id=i) Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
-                                            span=i+'lorem'
-                                            | minim velit id.
-                                            span 11
-                                            | minim velit id.
+                        +b.map-container
                             +e.IMG(src='./images/map.png').bg-img
                             -for(let i =0; i < 10; i++)
                                 +e.dot.icon-stop2(data-id=i)
