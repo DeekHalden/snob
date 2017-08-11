@@ -1,0 +1,152 @@
+include ../node_modules/bemto.pug/bemto
+-
+  set_bemto_settings({
+    prefix: '',
+    element: '__',
+    modifier: '--'
+  })
+html
+head
+    meta(charset='UTF-8')
+    title Snobart 404
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    style.
+        @font-face  {
+            font-family: 'Times-new-roman';
+            font-weight: normal;
+            src: url(./../fonts/times-new-roman.ttf)
+        
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times-new-roman';
+        }
+        .wrapper-404 {
+            padding: 0 50px;
+            background: #000; 
+    
+        }
+        .wrapper-404__text--top {
+            margin-top: 80px
+        
+        }
+        .wrapper-404__text--bottom {
+            margin-top: 80px
+        }
+        h1 {
+            font-size: 29px ;
+            font-weight: normal;
+            text-align: left;
+            color: #fff;
+            letter-spacing: 6px;
+        }
+                
+        a {
+            text-decoration: none;
+            color: #af9358;
+        
+        }
+        a:hover {
+            opacity: .7
+        }
+        h2 {
+            text-align: center;
+            margin-top: 120px;
+            font-size: 146px;
+            color: rgba(255, 255, 255, 0.051);
+        }
+                    
+        img {
+            display: none;
+        }
+        @media screen  and (orientation: landscape)  {
+            .wrapper-404__text--top {
+                margin-top: 40px
+            }
+            .wrapper-404__text--bottom {
+                margin-top: 20px
+            }
+            h1 {
+                text-align: center
+            }
+            h2 {
+                margin-top: 20px
+            }
+        }
+        @media screen and (min-width:720px)  {
+            .wrapper-404__text--top {
+                margin-top: 200px
+            }
+            
+            h1 {
+                font-size: 40px;
+                text-align: center;
+            }
+            h2 {
+                margin-top: 80px;
+                font-size: 156px
+            }
+            img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        @media screen and (min-width:720px) and (orientation:landscape) {
+            .wrapper-404__text--top {
+                margin-top: 80px
+            }
+            h2 {
+                margin-top: 40px
+            }
+        }
+        @media screen and (min-width:1366px)  {
+            .wrapper-404 {
+                background: #000 url(./images/dots.png) no-repeat center left
+            }
+            img  {
+                display: none
+            }
+
+            .wrapper-404__text--top {
+                top: 38%;
+                margin-top: 0;
+            }
+            .wrapper-404__text--bottom {
+                margin-top: 0;
+        
+                top: 58%;
+            }
+            h1 {
+                left: 50%;
+                font-size: 62px;
+                position: absolute;
+                transform: translateX(-50%) translateY(-50%)
+            }
+            h2 {
+                margin-top: 0;
+                position: absolute;
+                margin-top: 0;
+                font-size: 16.5em;
+                letter-spacing: 80px;
+                top: 48%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%)
+            }
+
+        
+        }
++b.BODY.wrapper-404
+    .container
+        +e.H1.text--top You have lost the road?
+        +e.IMG(src="./images/group.png")
+        +e.H2 404
+        +e.H1.text--bottom Let me bring you 
+            a(href="/") home.
+
+
+
+

@@ -40879,6 +40879,11 @@ function initSecondPart() {
         onTransitionStart: function onTransitionStart(swiper) {
             var text = $('.swiper-slide--horizontal.swiper-slide-active').data('name');
             $('.text p').text(text);
+            $('.menu').removeClass('menu--active').slideUp();
+            $('.text__paragraph').fadeIn(0);
+            $('.main-container').fadeIn();
+            $('.text').addClass('text--passive');
+            $('.icon-close').addClass('icon-menu').removeClass('icon-close');
         },
         paginationBulletRender: function paginationBulletRender(swiper, index, className) {
             var bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet');
@@ -40898,24 +40903,22 @@ function initSecondPart() {
         }
     });
 
-    (function () {
-        var bullets = $('.swiper-pagination-bullet');
-        var pagslides = $('.swiper-slide--horizontal');
-        bullets.on('click', function (e) {
-            e.preventDefault();
-            var id = $(this).id;
-            if (parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
-                // $('.menu').slideUp()    
-                $('.menu').toggleClass('menu--active');
-                // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
-                // $('.main-container').fadeIn()
-                $('.text__paragraph').fadeIn();
-                $('.text__menu-toggler').trigger('click');
-            } else {
-                return;
-            }
-        });
-    })();
+    // let bullets = $('.swiper-pagination-bullet')
+    // let pagslides = $('.swiper-slide--horizontal')
+    // bullets.on('click',function(e) {
+    //     let id = this.id
+    //     if(parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
+    //         // $('.menu').slideUp()    
+    //         $('.menu').toggleClass('menu--active')
+    //         // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
+    //         // $('.main-container').fadeIn()
+    //         $('.text__paragraph').fadeIn()
+    //         $('.text__menu-toggler').trigger('click')
+    //     } else {
+    //         return
+    //     }
+    // })
+
 
     var swiperPagination = new Swiper('.swiper-pagination', {
         slideToClickedSlide: true,

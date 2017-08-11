@@ -28,9 +28,9 @@ body.body
                 +e.anchor
 
             +e.INPUT(type='text' id='controls' name='controls' value='').range
-        .swiper-container.swiper-container-vertical1
-            .swiper-wrapper
-                +b.swiper-slide.swiper-slide--menu-wrapper
+        SECTION.swiper-container.swiper-container-vertical1
+            SECTION.swiper-wrapper
+                +b.SECTION.swiper-slide.swiper-slide--menu-wrapper
                     +e.menu-wrapper.container
                         +e.section.swiper-slide__section--left.swiperH-pagination
 
@@ -60,20 +60,20 @@ body.body
                                         +e.BUTTON.button Send another message?
 
 
-                .swiper-slide.active
-                    .swiper-container.swiper-container-h
-                        .swiper-wrapper
-                            +b.swiper-slide.swiper-slide--horizontal
+                SECTION.swiper-slide.active
+                    SECTION.swiper-container.swiper-container-h
+                        SECTION.swiper-wrapper
+                            +b.SECTION.swiper-slide.swiper-slide--horizontal
                                 .text
                                     h2 We are not snobs
                                     h2 We are just better than everyone else. 
                                     h2 Be our guest
 
                             each el, i in data 
-                                +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
+                                +b.SECTION.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
                                     .swiper-container(class='swiper-container-v--' + i).swiper-container-v
-                                        .swiper-wrapper
-                                            +b.swiper-slide
+                                        SECTION.swiper-wrapper
+                                            +b.SECTION.swiper-slide
                                                 .video-cont(data-swiper-parallax='0')
                                                     video.video(width='320' height='240'  )
                                                         source(src=el.src type='video/mp4')
@@ -85,14 +85,14 @@ body.body
                                                         +e.P.paragraph(data-swiper-parallax='100')=p
                                                 +e.goto-wrapper(data-swiper-parallax='0')
                                                     +e.A.goto learn more
-                                            +b.swiper-slide.swiper-slide--first
+                                            +b.SECTION.swiper-slide.swiper-slide--first
                                                 .wrapper.wrapper--white
                                                     +e.content
                                                         +e.H3.description(data-swiper-parallax='-100%') gathering
                                                         +e.P(data-swiper-parallax='-100%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
                                                         +e.P(data-swiper-parallax='-100%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
-                                            +b.swiper-slide
+                                            +b.SECTION.swiper-slide
                                                 .wrapper.wrapper--white
                                                     +e.content
                                                         +e.img-wrapper(data-swiper-parallax='-1000%')
@@ -102,14 +102,14 @@ body.body
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
-                                            +b.swiper-slide
+                                            +b.SECTION.swiper-slide
                                                 .wrapper.wrapper--white
                                                     +e.content
                                                         +e.H3.description(data-swiper-parallax='-1000%') gathering
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
-                                            +b.swiper-slide
+                                            +b.SECTION.swiper-slide
                                                 .wrapper.wrapper--white
                                                     +e.content
                                                         +e.img-wrapper(data-swiper-parallax='-1000%')
@@ -119,7 +119,7 @@ body.body
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna consequat.
                                                         +e.P(data-swiper-parallax='-1000%') Incididunt in laborum duis mollit anim exercitation exercitation dolor velit mollit id ullamco ea ut quis culpa commodo dolor nostrud ex culpa sit dolor incididunt nostrud officia tempor ex magna 
                                                             span consequat.
-                                            +b.swiper-slide.swiper-slide--map
+                                            +b.SECTION.swiper-slide.swiper-slide--map
                                                 .wrapper.wrapper--black
                                                     +e.content
                                                         h3 over the world
@@ -127,15 +127,15 @@ body.body
                                                         +e.dot-description
                                                             p Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
                                                                 span 88
-                                                                | minim velit id.
+                                                                |  minim velit id.
                                                                 span 11
-                                                                | minim velit id.
+                                                                |  minim velit id.
                                                             -for(let i =0; i < 10; i++)
                                                                 p(data-id=i) Eiusmod anim sit ullamco culpa consequat sed non amet in labore dolor 
                                                                     span=i+'lorem'
-                                                                    | minim velit id.
+                                                                    |  minim velit id.
                                                                     span 11
-                                                                    | minim velit id.
+                                                                    |  minim velit id.
                                                             
 
                                                     +b.map-container
@@ -143,9 +143,9 @@ body.body
                                                         -for(let i =0; i < 10; i++)
                                                             +e.dot.icon-stop2(data-id=i)
 
-                                        .swiperV-pagination
+                                        SECTION.swiperV-pagination
 
-                                +b.swiper-slide.swiper-slide--horizontal(data-name="")
+                                +b.SECTION.swiper-slide.swiper-slide--horizontal(data-name="")
     .main-text-start
         p Click to enter website
     .main-text

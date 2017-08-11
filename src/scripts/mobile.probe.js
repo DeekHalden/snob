@@ -783,6 +783,11 @@ function initSecondPart() {
         onTransitionStart: function(swiper) {
             let text = $('.swiper-slide--horizontal.swiper-slide-active').data('name')
             $('.text p').text(text)
+            $('.menu').removeClass('menu--active').slideUp()
+            $('.text__paragraph').fadeIn(0)
+            $('.main-container').fadeIn()
+            $('.text').addClass('text--passive')
+            $('.icon-close').addClass('icon-menu').removeClass('icon-close')
         },
         paginationBulletRender: function (swiper, index, className) {
             let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet')
@@ -803,24 +808,22 @@ function initSecondPart() {
         },
     });
 
-    (function() {
-        let bullets = $('.swiper-pagination-bullet')
-        let pagslides = $('.swiper-slide--horizontal')
-        bullets.on('click',function(e) {
-            e.preventDefault()
-            let id = $(this).id
-            if(parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
-                // $('.menu').slideUp()    
-                $('.menu').toggleClass('menu--active')
-                // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
-                // $('.main-container').fadeIn()
-                $('.text__paragraph').fadeIn()
-                $('.text__menu-toggler').trigger('click')
-            } else {
-                return
-            }
-        })
-    })()
+        // let bullets = $('.swiper-pagination-bullet')
+        // let pagslides = $('.swiper-slide--horizontal')
+        // bullets.on('click',function(e) {
+        //     let id = this.id
+        //     if(parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
+        //         // $('.menu').slideUp()    
+        //         $('.menu').toggleClass('menu--active')
+        //         // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
+        //         // $('.main-container').fadeIn()
+        //         $('.text__paragraph').fadeIn()
+        //         $('.text__menu-toggler').trigger('click')
+        //     } else {
+        //         return
+        //     }
+        // })
+
 
     const swiperPagination = new Swiper('.swiper-pagination', {
         slideToClickedSlide: true,
@@ -881,6 +884,7 @@ function initSecondPart() {
         $('.text').toggleClass('text--passive')
         // $('.text__paragraph').fadeToggle()
     })
+
 
     $('.menu__section--center button').on('click', function(e) {
         e.preventDefault()

@@ -784,6 +784,7 @@ $(document).ready(function() {
 
             }
         },
+
         paginationBulletRender: function (swiper, index, className) {
             let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' +
             '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
@@ -808,6 +809,7 @@ $(document).ready(function() {
 
         },
         onSlideChangeStart(swiper) {
+            swiperV1.slideTo(2,0)
             setTimeout(function() {
                 // $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
                 $('.swiper-container-h .swiper-slide--horizontal video').each(function() {
@@ -918,7 +920,7 @@ $(document).ready(function() {
         },
         onSlidePrevStart(swiper) {
             if (swiper.activeIndex === 0) {
-                $('.swiperV-pagination').fadeOut(0).removeClass('swiperV-pagination--active');
+                $('.swiperV-pagination').removeClass('swiperV-pagination--active').fadeOut(0);
             }
 
         },
@@ -940,7 +942,7 @@ $(document).ready(function() {
                 $('.menu-toggler').addClass('menu-toggler--active')
                 $('.wrapper').removeClass('wrapper--white-active')
             }
-            $('.swiperV-pagination').addClass('swiperV-pagination--active').fadeIn();
+            $('.swiperV-pagination').addClass('swiperV-pagination--active').delay(1200).fadeIn();
 
             let contentNotActive = $('.swiper-slide--horizontal.swiper-slide-active .swiper-slide').find('.swiper-slide__content');
             // setTimeout(function() {
@@ -953,7 +955,8 @@ $(document).ready(function() {
             }
             $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
             // },1000)
-
+            $('.swiperV-pagination').removeClass('swiperV-pagination--active-' + (swiper.activeIndex + 1) + ' swiperV-pagination--active-' + (swiper.activeIndex - 1))
+            $('.swiperV-pagination').addClass('swiperV-pagination--active-' + swiper.activeIndex)
 
         },
         onSlideChangeEnd(swiper) {
@@ -961,6 +964,7 @@ $(document).ready(function() {
             if (swiper.activeIndex >= 1 && swiper.activeIndex <= 6) {
 
                 $(content).addClass('swiper-slide__content--active')
+
                 $('.swiper-pagination-bullet').delay(1000).queue(function(next) {
                     $(this).addClass('swiper-pagination-bullet--active')
                     next()
@@ -1212,6 +1216,8 @@ $(document).ready(function() {
         },
         submitHandler(form) {
             $('.flip-container__wrapper').addClass('flip-container__wrapper--active')
+            $('.flip-container__back').fadeIn(300)
+            $('.flip-container__front').fadeOut(0)
             let data = $(form).serialize();
             $.ajax({
                     url: '',
@@ -1231,12 +1237,14 @@ $(document).ready(function() {
         }
     });
 
-    $('.card__button').on('click',function(e) {
+     $('.card__button').on('click',function(e) {
         e.preventDefault()
-        $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active')
         $('#contact-form')[0].reset();
+        $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active')
         $('.swiper-slide__input--active').removeClass('swiper-slide__input--active')
-        $('.swiper-slide__input.swiper-slide__input--submit').fadeOut()
+        $('.menu__input.menu__input--submit').fadeOut()
+        $('.flip-container__back').fadeOut(0)
+        $('.flip-container__front').fadeIn(300)
     })
 
     $("#contact__name, #contact__email, #contact__message").on('keydown keyup mouseup', function() {
@@ -1316,7 +1324,7 @@ let slides = $('.slide');
 // 1ST SLIDE TEXT SMOOTH MIVING
 function slideText(element, startValue, endValue, computedNow, valueNow) {
     let percent = 0
-    percent = (computedNow * 2.4) * 100 / endValue;
+    percent = (computedNow * 1.7) * 100 / endValue;
     let value = -100;
     value += percent * 2;
     // if(valueNow <= )
@@ -1334,24 +1342,7 @@ function translateText(element, value) {
 
 
 // RANGE HANDLERS
-
-
 window.$ = $
 window.jQuery = jQuery
 
 
-// var directionX;
-// document.addEventListener('mousemove', function(event) {
-//     directionX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-// });
-// var lastX;
-// $(document).bind('touchmove', function(e) {
-//     var currentX = e.originalEvent.touches[0].clientX;
-//     if (currentX > lastX) {
-//         directionX = 1;
-//     } else if (currentX < lastX) {
-//         // moved up
-//         directionX = -1;
-//     }
-//     lastX = currentX;
-// });

@@ -23,8 +23,12 @@ body
     font-family Roboto-reg 
     width 100%;
     text-align center
+    // 
     overflow hidden
+    // 
+        
 canvas
+    // display none
     position: absolute
     top 0
     bottom 0
@@ -35,9 +39,10 @@ canvas
     visibility hidden
     background-color transparent
     position relative
-    // position absolute
-    // height 100%
     visibility visible;
+    // 
+    // overflow-y auto;
+    // 
     &--active
         background-color #000
         overflow-y auto;
@@ -58,12 +63,16 @@ canvas
     width 100%
 .swiper-wrapper
     opacity 0
+    // 
+    // opacity 1
+    // 
     &--active
         opacity 1
 .menu
     padding-top 40px
     color #fff
     display none
+    // position absolute
     font-family $times
     top 0
     width 100%
@@ -225,6 +234,7 @@ canvas
             color  $gold
             
 .swiperH-pagination
+    
     display: flex !important;
     justify-content: space-between;
     align-items: flex-start;
@@ -271,7 +281,9 @@ canvas
                 opacity 1
                 background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
 .text
+    // 
     display none
+    // 
     z-index 132
     position fixed
     top 0
@@ -284,7 +296,8 @@ canvas
         transition .2s linear all
     &__menu-toggler
         width 32px 
-        height 32px 
+        height 32px
+        font-size 20px 
         background-color transparent
         position absolute
         right 0px
@@ -464,7 +477,7 @@ canvas
                     z-index -1
                     content ''
                     position absolute
-                    width 100%
+                    width 200%
                     height 4px
                     left 0
                     bottom 5px
@@ -509,7 +522,7 @@ canvas
         position relative
         pointer-events none
         width 100%
-        height 100%
+        min-height 100vh
         z-index 1
         h3
             padding-top 100px
@@ -528,7 +541,7 @@ canvas
         
         p
             margin-bottom 10px
-            text-align right
+            text-align left
             &:not(:first-child)
                 display none
             span
@@ -567,6 +580,9 @@ canvas
         transform rotate(45deg)
         position absolute
         color $gold
+        width 32px
+        height 32px
+        
         font-size 32px
         &:nth-of-type(1)
             top 20% 
@@ -613,6 +629,7 @@ canvas
     background-color #000
     display none
     height 100vh 
+    z-index 123123123
     &__logo
         display block
         max-width 100%
@@ -623,6 +640,7 @@ canvas
             font-weight 100
             color #fff
             text-align left
+            margin-bottom 20px
             letter-spacing 4px
             line-height 26px
     &__enter
@@ -638,6 +656,7 @@ canvas
             width 56px
             margin 0 auto
 .swiper-pagination
+    opacity 1
     pointer-events none
     width 100%
     top -100px
@@ -740,7 +759,7 @@ canvas
 
 @media(orientation: portrait) and (min-width 360px) 
     .swiper-pagination
-        top 370px
+        top 340px
     .swiper-slide
         &__main-wrapper 
             .swiper-slide
@@ -751,7 +770,9 @@ canvas
             &:nth-of-type(2) , &:nth-of-type(3) ,&:nth-of-type(4)
                 .swiper-slide
                     &__goto
-                        bottom  30px
+                        bottom  0px
+// @media(orientation landscape) and (min-width 350px)
+    
 @media(orientation landscape) and (min-width 577px)
     .swiper-slide
         &__dot-description
@@ -770,10 +791,21 @@ canvas
                         font-size 40px
             &--left, &--right 
                 padding 0 25px 
+        &__main-text
+            padding 0 28px
+            h2
+                font-size 23px
+                line-height 1.2
+                span 
+                    font-size 33px
+            p
+                font-size 23px
+                line-height 1.2
             
         
     .swiperH-pagination 
         .swiper-pagination-bullet
+            margin-bottom 40px
             font-size 16px
     .swiper-slide
         &__text-wrapper
@@ -875,6 +907,12 @@ canvas
                     top 73px
     .swiper-pagination
         top 762px
+    .intro
+        &__logo
+            margin 0 auto 
+        &__text
+            width 320px
+            margin 0 auto
 @media (min-width 720px) and (orientation landscape)
     .swiper-slide
         &__main-wrapper

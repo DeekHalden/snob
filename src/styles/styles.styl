@@ -1,3 +1,12 @@
+tablet()
+  @media (max-width 1366px)
+    {block}
+lg()
+  @media (max-width 1600px)
+    {block}
+
+
+
 $gold = #af9358
 $grad = #353638
 $transition = .5s ease all
@@ -7,6 +16,7 @@ $transition = .5s ease all
 @font-face 
     font-family Times-new-roman
     src url(./../fonts/times-new-roman.ttf)
+    font-weight normal
     
 $times = Times-new-roman
 *
@@ -30,6 +40,7 @@ body
     overflow hidden
     
     margin 0
+
     
 .body
     background-color #fff
@@ -64,15 +75,19 @@ a
     display none
     color #fff
 .main-text
+    font-family $times
     text-transform uppercase
     display none
     position absolute
+    letter-spacing 4px
+    background-color #fff
     top 50%
     left 50%
     transform translateY(-50%) translateX(-50%)
     p
         font-size 24px
 .main-text-start
+    font-family $times
     text-transform uppercase
     font-size 24px
     display none
@@ -86,28 +101,6 @@ a
     width auto
     height 100vh
     position relative
-    // &:after
-    //     z-index 1
-    //     transform translateY(-50%)
-    //     transition $transition
-    //     pointer-events none
-    //     left 0
-    //     position absolute
-    //     top 50%
-    //     background-image: linear-gradient(to right, rgba(18,17,18,.6) 33%, rgba(255,255,255,0) 0%);
-    //     background-position: bottom;
-    //     background-size: 7px 2px;
-    //     background-repeat: repeat-x;
-    //     content ''
-    //     width 100%
-    //     font-size 30px
-    //     height 2px
-    //     // border-bottom 3px dotted #000
-    // &--light
-    //     &:after
-    //         background-image: linear-gradient(to right, white 33%, rgba(0,0,0,0) 0%);
-    //         // border-bottom 3px dotted #fff
-    
     
 .range-slider
     width: calc(100% - 280px);
@@ -142,6 +135,8 @@ a
             left -12px
         &:nth-child(2)    
             left 27.9%
+            +tablet()
+                left 27.5%
         &:nth-child(3)
             right 28%
         &:nth-child(4)
@@ -165,151 +160,7 @@ a
         transition 1s ease all
     
         
-.swiperV-pagination
-    position fixed
-    z-index 1
-    top 0
-    bottom 0px
-    right auto
-    left 0
-    width 400px
-    height 100%
-    background-color #000
-    transform translateX(0) 
-    flex-direction column
-    justify-content center
-    align-items center
-    display flex
-    transition .5s linear all
-    left -400px
-    opacity 0
-    &--active
-        opacity 1
-        background #000 url('./../images/indicator.png') no-repeat 131px center
-        left 0
-    // &:after
-    //     content ''
-    //     position absolute
-    //     z-index 1
-    //     height 100%
-    //     width 20px
-    //     top 50%
-    //     transform translateY(-50%)
-    //     left 123px
-    .swiper-pagination-bullet
-        
-        position relative
-        
-        font-size 0
-        border-radius 0
-        width 28px
-        height 28px
-        left 40px
-        opacity 0
-        margin 50px 0 !important
-        background url('./../images/pagination-anchor.png') no-repeat center
-        background-size contain
-        transition .2s linear all
-        // &:before
-        //     content ''
-        //     display block
-        //     width 20px
-        //     height 20px
-        //     transform rotate(-45deg)
-            
-            
-        
-        &--active:not(.swiper-pagination-bullet-active)
-            opacity 1
-            
-        &:first-child
-            margin 0 !important
-            background transparent url('./../images/angle-down.png') no-repeat center
-            
-            background-size contain
-            position absolute
-            width 30px
-            height 30px
-            top 15px 
-            left 50%
-            opacity 1
-            transform translateX(-50%) rotate(180deg)
-            &:before
-                display none
-            &:hover
-                opacity .7
 
-
-        &.swiper-pagination-bullet-active
-        
-            // background-size: 20px 20px !important;
-            position relative
-            background: url('./../images/diamond-mobile.png') no-repeat center;
-            background-size contain
-            opacity 0
-            left 39px
-            width 28px
-            height 28px
-            &.swiper-pagination-bullet--active
-            
-                opacity 1
-            &:before
-                left -94px
-                content ''
-                z-index 2
-                position: absolute;
-                width: 1px;
-                
-            &:after
-                left: -104px;
-                content: '-';
-                color: #fff;
-                background-color: #fff;
-                width: 20px;
-                height: 1px;
-                display: block;
-                position: absolute;
-                top: 13px;
-        &:nth-child(2)
-            &.swiper-pagination-bullet-active
-                &.swiper-pagination-bullet--active
-                    &:before
-                        background-image: linear-gradient( 180deg, rgba(255,255,255,1), rgba(255,255,255,.45) 100%)
-                        background-size contain
-                        height: 300px;
-                        top -20px
-        &:nth-child(3)
-            &.swiper-pagination-bullet-active
-                &.swiper-pagination-bullet--active
-                    &:before
-                        
-                        background-image: linear-gradient( 180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,.45) 100%)
-                        top -146px
-                        height: 300px;
-
-        &:nth-child(4)
-            &.swiper-pagination-bullet-active
-                &.swiper-pagination-bullet--active
-                    &:before
-                        background-image: linear-gradient( 180deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,.1) 100%)
-                        top -150px
-                        height: 300px;
-
-        &:nth-child(5)
-            &.swiper-pagination-bullet-active
-                &.swiper-pagination-bullet--active
-                    &:before
-                        background-image: linear-gradient( 180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,1) 75%, rgba(255,255,255,.45) 100%)
-                        top -126px
-                        height: 300px;
-        &:nth-child(6)
-            &.swiper-pagination-bullet-active
-                &.swiper-pagination-bullet--active
-                    &:before
-                        background-image: linear-gradient( 180deg, rgba(255,255,255,.45), rgba(255,255,255,1) 100%)
-                        top -253px
-                        height 300px
-                
 .go-top
     position absolute
     top 10px
@@ -319,48 +170,7 @@ a
     left 30px
     cursor pointer
     
-.swiperH-pagination
-    display: flex !important;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-direction: column;
-    .swiper-pagination-bullet
-        display block
-        width auto
-        height 20px
-        color #fff
-        opacity 1
-        background none
-        position relative
-        text-align right
-        padding-right 40px
-        letter-spacing 5px
-        & + .swiper-pagination-bullet 
-            margin-top 256px
-            
-        &:after
-            opacity .2
-            position absolute
-            content ''
-            background #fff
-            width 20px
-            right 0
-            height 20px
-            transform rotate(45deg)
-            
-        &:first-child, &:nth-child(3), &:nth-child(5), &:nth-child(7)
-            display none
-        &:nth-child(2)
-            margin-top 0 !important
-        &.swiper-pagination-bullet-active
-            &:before
-                opacity 1
-                z-index -2
-                background-color $gold
-            &:after
-                z-index -1
-                opacity 1
-                background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
+
             
 .swiper-slide
     height 100%
@@ -376,16 +186,19 @@ a
             &__content
                 pointer-events none
                 width 100%
+                max-width initial
                 height 100%
                 opacity 0
+                h3
+                    padding-right 20%
                 &--active
                     color #fff
                     opacity 1
             &__dot-description
                 position absolute
-                right 48%
+                right 20%
                 bottom 100px
-                transform translateX(50%)
+                transform translateX(0%)
                 width 900px
                 p
                     text-align right
@@ -482,7 +295,6 @@ a
         &:hover
             color $gold
     .text
-        font-weight 100
         line-height 10px      
         color inherit
         position absolute
@@ -490,9 +302,22 @@ a
         transition .1s linear all
         text-align left
         bottom  10%
+        font-weight normal
+        z-index 123
         width: 100%
         border-bottom 9px solid #af9358
-        border-radius 5px
+        &:after
+            content ''
+            left 0
+            
+            position absolute
+            bottom -9px
+            width 100%
+            height 9px
+            z-index -1
+            background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
+            
+        
         h2
             margin 0
             font-size 30px  
@@ -565,7 +390,7 @@ a
         // transform translateY(-50%)
         position relative
         color transparent
-        max-width 1180px
+        max-width 50%
         padding-top 120px
         margin-left auto
         margin-right 230px
@@ -598,11 +423,13 @@ a
                 height: 20px;
             &:after
                 background-color: #af9358;
+                z-index -4
             &:before
+                z-index -3
                 background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
             
         p
-            padding-right 30px
+            // padding-right 30px
             font-family: $times
             color inherit
             text-align left
@@ -618,13 +445,13 @@ a
             display inline
             &:after
                 width 100%
-                bottom 0
                 z-index -2
+                // bottom 0
             &:before
                 width 100%
-                bottom 0
                 z-index -1
-                background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
+                // bottom 0
+                // background-image linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.55) 100%)
     &__menu-wrapper
         position absolute
         top 50%
@@ -740,12 +567,12 @@ a
     // height 700px
     position absolute
     top 50%
-    right 50% 
-    transform translateY(-50%) translateX(50%)
+    right 20%
+    transform translateY(-50%) translateX(0%)
     &__bg-img
         display block
         
-        max-height 500px
+        max-height 550px
     &__dot
         display none
         position absolute
@@ -836,7 +663,6 @@ a
     perspective: 1000px;
     
     &__wrapper
-        height 480px
         transition: 0.6s
         transform-style: preserve-3d
         position: relative
@@ -855,6 +681,7 @@ a
         /* for firefox 31 */
         transform: rotateY(0deg);
     &__back
+        display none
         border 2px solid $gold
         border-radius 2px
         transform: rotateY(180deg);
@@ -895,6 +722,207 @@ a
         transition $transition 
         &:hover 
             color  $gold
+.swiperH-pagination
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+    .swiper-pagination-bullet
+        display block
+        width auto
+        height 20px
+        color #fff
+        opacity 1
+        font-family $times
+        background none
+        position relative
+        text-align right
+        padding-right 40px
+        letter-spacing 5px
+        &:after
+            opacity .2
+            position absolute
+            content ''
+            background #fff
+            width 20px
+            right 0
+            height 20px
+            transform rotate(45deg)
+            
+        &:first-child, &:nth-child(3), &:nth-child(5), &:nth-child(7)
+            display none
+        &:nth-child(2)
+            margin-top 0 !important
+        &.swiper-pagination-bullet-active
+            &:before
+                opacity 1
+                z-index -2
+                background-color $gold
+            &:after
+                z-index -1
+                opacity 1
+                background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)                    
+            
+.swiperV-pagination
+    position fixed
+    z-index 1
+    top 0
+    bottom 0px
+    right auto
+    left 0
+    width 25%
+    height 100%
+    background-color #000
+    transform translateX(0) 
+    flex-direction column
+    justify-content center
+    align-items center
+    display flex
+    transition .5s linear all
+    left -25%
+    opacity 0
+    &--active-1
+        opacity 1
+        background #000 url('./../images/1.png') no-repeat 25% center
+        left 0
+    &--active-2
+        opacity 1
+        background #000 url('./../images/2.png') no-repeat 25% center
+        left 0
+    &--active-3
+        background #000 url('./../images/3.png') no-repeat 25% center
+        opacity 1
+        left 0
+    &--active-4
+        background #000 url('./../images/4.png') no-repeat 25% center
+        opacity 1
+        left 0
+    &--active-5
+        background #000 url('./../images/5.png') no-repeat 25% center
+        opacity 1
+        left 0
+    // &:after
+    //     content ''
+    //     position absolute
+    //     z-index 1
+    //     height 100%
+    //     width 20px
+    //     top 50%
+    //     transform translateY(-50%)
+    //     left 123px
+    .swiper-pagination-bullet
+        
+        position relative
+        
+        font-size 0
+        border-radius 0
+        width 28px
+        height 28px
+        left 40px
+        opacity 0
+        margin 51px 0 !important
+        background url('./../images/pagination-anchor.png') no-repeat center
+        background-size contain
+        transition .2s linear all
+        // &:before
+        //     content ''
+        //     display block
+        //     width 20px
+        //     height 20px
+        //     transform rotate(-45deg)
+            
+            
+        
+        &--active:not(.swiper-pagination-bullet-active)
+            opacity 1
+            
+        &:first-child
+            margin 0 !important
+            background transparent url('./../images/angle-down.png') no-repeat center
+            
+            background-size contain
+            position absolute
+            width 30px
+            height 30px
+            top 15px 
+            left 50%
+            opacity 1
+            transform translateX(-50%) rotate(180deg)
+            &:before
+                display none
+            &:hover
+                opacity .7
+
+
+        &.swiper-pagination-bullet-active
+        
+            // background-size: 20px 20px !important;
+            position relative
+            background: url('./../images/diamond-mobile.png') no-repeat center;
+            background-size contain
+            opacity 0
+            left 39px
+            width 28px
+            height 28px
+            &.swiper-pagination-bullet--active
+            
+                opacity 1
+        //     &:before
+        //         left -518%
+        //         content ''
+        //         z-index 2
+        //         position: absolute;
+        //         width: 1px;
+                
+        //     &:after
+        //         left: -104px;
+        //         content: '-';
+        //         color: #fff;
+        //         background-color: #fff;
+        //         width: 20px;
+        //         height: 1px;
+        //         display: block;
+        //         position: absolute;
+        //         top: 13px;
+        // &:nth-child(2)
+        //     &.swiper-pagination-bullet-active
+        //         &.swiper-pagination-bullet--active
+        //             &:before
+        //                 background-image: linear-gradient( 180deg, rgba(255,255,255,1), rgba(255,255,255,.45) 100%)
+        //                 background-size contain
+        //                 height: 300px;
+        //                 top -20px
+        // &:nth-child(3)
+        //     &.swiper-pagination-bullet-active
+        //         &.swiper-pagination-bullet--active
+        //             &:before
+                        
+        //                 background-image: linear-gradient( 180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,1) 25%, rgba(255,255,255,.45) 100%)
+        //                 top -146px
+        //                 height: 300px;
+
+        // &:nth-child(4)
+        //     &.swiper-pagination-bullet-active
+        //         &.swiper-pagination-bullet--active
+        //             &:before
+        //                 background-image: linear-gradient( 180deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,.1) 100%)
+        //                 top -150px
+        //                 height: 300px;
+
+        // &:nth-child(5)
+        //     &.swiper-pagination-bullet-active
+        //         &.swiper-pagination-bullet--active
+        //             &:before
+        //                 background-image: linear-gradient( 180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,1) 75%, rgba(255,255,255,.45) 100%)
+        //                 top -126px
+        //                 height: 300px;
+        // &:nth-child(6)
+        //     &.swiper-pagination-bullet-active
+        //         &.swiper-pagination-bullet--active
+        //             &:before
+        //                 background-image: linear-gradient( 180deg, rgba(255,255,255,.45), rgba(255,255,255,1) 100%)
+        //                 top -253px
+        //                 height 300px
             
 @media(min-width 1921px)
     .range-slider
@@ -923,33 +951,42 @@ a
                     h3
                         margin-top 100px
 @media(max-width 1600px)
-    .swiperV-pagination
-        width 100px    
-        &--active
-            background #000 url('./../images/indicator.png') no-repeat 26px center
-        .swiper-pagination-bullet
-            left 10px
-            &.swiper-pagination-bullet-active
-                left 11px
-                &:before
-                    left: -21px
-                    
-                &:after
-                    left -32px
     .swiper-slide
+        &__goto-wrapper
+            bottom 20px
+            
         &__section
             &--center
                 h2
-                    font-size: 20px
+                    margin-bottom 10px
+                    font-size: 16px
                 p
                     font-size: 14px
+                    & + p
+                        margin-top 10px
         &__text
-            font-size: 80px
+            bottom 150px
+            font-size: 3rem
             p
-                line-height 80px
-                height 80px
+                height 3rem
+                line-height 3rem
+                margin-bottom 10px
+                &:before, &:after
+                    bottom -2px
+                    width calc(100% - 20px)
         &__content
             margin 0 7% 0 auto
+            
+            h3
+                font-size 3rem
+                line-height 3rem
+                height 3rem
+                margin-bottom 20px
+                &:before, &:after
+                    bottom 5px
+            p
+                line-height 38px
+            
         &__img-wrapper
             top 350px
         &__img
@@ -960,90 +997,65 @@ a
         &--map
             .swiper-slide
                 &__content
+                    // height 95%
                     transition .5s
-                    padding-top 80px
+                    padding-top 120px
                     h3
+                        
                         height auto
                         letter-spacing 20px
                         line-height normal
-                        font-size 42px
+                        font-size 2.5rem
                         &:before, &:after
-                            bottom 11px
+                            bottom 5px
+                            
+                            
                     p
                         letter-spacing 2px
                 &__dot-description
                     width 600px
                     transform translateX(0)
                     right 120px
-                    bottom 20px
+                    bottom 80px
                     height 96px
                     overflow hidden
-                    
-            
-                    
-@media(max-width 1426px)
-    .range-slider
-        &__anchor
-            &:nth-child(2)    
-                left 27.5%
-            &:nth-child(3)
-                right 28%
-    .swiperH-pagination
+        &__form
+            h2
+                font-size 16px
+    .map-container
+        &__bg-img
+            max-height 350px
+    .swiperH-pagination 
         .swiper-pagination-bullet
-            & +  .swiper-pagination-bullet
-                
-                margin-top 302px
-    .swiperV-pagination
-        .swiper-pagination-bullet
-            &.swiper-pagination-bullet-active
-                // left 8px
-                
-                    
-                &:after
-                    left -32px
+            font-size 14px
+
+                                    
+@media(max-width 1024px)
     .swiper-slide
-        &__text
-            font-size 60px
-            p
-                height 76px
-                &:before, &:after
-                    width calc(100% - 17px)
-                    bottom -11px
-            
-        &__main-text
-            max-height 482px
-        &__content 
-            h3 
-                font-size 40px
-                margin-bottom 40px
-                &:before, &:after
-                    bottom 38px
-                    height 20px
+        &__menu-wrapper
+            width 100%
+            padding 0 50px 
+        &__section
+            &--center
+                h2
+                    font-size 16px
+                    margin-bottom 20px
+                    
+                p
+                    font-size 12px
+                        
+                    & + p
+                        margin-top 30px
+        &__content
             p
                 font-size 14px
-                line-height 30px
-        &__img-wrapper
-            top 295px
-        &--map
-            .swiper-slide
-                &__dot-description
-                    bottom 50px
+                line-height 28px
+        &__main-text
+            max-height initial
             
-@media(max-width 1024px)
-            
-    .swiperV-pagination
-        width 50px
-        background #000
+
+    .swiperH-pagination
         .swiper-pagination-bullet
-            left 0px
-            &.swiper-pagination-bullet-active
-                &:before
-                    display none
-            
- 
-
-
-
-
-    /* flip the pane when hovered */
-
+            font-size 14px
+    .menu-close
+        top 3px
