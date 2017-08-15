@@ -78,7 +78,7 @@
 
 .irs-single {
     z-index: 100;
-    opacity: 0;
+    opacity: 1;
     /*attention !!!!! */
     transition: .5s ease transform
 }

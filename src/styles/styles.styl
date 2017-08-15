@@ -60,10 +60,10 @@ a
     &:hover
         color $gold
 .menu-close, .menu-toggler
-    display: none
+    // display: none
     z-index 10
     position absolute
-    top 50px
+    top 46px
     left 50%
     transform  translateX(-50%)
     cursor pointer
@@ -152,8 +152,8 @@ a
         transition 2s ease all !important
         z-index 2
 .swiper-container-v
-    .swiper-slide
-        background-color #000 
+    // .swiper-slide
+    //     background-color #000 
     // .swiper-slide:not(:first-child),  .swiper-slide:not(:nth-child(2))
     //     background-color #fff
     .swiper-slide
@@ -190,7 +190,7 @@ a
                 height 100%
                 opacity 0
                 h3
-                    padding-right 20%
+                    padding-right 18%
                 &--active
                     color #fff
                     opacity 1
@@ -207,7 +207,7 @@ a
                     
         
     &--map-active
-        background-color #000 !important
+        background-color #090909 !important
     
     .wrapper
         width 100%
@@ -227,7 +227,7 @@ a
             right 0
         &--black
             right -100%
-            background-color #000
+            background-color #090909
         &--black--active
             right 30%
             right 0
@@ -282,10 +282,10 @@ a
         font-size 24px
         letter-spacing 4px
     &__goto-wrapper
-        bottom 50px
+        bottom 48px
         left 0
         right 0px
-        height 50px
+        height 30px
         position fixed
         transform translateX(-50%) translateY(50%)
     &__goto
@@ -620,14 +620,14 @@ a
             top 17.5%
 // main dots
 .dots-wrapper
-    z-index: 2
+    z-index: 1
     position: absolute
     top 50%
     transform translateY(-50%) translateX(-50%)
     width 0%
     left 50%
     transition 1.5s linear all
-    // width 100%
+    width 100%
     &--active
         width 100%
     // display flex
@@ -635,7 +635,7 @@ a
     
 .dot 
     margin 0
-    display none
+    // display none
     float left
     background-color: black
     background-size 100%
@@ -647,8 +647,8 @@ a
     position absolute
     left 50%
     transform translateX(-50%) scale(.25)
-    // margin 0 calc( (100% / 100 / 2) - 4px)
-    // position static
+    margin 0 calc( (100% / 100 / 2) - 4px)
+    position static
     &--active
         position static
         margin 0 calc( (100% / 100 / 2) - 4px)
@@ -783,22 +783,22 @@ a
     opacity 0
     &--active-1
         opacity 1
-        background #000 url('./../images/1.png') no-repeat 25% center
+        background #000 url('./../images/1.png') no-repeat 39% center
         left 0
     &--active-2
         opacity 1
-        background #000 url('./../images/2.png') no-repeat 25% center
+        background #000 url('./../images/2.png') no-repeat 39% center
         left 0
     &--active-3
-        background #000 url('./../images/3.png') no-repeat 25% center
+        background #000 url('./../images/3.png') no-repeat 39% center
         opacity 1
         left 0
     &--active-4
-        background #000 url('./../images/4.png') no-repeat 25% center
+        background #000 url('./../images/4.png') no-repeat 39% center
         opacity 1
         left 0
     &--active-5
-        background #000 url('./../images/5.png') no-repeat 25% center
+        background #000 url('./../images/5.png') no-repeat 39% center
         opacity 1
         left 0
     // &:after
@@ -972,8 +972,9 @@ a
                 line-height 3rem
                 margin-bottom 10px
                 &:before, &:after
-                    bottom -2px
+                    bottom 0px
                     width calc(100% - 20px)
+                    height 4px
         &__content
             margin 0 7% 0 auto
             

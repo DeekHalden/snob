@@ -287,7 +287,7 @@ function init() {
                 this.obj.scale.y -= .01
                 $(".dots-wrapper").addClass('dots-wrapper--active')
                 $(".dots-wrapper .dot").each(function(i) {
-                    $(this).delay(15 * i).addClass('dot--active').fadeIn()
+                    $(this).delay(10 * i).addClass('dot--active').fadeIn()
                 })
             } else {
                 this.moveTo(135, centerY, 10000)
@@ -699,7 +699,7 @@ function init() {
             });
             setTimeout(() => {
                 freemove = false
-            }, 3000)
+            }, 2500)
         }
 
         setTimeout(() => {
@@ -709,13 +709,13 @@ function init() {
 
         if (changeDirection) {
             dotsArray.forEach(dot => {
-                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
                 dot.changeInitialDirection(45)
+                dot.moveDot()
 
             });
             smallDots.forEach(dot => {
-                dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
                 dot.changeInitialDirection(45)
+                dot.moveDot()
                 dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
             });
         }
@@ -757,7 +757,7 @@ function init() {
 }
 
 $(document).ready(function() {
-    init()
+    // init()
     window.onresize = function() {
 
         createTags()
@@ -775,6 +775,7 @@ $(document).ready(function() {
         onlyExternal: true,
         longSwipes: false,
         parallax: true,
+        resizeEvent: 'resize',
 
         breakpoints: {
             1367: {
@@ -902,6 +903,7 @@ $(document).ready(function() {
         onlyExternal: true,
         shortSwipes: false,
         longSwipes: false,
+        resizeEvent: 'resize',
         breakpoints: {
             1367: {
                 onlyExternal: false,
@@ -955,7 +957,9 @@ $(document).ready(function() {
             }
             $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
             // },1000)
-            $('.swiperV-pagination').removeClass('swiperV-pagination--active-' + (swiper.activeIndex + 1) + ' swiperV-pagination--active-' + (swiper.activeIndex - 1))
+            for(let i = 0; i < 6; i++) {
+                $('.swiperV-pagination').removeClass('swiperV-pagination--active-' + i)
+            }
             $('.swiperV-pagination').addClass('swiperV-pagination--active-' + swiper.activeIndex)
 
         },
@@ -1003,6 +1007,7 @@ $(document).ready(function() {
         mousewheelControl: false,
         parallax: true,
         nested: true,
+        resizeEvent: 'resize',
         speed: 1500,
         onlyExternal: true,
         shortSwipes: false,

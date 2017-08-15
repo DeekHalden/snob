@@ -13,7 +13,8 @@ head
     link(rel='stylesheet' href='css/bundle.min.css')
 -var data = [{src: './video/vasizstas.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['MOBILE','APPLICATIONS']},{src: './video/ole.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['WEB','DEVELOPMENT']},{src: './video/xu.mp4', description:['As snobs, we prefer making','significantly perfect'], paragraph: ['DESIGN']}]
 body.body
-    .slider-container(style='visibility:hidden;opacity:0')
+    .slider-container
+        //- (style='visibility:hidden;opacity:0')
         .dots-wrapper
             -for(var i = 0; i < 100; i++)
                 .dot
@@ -75,7 +76,7 @@ body.body
                                         SECTION.swiper-wrapper
                                             +b.SECTION.swiper-slide
                                                 .video-cont(data-swiper-parallax='0')
-                                                    video.video(width='320' height='240'  )
+                                                    video.video(width='395' height='551')
                                                         source(src=el.src type='video/mp4')
                                                 +e.head-description
                                                     each h3 in el.description
