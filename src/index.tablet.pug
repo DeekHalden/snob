@@ -12,7 +12,7 @@ head
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet' href='css/mobile.bundle.min.css')
 -var data = [{src: './images/stas.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'MOBILE APPLICATIONS'},{src: './images/ole.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'WEB DEVELOPMENT'},{src: './images/xu.png', description:['As snobs, we prefer making','significantly perfect'], paragraph: 'DESIGN'}]
--let slidesData = [{title:'oleg sosin',text:['Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.Snobarts lead PHP developer;  developed & supported Cherbobyl NIn laborum non mollit mollit in aliqua labore ut eiusmod est ut eiusmod dolore ut labore incididunt laboris et ex voluptate velit id amet mollit sit adipisicing consequat dolor.'],img:'./images/stas.png'},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'}]
+-let slidesData = [{title:'oleg sosin',text:['Snobarts lead PHP developer;  Snobarts lead PHP developer; developed & supported Cherbobyl NPP website in 1984-86, until he fucked up. Loves ‘Imagine Dragons’ band, especially their ‘Radioactive’ well-known hit.'],img:'./images/stas.png'},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'gathering',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.','We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.']},{title:'GATHERING',text:['We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea.','We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.We make mobile applications and we make them good. Over nine thousand specialists are working in our studio, which is located in Huysosi, North Korea. We start our work by gathering ideas, getting the first payment, and then finally poshel nahooy pheh.'],imgBottom:'./images/redhead.png'}]
 body.body
     +b.menu
         +e.menu-wrapper.container
@@ -49,7 +49,8 @@ body.body
                             +e.BUTTON.button Send another message?
     +b.text()
         +e.A.goto(href='#additional-wrapper--0--0')  
-            img(src="./images/top-gold.png") 
+            //- img(src="./images/top-gold.png") 
+            i.icon-chevron-thin-up
         +e.BUTTON.menu-toggler.icon-menu
         +e.P.paragraph='bla'
         +e.left
@@ -62,7 +63,8 @@ body.body
                 h2 Be our guest.
             +e.enter
                 IMG(src="./images/big-diamond.svg")
-        .swiper-wrapper(style="display:none")
+        .swiper-wrapper
+            //- (style="display:none")
             each el, i in data 
                 +b.swiper-slide.swiper-slide--horizontal(data-id=i, data-name=el.paragraph.toString().split(',').join(' '))
                     +e.main-wrapper.container(id='additional-wrapper--' + i + '--0')
@@ -75,20 +77,37 @@ body.body
                                 +e.P.role='lead PHP developer'
                             +e.A.goto(href='#additional-wrapper--' + i + '--1') 
                     each el, index in slidesData
-                        +e.additional-wrapper(id='additional-wrapper--' + i + '--'  + (index + 1))
-                            +e.text-wrapper.container
-                                +e.H2=el.title
 
-                                if(el.img)
-                                    +e.IMG(src=el.img).small-face
-                                each p in el.text
-                                    +e.P=p
-                            if(el.imgBottom)
-                                +e.img-wrapper
-                                    +e.img-mask
-                                    +e.IMG(src=el.imgBottom).img-fluid
-                            -if(index !== 5) 
-                                +e.A.goto(href='#additional-wrapper--' + i + '--' + (index + 2))
+                        -if(index >= 1)
+                            +e.additional-wrapper--active(id='additional-wrapper--' + i + '--'  + (index + 1))
+                                +e.text-wrapper.container
+                                    +e.H2=el.title
+
+                                    if(el.img)
+                                        +e.IMG(src=data[i].src).small-face
+                                    each p in el.text
+                                        +e.P=p
+                                if(el.imgBottom)
+                                    +e.img-wrapper
+                                        +e.img-mask
+                                        +e.IMG(src=el.imgBottom).img-fluid
+                                -if(index !== 5) 
+                                    +e.A.goto(href='#additional-wrapper--' + i + '--' + (index + 2))
+                        -else 
+                            +e.additional-wrapper(id='additional-wrapper--' + i + '--'  + (index + 1))
+                                +e.text-wrapper.container
+                                    +e.H2=el.title
+
+                                    if(el.img)
+                                        +e.IMG(src=data[i].src).small-face
+                                    each p in el.text
+                                        +e.P=p
+                                if(el.imgBottom)
+                                    +e.img-wrapper
+                                        +e.img-mask
+                                        +e.IMG(src=el.imgBottom).img-fluid
+                                -if(index !== 5) 
+                                    +e.A.goto(href='#additional-wrapper--' + i + '--' + (index + 2))
                     +e.additional-wrapper--map(id='additional-wrapper--' + 0 + '--' + 6)
                         +e.content
                             h3 over the world

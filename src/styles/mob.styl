@@ -23,9 +23,12 @@ body
     font-family Roboto-reg 
     width 100%;
     text-align center
+    background-color #000
     // 
-    overflow hidden
+    // overflow hidden
     // 
+    &.is-active
+        overflow-y hidden
         
 canvas
     // display none
@@ -41,8 +44,13 @@ canvas
     position relative
     visibility visible;
     // 
-    // overflow-y auto;
+    
+    z-index 0
     // 
+    &.is-active
+        z-index -5
+        overflow-y hidden
+        
     &--active
         background-color #000
         overflow-y auto;
@@ -64,7 +72,7 @@ canvas
 .swiper-wrapper
     opacity 0
     // 
-    // opacity 1
+    opacity 1
     // 
     &--active
         opacity 1
@@ -72,15 +80,23 @@ canvas
     padding-top 40px
     color #fff
     display none
-    // position absolute
+    position fixed
     font-family $times
-    top 0
+    // bottom 0
+    height 100%
+    overflow scroll
     width 100%
+    z-index 1
     background-color #000
     letter-spacing 2px
-    
-        
-        
+    &--active
+        overflow auto
+        z-index 10
+        display block
+        top 0 
+        bottom 0
+        left 0
+        right 0
     &__menu-wrapper
         padding 0 25px
     &__form
@@ -282,7 +298,7 @@ canvas
                 background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
 .text
     // 
-    display none
+    // display none
     // 
     z-index 132
     position fixed
@@ -303,16 +319,19 @@ canvas
         right 0px
         top 0px
         border none 
+        z-index 1231
+        
         &:focus
             outline none
     &__left
         display none
         background-color #000
-        position fixed
+        position absolute
         left 0 
         top 0
+        // bottom 0
         width 20px
-        height 100%
+        height 120vh
         transition .2s linear all
         &:before, &:after
             content ''
@@ -340,14 +359,16 @@ canvas
             background-image: linear-gradient( 90deg, rgba(255,255,255,.44) 0%, rgba(53,54,56, .44)  100%);
             
         .text__left
-            
+            overflow-y visible
+            height 200vh
             &:before, &:after
                 top 34px
                 content ''
                 position absolute
                 right 0
                 width 4px
-                height 100%
+                
+                height 120%
                 z-index 1
                 transition .2s linear all
             &:before
@@ -369,13 +390,15 @@ canvas
         left 10px
         top 10px
         z-index 213
+        text-decoration none
+        i
+            font-size 20px
+            color $gold
         
         
 .swiper-slide
-    
-    
     position relative
-    transition .5s linear all
+    // transition .5s linear all
     &--active
         background-color #fff
     h2, p
@@ -385,8 +408,11 @@ canvas
     &__head-description
         position relative
         z-index 1
-        top -10px
+        width 305px 
+        margin 0 auto
+        top -5px
         color #fff
+        left -15px        
         h2
             padding-left 15px
             letter-spacing 9px
@@ -400,14 +426,16 @@ canvas
             font-size 15px
             text-align right
     &__main-content
-        width 305px 
-        position absolute
+        
+        // position absolute
         top 35%
+        margin 0 auto
         left 50%
-        transform translateX(-50%) translateY(-50%)
+        // transform translateX(-50%) translateY(-50%)
     &__face-cont
-        margin-top 20px
+        margin-top 80px
     &__face
+        opacity .35
         z-index 0
         display block
         height 190px
@@ -415,15 +443,16 @@ canvas
          
     &__main-wrapper
         position relative
-        min-height 100vh
+        padding-bottom 170px
         .swiper-slide__goto
             position absolute
-            bottom -130px
+            // bottom -130px
             left 50%
             transform translateX(-50%)
     &__additional-wrapper
+        overflow-x hidden
         position relative
-        margin-top 20px
+        padding-top 20px
         min-height 100vh
         color #fff
         &--map
@@ -432,6 +461,7 @@ canvas
             
         &--active
             color #000
+            background #fff
             .swiper-slide__goto
                 background  url('./../images/downarrow--black.png') no-repeat center
         h2
@@ -448,6 +478,8 @@ canvas
             text-align left
             letter-spacing 2px
             font-size 15px 
+            &:last-of-type
+                padding-bottom 60px
         &:nth-of-type(2)
             h2
                 text-align center
@@ -471,8 +503,10 @@ canvas
         &:not(:nth-of-type(2))
             h2
                 
-                // padding-top 80px
-                margin-bottom 40px
+                padding-top 50px
+                margin-bottom 80px
+                margin-left 80px
+                padding-left 5px
                 &:after, &:before
                     z-index -1
                     content ''
@@ -483,7 +517,7 @@ canvas
                     bottom 5px
                     
                 &:after
-                    background-image linear-gradient(90deg, rgba($gold, 1), rgba($gold, .45))
+                    background-image linear-gradient(360deg, rgba($gold, 1), rgba($gold, .45))
                     
                 &:before
                     z-index -2
@@ -546,11 +580,18 @@ canvas
                 display none
             span
                 @extends .swiper-slide__additional-wrapper:not(:nth-of-type(2)) h2
+                padding 0
+                
+                margin 0
                 letter-spacing: inherit;
                 position relative
                 height: auto;
                 line-height: inherit;
                 display: inline;
+                &:after, &:before
+                    width 100%
+                    bottom 2px
+                    
         
         // &:after
         //     content ''
@@ -667,8 +708,11 @@ canvas
     background-color transparent
     transition 0s
     height 260px
+    // 
+    top 280px
+    // 
     &--active
-        top 240px
+        top 280px
     .swiper-wrapper
         pointer-events auto
         align-items center
@@ -711,18 +755,18 @@ canvas
         
         
             
-@media(orientation: portrait) 
-    .intro
-        min-height 100vh
-        &__enter
-            transform  translateX(-50%) translateY(50%) 
-            position absolute
-    .swiper-slide
-        &__text-wrapper
-            &--active
-                padding-left value
-
-        
+// @media(orientation: portrait) 
+//     .intro
+//         min-height 100vh
+//         &__enter
+//             transform  translateX(-50%) translateY(50%) 
+//             position absolute
+// @media(orientation: portrait) and (min-height 1000px)
+//     .swiper-slide
+//         &__additional-wrapper
+//             min-height initial
+//         &__content
+//             min-height 50vh
 @media(orientation: landscape) 
     .intro
         &__logo
@@ -732,54 +776,90 @@ canvas
         &__wrapper
             min-height: 100vh
     .swiper-slide
-        &__main-content
-            top 50%
-        &__head-description
-            h2, p
-                text-align center
-        &__small-face
-            margin 0 auto
         &__main-wrapper
-            margin-bottom 150px
-            .swiper-slide__goto
-                bottom -165px
-        &__additional-wrapper
-            margin-top 20px
-            &:nth-child(2)
-                h2
-                    padding-top 40px !important
-                    text-align center
-            &:last-child
-                margin-top 0
+            padding-bottom 150px
+        &__head-description
+            left 0px        
         &__content
             h3
-                padding-top 20px
-        &__dot-description
-            bottom 0
-
-@media(orientation: portrait) and (min-width 360px) 
-    .swiper-pagination
-        top 340px
-    .swiper-slide
-        &__main-wrapper 
-            .swiper-slide
-                &__goto
-                    bottom -200px
-    .swiper-slide
-        &__additional-wrapper
-            &:nth-of-type(2) , &:nth-of-type(3) ,&:nth-of-type(4)
-                .swiper-slide
-                    &__goto
-                        bottom  0px
-// @media(orientation landscape) and (min-width 350px)
-    
-@media(orientation landscape) and (min-width 577px)
-    .swiper-slide
-        &__dot-description
-            transform: translateX(50%) translateY(50%)
+                padding-top 10px
+        &__dot-description 
+            p
+                padding-bottom 20px
 @media (min-width 720px) 
+    .container 
+        padding-left 100px
+        padding-right 100px
+    .swiper-slide
+        &__main-wrapper
+            padding-bottom 210px
+        &__face
+            padding-top 50px
+            height 550px
+        &__head-description
+            width 520px
+            padding-bottom 20px
+            left 0%
+            h2
+                font-size 25px
+                text-align center
+                line-height 1.4
+            p
+                float right
+                font-size 19px
+                line-height 2.5
+                
+        // &__additional-wrapper
+        &__small-face
+            height 550px
+        &__additional-wrapper
+            &:nth-of-type(2) 
+                h2
+                    @extends .swiper-slide__head-description h2
+                    
+                    top 450px
+                    position relative
+                    left 0
+                    transform translateX(0)
+                    padding-left 0
+                    text-align left
+            &:not(:nth-of-type(2)) 
+                h2
+                    font-size 34px
+                    font-weight 300
+                    letter-spacing 10px
+                    &:after, &:before
+                        bottom 3px
+                        height 11px
+                
+            p
+                font-size 20px
+    .swiper-pagination
+        top 680px
+    .text
+        padding 28px 0
+        p
+            letter-spacing 4px
+            font-size 16px
+        &__goto
+            left 27px 
+            top 24px
+            i
+                font-size 30px
+        &__menu-toggler
+            font-size 32px
+            right 20px
+            top 19px
+        &__left
+            width 50px
+        &--active
+            &:before, &:after
+                left 47px 
+            .text__left
+                &:before, &:after 
+                    top 73px
     .menu
-        padding 70px 130px 0
+        padding 70px 50px 0
         &__menu-wrapper
             width auto
         &__section
@@ -801,129 +881,65 @@ canvas
             p
                 font-size 23px
                 line-height 1.2
-            
-        
     .swiperH-pagination 
         .swiper-pagination-bullet
             margin-bottom 40px
             font-size 16px
-    .swiper-slide
-        &__text-wrapper
-            &--active
-                padding-left 40px
-        &__main-wrapper, &__additional-wrapper
-            height calc(100vh - 37px)
-            overflow hidden
-        &__main-wrapper
-            .swiper-slide
-                &__goto
-                    bottom -100px
-        &__additional-wrapper
-            margin-top 40px
-            min-height initial
-            height calc(100vh - 75px)
-            h2
-                font-size 16px
-                display inline-block
-                text-align center
-                width auto
-                padding-left 0
-                margin-bottom 70px
-            &:not(:nth-of-type(2))
-                h2
-                    &:before, &:after
-                        width 400%
-                        bottom 3px
-            &:nth-of-type(2)
-                h2
-                    top 500px
-                p
-                    position relative
-                    top -120px 
-                    line-height 1.403
-                    height 190px
-                    overflow hidden
-            p
-                margin-bottom 40px
-            &--map
-                min-height 100vh
-                margin-top 0
-                
-        &__main-content
-            width 100%
-            top 50%
-        &__head-description
-            top -190px
-            h2
-                width 540px
-                margin 0 auto
-                text-align center
-            p
-                margin 0 auto
-                width 540px
-                font-size 18px
-        &__content
-            h3
-                font-size 16px
-        &__face
-            height auto
-            max-width 100%
-        &__small-face
-            margin 0 auto
-            height auto
-            max-width 100%
-        &__img-wrapper
-            position absolute
-            bottom 0
-        &__dot-description
-            p
-                font-size 20px
-                span
-                    &:after
-                        bottom 4px
-                        width 100%
-    .text
-        padding 30px 0
-        p
-            letter-spacing 4px
-            font-size 16px
-        &__goto
-            left 27px 
-            top 29px
-            img
-                width 32px
-                display block
-        &__menu-toggler
-            font-size 32px
-            right 20px
-            top 19px
-        &__left
-            width 50px
-        &--active
-            &:before, &:after
-                left 47px 
-            .text__left
-                &:before, &:after 
-                    top 73px
-    .swiper-pagination
-        top 762px
-    .intro
-        &__logo
-            margin 0 auto 
-        &__text
-            width 320px
-            margin 0 auto
-@media (min-width 720px) and (orientation landscape)
-    .swiper-slide
-        &__main-wrapper
-            .swiper-slide
-                &__goto
-                    bottom 0px
-    .swiper-pagination
-        top 525px
-@media(min-width 720px)
-    .map-container
-        &__bg-img
-            max-height 400px
+// @media(orientation: portrait) and (min-width 360px) 
+//     .swiper-pagination
+//         top 340px
+//     .swiper-slide
+//         &__main-wrapper
+//             height 100vh
+//             .swiper-slide__goto 
+//                 bottom 100px
+    
+// @media (min-width 480px)
+//     .swiper-slide
+//         &__face
+//             height 55vh
+// @media(orientation: portrait) and (min-width 577px) 
+//     .swiper-pagination
+//         top 620px
+    
+// @media(orientation landscape) and (min-width 577px)
+//     .swiper-slide
+//         &__dot-description
+//             transform: translateX(50%) translateY(50%)
+// @media (min-width 720px) 
+            
+        
+
+//     .swiper-slide
+//         &__text-wrapper
+//             &--active
+//                 padding-left 40px
+//         &__main-wrapper, &__additional-wrapper
+            
+//             overflow hidden
+
+//     // .swiper-pagination
+//     //     top 462px
+//     .intro
+//         &__logo
+//             margin 0 auto 
+//         &__text
+//             width 320px
+//             margin 0 auto
+// @media (min-width 720px) and (orientation landscape)
+//     .swiper-slide
+//         &__main-content
+//             position static
+//             transform translate(0)
+//         &__main-wrapper
+//             .swiper-slide
+//                 &__goto
+//                     bottom 0px
+//     .swiper-pagination
+//         top 605px
+// @media(min-width 720px)
+//     .map-container
+//         &__bg-img
+//             max-height 400px
             
             

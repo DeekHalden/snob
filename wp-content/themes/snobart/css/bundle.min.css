@@ -1262,6 +1262,10 @@ a:hover {
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
 }
+.swiper-slide--horizontal:nth-child(2) .swiper-slide__text,
+.swiper-slide--horizontal:nth-child(4) .swiper-slide__text {
+  left: 42%;
+}
 .swiper-slide__text {
   font-weight: 100;
   text-align: left;
@@ -1297,7 +1301,7 @@ a:hover {
   left: 0;
   content: '';
   position: absolute;
-  bottom: 2px;
+  bottom: -1px;
   width: calc(100% - 30px);
   height: 9px;
   background-color: #af9358;
@@ -1310,7 +1314,7 @@ a:hover {
   left: 0;
   content: '';
   position: absolute;
-  bottom: 2px;
+  bottom: -1px;
   width: calc(100% - 30px);
   height: 9px;
   background-image: linear-gradient(360deg, #af9358, rgba(255,255,255,0.55) 100%);
@@ -1550,7 +1554,7 @@ a:hover {
   top: 17.5%;
 }
 .dots-wrapper {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);

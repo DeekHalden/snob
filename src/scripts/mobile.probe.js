@@ -774,7 +774,7 @@ function initSecondPart() {
         paginationClickable: true,
         parallax: true,
         pagination: '.swiperH-pagination',
-        onlyExternal: true,
+        // onlyExternal: true,
         effect: 'slide',
         onInit: function(swiper) {
             let text = $('.swiper-slide--horizontal.swiper-slide-active').data('name')
@@ -854,6 +854,7 @@ function initSecondPart() {
 
     $('.swiper-slide__goto,  .text__goto').on('click', function(event) {
         event.preventDefault()
+        event.stopPropagation()
         if($(window).width() < 720) {
             $('html, body').animate({
                 scrollTop: $($.attr(this, 'href')).offset().top - 35
@@ -879,8 +880,9 @@ function initSecondPart() {
         e.preventDefault()
         $(this).toggleClass('icon-close icon-menu')
         $('.menu').slideToggle().toggleClass('menu--active')
+        $('body').toggleClass('is-active')
         $('.text__paragraph').fadeToggle(0)
-        $('.main-container').fadeToggle()
+        $('.main-container').toggleClass('is-active')
         $('.text').toggleClass('text--passive')
         // $('.text__paragraph').fadeToggle()
     })
@@ -962,9 +964,11 @@ function initSecondPart() {
             contact__message: ""
         },
         submitHandler(form) {
-            $('.flip-container__wrapper').addClass('flip-container__wrapper--active')
-            $('.flip-container__back').fadeIn(300)
-            $('.flip-container__front').fadeOut(0)
+            setTimeout(()=>{
+                $('.flip-container__wrapper').addClass('flip-container__wrapper--active')
+                $('.flip-container__back').fadeIn(300)
+                $('.flip-container__front').fadeOut(0)
+            },1000)
             let data = $(form).serialize();
             $.ajax({
                     url: '',
@@ -1009,19 +1013,19 @@ function initSecondPart() {
     })
 
     // console.log($(window).scrollTop())
-    $(window).scroll(function() {
+    $(window).on('scroll touchstart', function(e) {
+        e.stopPropagation()
         let el = $('.swiper-slide__additional-wrapper')[1];
+            
         if ($(window).scrollTop() >= $(el).offset().top - 80 && !$('.menu').hasClass('menu--active')) {
             $('.swiper-slide__text-wrapper').addClass('swiper-slide__text-wrapper--active')
-            $('.text').addClass('text--active')
-            $('.swiper-slide').addClass('swiper-slide--active')
-            $('.swiper-slide__additional-wrapper').addClass('swiper-slide__additional-wrapper--active')
+            $('.text').addClass('text--active').removeClass('text--passive')
             $('.text__left').fadeIn(100)
         } else {
             $('.text').removeClass('text--active')
             $('.swiper-slide__text-wrapper').removeClass('swiper-slide__text-wrapper--active')
-            $('.swiper-slide').removeClass('swiper-slide--active')
-            $('.swiper-slide__additional-wrapper').removeClass('swiper-slide__additional-wrapper--active')
+            // $('.swiper-slide').removeClass('swiper-slide--active')
+            // $('.swiper-slide__additional-wrapper').removeClass('swiper-slide__additional-wrapper--active')
             $('.text__left').fadeOut()
         }
         if ($(window).scrollTop() >= $($('.swiper-slide__additional-wrapper')[0]).offset().top + 40) {
@@ -1047,7 +1051,7 @@ function initSecondPart() {
 
 
 $(document).ready(function() {
-    init()
+    // init()
     initSecondPart()
 })
 
