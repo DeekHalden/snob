@@ -8,6 +8,31 @@ import { validate, validator } from 'jquery-validation'
 
 
 function init() {
+    var currentMousePos = { x: -1, y: -1 };
+    $(function() {
+        document.addEventListener("touchstart", onTouchStart, true);
+        document.addEventListener("touchend", onTouchEnd, true);
+        document.addEventListener("touchmove", onTouchMove, true);
+        setTimeout(()=>{
+            currentMousePos = { x: -1, y: -1 }
+        },200)
+    });
+
+    function onTouchStart(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    }
+
+    function onTouchMove(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    }
+
+    function onTouchEnd(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    }
+
     function clearAdditions(e) {
         moveToRandomPosition = false
         moveDiamondToStart = true
@@ -20,7 +45,7 @@ function init() {
     }
     console.log(window.innerWidth)
     const app = new PIXI.Application()
-    app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true , autoresize: true})
+    app.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerWidth, { transparent: true, autoresize: true })
 
     document.body.appendChild(app.view)
 
@@ -34,11 +59,21 @@ function init() {
     let centerX = innerWidth / 2
     let centerY = innerHeight / 2
 
-    window.onresize = function() {
-        if (!disableResize) {
-            location.reload()
+
+    
+
+    $(window).resize(function() {
+        if ($(window).width() > 1366) {
+            console.log(1)
+            window.location.href = '/index.html'
         }
-    }
+        if (!disableResize) {
+            setTimeout(() => {
+                location.reload()
+            }, 300)
+        }
+    })
+       
 
     if (!!window.MSInputMethodContext && !!document.documentMode) {
         if (location.pathname === '/' || location.pathname === '/index.tablet.html') {
@@ -183,18 +218,21 @@ function init() {
                 this.obj.on('mouseover', function(mouseData) {
                     if (self.fadeIn === true) {
                         $('.main-text-start').fadeIn()
+                        $('.intro-logo').fadeIn();
                     }
                     moveToRandomPosition = false
-                    logo.increaseOpacity()
+
                     freeFall = false
                     setTimeout(() => {
                         self.obj.on('tap', function(mouseData) {
                             clearAdditions()
                             $('.main-text-start').fadeOut()
+                            $('.intro-logo').fadeOut()
                             moveDiamondToStart = true
                         })
                         self.obj.on('mousedown', function(mouseData) {
                             clearAdditions()
+                            $('.intro-logo').fadeOut()
                             $('.main-text-start').fadeOut()
                             moveDiamondToStart = true
                         })
@@ -205,13 +243,14 @@ function init() {
                 this.obj.on('tap', function(mouseData) {
                     if (self.fadeIn === true) {
                         $('.main-text-start').fadeIn()
+                        $('.intro-logo').fadeIn();
                     }
                     moveToRandomPosition = false
-                    logo.increaseOpacity()
                     freeFall = false
                     self.obj.on('tap', function(mouseData) {
 
                         clearAdditions()
+                        $('.intro-logo').fadeOut()
                         moveDiamondToStart = true
                         $('.main-text-start').fadeOut()
                     })
@@ -269,7 +308,7 @@ function init() {
                             $('canvas').remove()
                             $('.main-text').fadeIn()
                             $('.menu-toggler').fadeIn()
-                            $('body').css('overflow', 'scroll')
+
                         }
 
                     }, 1000)
@@ -675,7 +714,7 @@ function init() {
     app.stage.addChild(diamondMaskObjStart.obj);
     app.stage.addChild(diamondMaskObjEnd.obj);
     app.stage.addChild(text.obj);
-    app.stage.addChild(logo.obj);
+    // app.stage.addChild(logo.obj);
 
     var diamondInterval = setInterval(() => {
         diamond.increaseOpacity()
@@ -703,7 +742,14 @@ function init() {
             smallDots.forEach(dot => {
                 dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
                 dot.obj.alpha = 1
-                dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
+                let values 
+                if(currentMousePos.x != -1) {
+                    dot.collide(currentMousePos.x, currentMousePos.y, 120)
+                    
+                } else {
+                    dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
+                }
+                
             });
             setTimeout(() => {
                 freemove = false
@@ -713,7 +759,7 @@ function init() {
         setTimeout(() => {
             changeDirection = true
 
-        }, 2000)
+        }, 2500)
 
         if (changeDirection) {
             dotsArray.forEach(dot => {
@@ -724,7 +770,12 @@ function init() {
             smallDots.forEach(dot => {
                 dot.moveDot( /*smallDot.randomX, smallDot.randomY*/ )
                 dot.changeInitialDirection(45)
-                dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
+                if(currentMousePos.x != -1) {
+                    dot.collide(currentMousePos.x, currentMousePos.y, 120)
+                    
+                } else {
+                    dot.collide(app.renderer.plugins.interaction.mouse.global.x, app.renderer.plugins.interaction.mouse.global.y, 120)
+                }
             });
         }
 
@@ -739,7 +790,7 @@ function init() {
                 dotsArray.forEach(dot => app.stage.removeChild(dot.obj));
                 smallDots.forEach(dot => app.stage.removeChild(dot.obj));
 
-            }, 1500)
+            }, 2500)
 
         }
         if (!moveToRandomPosition && moveDiamondToStart) {
@@ -762,10 +813,11 @@ function init() {
         moveToRandomPosition = true
         app.ticker.add(create);
     }, 1000)
-    $('.main-text-start').on('click',function(e) {
+    $('.main-text-start').on('click', function(e) {
         e.preventDefault()
         clearAdditions()
         moveDiamondToStart = true
+            // $('.main-container').fadeIn()
     })
 }
 
@@ -785,20 +837,20 @@ function initSecondPart() {
             $('.text p').text(text)
             $('.menu').removeClass('menu--active').slideUp()
             $('.text__paragraph').fadeIn(0)
-            $('.main-container').fadeIn()
+            // $('.main-container').fadeIn()
             $('.text').addClass('text--passive')
             $('.icon-close').addClass('icon-menu').removeClass('icon-close')
         },
-        paginationBulletRender: function (swiper, index, className) {
+        paginationBulletRender: function(swiper, index, className) {
             let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet')
             let pagslides = $('.swiper-slide--horizontal')
             let names = []
             pagslides.each(function(i) {
                 names.push($(this).data('name'))
             })
-            
-            return '<span id='+ index +' class="' + className + '">' + names[index] + '</span>';
-            
+
+            return '<span id=' + index + ' class="' + className + '">' + names[index] + '</span>';
+
             // bullets.each(function(i) {
             //     // $(this).text(names[i])
             //     $(this).attr('id', i)
@@ -808,21 +860,21 @@ function initSecondPart() {
         },
     });
 
-        // let bullets = $('.swiper-pagination-bullet')
-        // let pagslides = $('.swiper-slide--horizontal')
-        // bullets.on('click',function(e) {
-        //     let id = this.id
-        //     if(parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
-        //         // $('.menu').slideUp()    
-        //         $('.menu').toggleClass('menu--active')
-        //         // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
-        //         // $('.main-container').fadeIn()
-        //         $('.text__paragraph').fadeIn()
-        //         $('.text__menu-toggler').trigger('click')
-        //     } else {
-        //         return
-        //     }
-        // })
+    // let bullets = $('.swiper-pagination-bullet')
+    // let pagslides = $('.swiper-slide--horizontal')
+    // bullets.on('click',function(e) {
+    //     let id = this.id
+    //     if(parseInt(id) !== $('.swiper-slide--horizontal.swiper-slide-active').data('id')) {
+    //         // $('.menu').slideUp()    
+    //         $('.menu').toggleClass('menu--active')
+    //         // $('.text__menu-toggler').toggleClass('icon-close icon-menu')
+    //         // $('.main-container').fadeIn()
+    //         $('.text__paragraph').fadeIn()
+    //         $('.text__menu-toggler').trigger('click')
+    //     } else {
+    //         return
+    //     }
+    // })
 
 
     const swiperPagination = new Swiper('.swiper-pagination', {
@@ -837,13 +889,16 @@ function initSecondPart() {
     });
     $('.intro__enter').on('click', function(e) {
         e.preventDefault()
+        $('.intro').addClass('is-passive')
         swiperH.slideTo(0, 1500)
-        $(this).parent().fadeOut(0).css('display', 'none')
         $('.swiper-wrapper').toggleClass('swiper-wrapper--active')
         $('.swiper-wrapper').fadeIn()
         $('.swiper-pagination').addClass('swiper-pagination--active')
         $('.text').fadeIn(0)
-        
+        $('body').css('overflow-y', 'auto')
+        $('.main-container').addClass('is-active')
+        $(window).scrollTop(0)
+
     });
 
     $('.swiper-slide__goto-wrapper').click(function(e) {
@@ -855,11 +910,11 @@ function initSecondPart() {
     $('.swiper-slide__goto,  .text__goto').on('click', function(event) {
         event.preventDefault()
         event.stopPropagation()
-        if($(window).width() < 720) {
+        if ($(window).width() < 720) {
             $('html, body').animate({
                 scrollTop: $($.attr(this, 'href')).offset().top - 35
             }, 500)
-            
+
         } else {
             $('html, body').animate({
                 scrollTop: $($.attr(this, 'href')).offset().top - 105
@@ -878,12 +933,14 @@ function initSecondPart() {
 
     $('.text__menu-toggler').on('click', function(e) {
         e.preventDefault()
+        $('.icon-chevron-thin-up').fadeToggle()
         $(this).toggleClass('icon-close icon-menu')
         $('.menu').slideToggle().toggleClass('menu--active')
         $('body').toggleClass('is-active')
         $('.text__paragraph').fadeToggle(0)
         $('.main-container').toggleClass('is-active')
         $('.text').toggleClass('text--passive')
+        $(window).trigger('scroll')
         // $('.text__paragraph').fadeToggle()
     })
 
@@ -931,10 +988,10 @@ function initSecondPart() {
         return this.optional(element) || value == value.match(/^[a-zA-Zа-яА-Я ]+$/);
     });
 
-    $("#contact__name").on("input", function(){
+    $("#contact__name").on("input", function() {
         let regexp = /[^a-zA-Zа-яА-Я ]/g;
-        if($(this).val().match(regexp)){
-            $(this).val( $(this).val().replace(regexp,'') );
+        if ($(this).val().match(regexp)) {
+            $(this).val($(this).val().replace(regexp, ''));
         }
     });
 
@@ -943,7 +1000,7 @@ function initSecondPart() {
         return isEmail
     });
 
-     $('#contact-form').validate({
+    $('#contact-form').validate({
         debug: true,
         rules: {
             contact__name: {
@@ -964,11 +1021,11 @@ function initSecondPart() {
             contact__message: ""
         },
         submitHandler(form) {
-            setTimeout(()=>{
+            setTimeout(() => {
                 $('.flip-container__wrapper').addClass('flip-container__wrapper--active')
                 $('.flip-container__back').fadeIn(300)
                 $('.flip-container__front').fadeOut(0)
-            },1000)
+            }, 1000)
             let data = $(form).serialize();
             $.ajax({
                     url: '',
@@ -988,7 +1045,7 @@ function initSecondPart() {
         }
     });
 
-    $('.card__button').on('click',function(e) {
+    $('.card__button').on('click', function(e) {
         e.preventDefault()
         $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active')
         $('#contact-form')[0].reset();
@@ -1016,17 +1073,17 @@ function initSecondPart() {
     $(window).on('scroll touchstart', function(e) {
         e.stopPropagation()
         let el = $('.swiper-slide__additional-wrapper')[1];
-            
+
         if ($(window).scrollTop() >= $(el).offset().top - 80 && !$('.menu').hasClass('menu--active')) {
             $('.swiper-slide__text-wrapper').addClass('swiper-slide__text-wrapper--active')
             $('.text').addClass('text--active').removeClass('text--passive')
-            $('.text__left').fadeIn(100)
+            $('.text__left').css('opacity', 1)
         } else {
             $('.text').removeClass('text--active')
             $('.swiper-slide__text-wrapper').removeClass('swiper-slide__text-wrapper--active')
             // $('.swiper-slide').removeClass('swiper-slide--active')
             // $('.swiper-slide__additional-wrapper').removeClass('swiper-slide__additional-wrapper--active')
-            $('.text__left').fadeOut()
+            $('.text__left').css('opacity', 0)
         }
         if ($(window).scrollTop() >= $($('.swiper-slide__additional-wrapper')[0]).offset().top + 40) {
             $('.text__goto').fadeIn()
@@ -1050,10 +1107,17 @@ function initSecondPart() {
 }
 
 
+
 $(document).ready(function() {
-    // init()
+    init()
     initSecondPart()
 })
 
 window.$ = $
 window.jQuery = jQuery
+
+
+// display x - y coordinates for mouse only
+// console.log(renderer.plugins.interaction.mouse.global.x + ' - ' + renderer.plugins.interaction.mouse.global.y);
+// display x - y coordinates for mouse or touch events
+// console.log(renderer.plugins.interaction.eventData.data.global.x + ' - ' + renderer.plugins.interaction.eventData.data.global.y);

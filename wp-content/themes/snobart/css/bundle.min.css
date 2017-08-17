@@ -956,6 +956,7 @@ a:hover {
 }
 .menu-close,
 .menu-toggler {
+  display: none;
   z-index: 10;
   position: absolute;
   top: 46px;
@@ -1089,6 +1090,7 @@ a:hover {
   transition: 4s linear all;
 }
 .swiper-slide--map .swiper-slide__content {
+  padding-top: 80px;
   pointer-events: none;
   width: 100%;
   max-width: initial;
@@ -1096,7 +1098,7 @@ a:hover {
   opacity: 0;
 }
 .swiper-slide--map .swiper-slide__content h3 {
-  padding-right: 18%;
+  padding-right: 4%;
 }
 .swiper-slide--map .swiper-slide__content--active {
   color: #fff;
@@ -1104,10 +1106,10 @@ a:hover {
 }
 .swiper-slide--map .swiper-slide__dot-description {
   position: absolute;
-  right: 20%;
+  right: 6%;
   bottom: 100px;
   transform: translateX(0%);
-  width: 900px;
+  width: 1020px;
 }
 .swiper-slide--map .swiper-slide__dot-description p {
   text-align: right;
@@ -1489,12 +1491,12 @@ a:hover {
   display: none;
   position: absolute;
   top: 50%;
-  right: 20%;
+  right: 14%;
   transform: translateY(-50%) translateX(0%);
 }
 .map-container__bg-img {
   display: block;
-  max-height: 550px;
+  max-height: 579px;
 }
 .map-container__dot {
   display: none;
@@ -1561,13 +1563,13 @@ a:hover {
   width: 0%;
   left: 50%;
   transition: 1.5s linear all;
-  width: 100%;
 }
 .dots-wrapper--active {
   width: 100%;
 }
 .dot {
   margin: 0;
+  display: none;
   float: left;
   background-color: #000;
   background-size: 100%;
@@ -1578,8 +1580,6 @@ a:hover {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) scale(0.25);
-  margin: 0 calc((100% / 100 / 2) - 4px);
-  position: static;
 }
 .dot--active {
   position: static;

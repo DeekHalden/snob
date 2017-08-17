@@ -34,15 +34,39 @@ function init() {
     let centerX = innerWidth / 2
     let centerY = innerHeight / 2
 
-    window.onresize = function() {
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this,
+                args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
 
-        if (!disableResize) {
-            location.reload()
+    var myEfficientFn = debounce(function() {
+    }, 150);
+
+    $(window).resize(function() {
+        if ($(window).width() < 1366) {
+            console.log(1)
+            window.location.href = '/index.tablet.html'
         }
-    }
+        if (!disableResize) {
+            setTimeout(() => {
+                location.reload()
+            }, 300)
+        }
+    })
 
     if (!!window.MSInputMethodContext && !!document.documentMode) {
-        if (location.pathname === '/') {
+        if (location.pathname === '/index.html') {
             var texture0 = './../images/big-diamond.png'
             var texture1 = './../images/big-diamond-start.png'
             var texture2 = './../images/big-diamond-end.png'
@@ -53,7 +77,7 @@ function init() {
         }
 
     } else {
-        if (location.pathname === '/') {
+        if (location.pathname === '/index.html') {
             var texture0 = './../images/big-diamond.svg'
             var texture1 = './../images/big-diamond-start.svg'
             var texture2 = './../images/big-diamond-end.svg'
@@ -67,7 +91,7 @@ function init() {
 
     }
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/index.html') {
         var texture3 = './../images/mask.png'
         var texture4 = './../images/dot.png'
         var texture5 = './../images/dot--small.png'
@@ -786,18 +810,18 @@ $(document).ready(function() {
             }
         },
 
-        paginationBulletRender: function (swiper, index, className) {
+        paginationBulletRender: function(swiper, index, className) {
             let bullets = $('.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(2),' +
-            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
-            '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
+                '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(4),' +
+                '.swiperH-pagination.swiper-pagination-clickable.swiper-pagination-bullets .swiper-pagination-bullet:nth-child(6)')
             let pagslides = $('.swiper-slide--horizontal')
             let names = []
             pagslides.each(function(i) {
                 names.push($(this).data('name'))
             })
-            
+
             return '<span class="' + className + '">' + names[index] + '</span>';
-            
+
             // bullets.each(function(i) {
             //     // $(this).text(names[i])
             //     $(this).attr('id', i)
@@ -810,7 +834,7 @@ $(document).ready(function() {
 
         },
         onSlideChangeStart(swiper) {
-            swiperV1.slideTo(2,0)
+            swiperV1.slideTo(2, 0)
             setTimeout(function() {
                 // $('.swiper-container-h .swiper-slide--horizontal video')[0].currentTime = 0;
                 $('.swiper-container-h .swiper-slide--horizontal video').each(function() {
@@ -957,7 +981,7 @@ $(document).ready(function() {
             }
             $('.swiper-slide-active .swiper-slide-active .swiper-slide-active .wrapper--white').addClass('wrapper--white-active')
             // },1000)
-            for(let i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 $('.swiperV-pagination').removeClass('swiperV-pagination--active-' + i)
             }
             $('.swiperV-pagination').addClass('swiperV-pagination--active-' + swiper.activeIndex)
@@ -1139,15 +1163,15 @@ $(document).ready(function() {
         });
 
 
-    // $(window).resize(function() {
-    //     if($(window).width() < 1366) {
-    //         slider.destroy()
-    //     }
-    // })
+    $(window).resize(function() {
+        swiperH.resizeFix(true);
+        for (var i = swiperV.length - 1; i >= 0; i--) {
+            swiperV[i].resizeFix(true)
+        }
+        swiperV1.resizeFix(true)
+    })
 
-    // if($(window).width() < 1366) {
-    //     slider.destroy()
-    // }
+
 
 
     $('#contact__name, #contact__email').on('keydown keyup', function(e) {
@@ -1187,10 +1211,10 @@ $(document).ready(function() {
         return this.optional(element) || value == value.match(/^[a-zA-Zа-яА-Я ]+$/);
     });
 
-    $("#contact__name").on("input", function(){
+    $("#contact__name").on("input", function() {
         let regexp = /[^a-zA-Zа-яА-Я ]/g;
-        if($(this).val().match(regexp)){
-            $(this).val( $(this).val().replace(regexp,'') );
+        if ($(this).val().match(regexp)) {
+            $(this).val($(this).val().replace(regexp, ''));
         }
     });
 
@@ -1242,7 +1266,7 @@ $(document).ready(function() {
         }
     });
 
-     $('.card__button').on('click',function(e) {
+    $('.card__button').on('click', function(e) {
         e.preventDefault()
         $('#contact-form')[0].reset();
         $('.flip-container__wrapper--active').removeClass('flip-container__wrapper--active')
@@ -1349,5 +1373,3 @@ function translateText(element, value) {
 // RANGE HANDLERS
 window.$ = $
 window.jQuery = jQuery
-
-

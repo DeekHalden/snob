@@ -39993,15 +39993,38 @@ function init() {
     var centerX = innerWidth / 2;
     var centerY = innerHeight / 2;
 
-    window.onresize = function () {
-
-        if (!disableResize) {
-            location.reload();
-        }
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this,
+                args = arguments;
+            var later = function later() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
     };
 
+    var myEfficientFn = debounce(function () {}, 150);
+
+    $(window).resize(function () {
+        if ($(window).width() < 1366) {
+            console.log(1);
+            window.location.href = '/index.tablet.html';
+        }
+        if (!disableResize) {
+            setTimeout(function () {
+                location.reload();
+            }, 300);
+        }
+    });
+
     if (!!window.MSInputMethodContext && !!document.documentMode) {
-        if (location.pathname === '/') {
+        if (location.pathname === '/index.html') {
             var texture0 = './../images/big-diamond.png';
             var texture1 = './../images/big-diamond-start.png';
             var texture2 = './../images/big-diamond-end.png';
@@ -40011,7 +40034,7 @@ function init() {
             var texture2 = '/snobart/images/big-diamond-end.png';
         }
     } else {
-        if (location.pathname === '/') {
+        if (location.pathname === '/index.html') {
             var texture0 = './../images/big-diamond.svg';
             var texture1 = './../images/big-diamond-start.svg';
             var texture2 = './../images/big-diamond-end.svg';
@@ -40022,7 +40045,7 @@ function init() {
         }
     }
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/index.html') {
         var texture3 = './../images/mask.png';
         var texture4 = './../images/dot.png';
         var texture5 = './../images/dot--small.png';
@@ -41187,16 +41210,13 @@ $(document).ready(function () {
         $('.range-slider__anchors').removeClass('range-slider__anchors--important');
     });
 
-    // $(window).resize(function() {
-    //     if($(window).width() < 1366) {
-    //         slider.destroy()
-    //     }
-    // })
-
-    // if($(window).width() < 1366) {
-    //     slider.destroy()
-    // }
-
+    $(window).resize(function () {
+        swiperH.resizeFix(true);
+        for (var i = swiperV.length - 1; i >= 0; i--) {
+            swiperV[i].resizeFix(true);
+        }
+        swiperV1.resizeFix(true);
+    });
 
     $('#contact__name, #contact__email').on('keydown keyup', function (e) {
         var max = 50;

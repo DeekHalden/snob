@@ -641,7 +641,7 @@ body {
   font-family: Roboto-reg;
   width: 100%;
   text-align: center;
-  background-color: #000;
+  overflow: hidden;
 }
 body.is-active {
   overflow-y: hidden;
@@ -653,21 +653,38 @@ canvas {
   left: 0;
   z-index: 1;
 }
+.intro-logo {
+  pointer-events: none;
+  display: none;
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
 .main-container {
   overflow: hidden;
   visibility: hidden;
   background-color: transparent;
   position: relative;
-  visibility: visible;
+  height: 0;
+  opacity: 0;
   z-index: 0;
 }
 .main-container.is-active {
-  z-index: -5;
-  overflow-y: hidden;
+  visibility: visible;
+  z-index: 1;
+  overflow-y: auto;
+  height: auto;
+  opacity: 1;
 }
 .main-container--active {
+  height: auto;
+  opacity: 1;
+  visibility: visible;
   background-color: #000;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 .main-text-start {
   text-transform: uppercase;
@@ -688,9 +705,10 @@ canvas {
 }
 .swiper-wrapper {
   opacity: 0;
-  opacity: 1;
+  height: 0;
 }
 .swiper-wrapper--active {
+  height: auto;
   opacity: 1;
 }
 .menu {
@@ -940,12 +958,13 @@ canvas {
   background-image: linear-gradient(360deg, #af9358, rgba(255,255,255,0.45) 100%);
 }
 .text {
+  display: none;
   z-index: 132;
   position: fixed;
   top: 0;
   width: 100%;
   color: #af9358;
-  padding: 10px 0;
+  padding: 10px 0 0;
   background-color: #000;
   transition: 0.2s linear all;
 }
@@ -968,14 +987,14 @@ canvas {
   outline: none;
 }
 .text__left {
-  display: none;
+  opacity: 0;
   background-color: #000;
   position: absolute;
   left: 0;
   top: 0;
+  z-index: -1;
   width: 20px;
   height: 120vh;
-  transition: 0.2s linear all;
 }
 .text__left:before,
 .text__left:after {
@@ -986,6 +1005,9 @@ canvas {
 .text--passive:after {
   opacity: 0;
 }
+.text--passive .text__left {
+  opacity: 1;
+}
 .text--passive .text__left:before,
 .text--passive .text__left:after {
   opacity: 0;
@@ -995,7 +1017,7 @@ canvas {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 20px;
+  left: 16px;
   width: 100%;
   z-index: 1;
   height: 4px;
@@ -1013,13 +1035,12 @@ canvas {
 }
 .text--active .text__left:before,
 .text--active .text__left:after {
-  top: 34px;
+  top: 32px;
   content: '';
   position: absolute;
   right: 0;
   width: 4px;
   height: 120%;
-  z-index: 1;
   transition: 0.2s linear all;
 }
 .text--active .text__left:before {
@@ -1030,7 +1051,8 @@ canvas {
 }
 .text p {
   text-transform: uppercase;
-  display: inline-block;
+  padding-bottom: 10px;
+  background-color: #000;
   font-family: Times-new-roman;
   letter-spacing: 2px;
   color: #fff;
@@ -1112,7 +1134,6 @@ canvas {
   overflow-x: hidden;
   position: relative;
   padding-top: 20px;
-  min-height: 100vh;
   color: #fff;
 }
 .swiper-slide__additional-wrapper--map {
@@ -1144,6 +1165,9 @@ canvas {
 }
 .swiper-slide__additional-wrapper p:last-of-type {
   padding-bottom: 60px;
+}
+.swiper-slide__additional-wrapper:nth-of-type(2) {
+  min-height: 100vh;
 }
 .swiper-slide__additional-wrapper:nth-of-type(2) h2 {
   text-align: center;
@@ -1345,9 +1369,13 @@ canvas {
 .intro {
   position: relative;
   background-color: #000;
-  display: none;
   height: 100vh;
   z-index: 123123123;
+}
+.intro.is-passive {
+  visibility: hidden;
+  height: 0;
+  display: none;
 }
 .intro__logo {
   display: block;
@@ -1390,7 +1418,6 @@ canvas {
   background-color: transparent;
   transition: 0s;
   height: 260px;
-  top: 280px;
 }
 .swiper-pagination--active {
   top: 280px;
@@ -1509,15 +1536,21 @@ canvas {
   .swiper-slide__additional-wrapper p {
     font-size: 20px;
   }
+  .intro__text {
+    width: 325px;
+    margin: 20px auto 100px;
+  }
   .swiper-pagination {
     top: 680px;
   }
   .text {
-    padding: 28px 0;
+    padding: 28px 0 0;
   }
   .text p {
     letter-spacing: 4px;
     font-size: 16px;
+    padding-top: 0;
+    padding-bottom: 28px;
   }
   .text__goto {
     left: 27px;
@@ -1536,7 +1569,7 @@ canvas {
   }
   .text--active:before,
   .text--active:after {
-    left: 47px;
+    left: 46px;
   }
   .text--active .text__left:before,
   .text--active .text__left:after {
@@ -1574,5 +1607,13 @@ canvas {
   .swiperH-pagination .swiper-pagination-bullet {
     margin-bottom: 40px;
     font-size: 16px;
+  }
+  .map-container__bg-img {
+    max-height: 400px;
+  }
+}
+@media (min-width: 960px) {
+  .swiper-slide__main-wrapper {
+    padding-bottom: 290px;
   }
 }

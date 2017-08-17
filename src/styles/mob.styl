@@ -23,9 +23,9 @@ body
     font-family Roboto-reg 
     width 100%;
     text-align center
-    background-color #000
+    // background-color #000
     // 
-    // overflow hidden
+    overflow hidden
     // 
     &.is-active
         overflow-y hidden
@@ -37,23 +37,43 @@ canvas
     bottom 0
     left 0
     z-index 1
+.intro-logo
+    pointer-events none
+    display none
+    width 100px
+    position absolute
+    top 50%
+    z-index 10
+    left 50%
+    
+    transform translateY(-50%) translateX(-50%)
 .main-container
     overflow hidden
     visibility hidden
     background-color transparent
     position relative
-    visibility visible;
     // 
     
+    height 0
+    // display none
+    opacity 0
     z-index 0
+    // visibility visible;
     // 
     &.is-active
-        z-index -5
-        overflow-y hidden
-        
+        visibility visible;
+        z-index 1
+        overflow-y auto
+        height auto
+        opacity 1
+        // display block
     &--active
+        height auto
+        // display block
+        opacity 1
+        visibility visible;
         background-color #000
-        overflow-y auto;
+        overflow-y hidden;
         
 .main-text-start
     text-transform uppercase
@@ -71,10 +91,12 @@ canvas
     width 100%
 .swiper-wrapper
     opacity 0
+    height 0
     // 
-    opacity 1
+    // opacity 1
     // 
     &--active
+        height auto
         opacity 1
 .menu
     padding-top 40px
@@ -298,14 +320,14 @@ canvas
                 background-image: linear-gradient( 360deg, rgba($gold), rgba(255,255,255,.45) 100%)
 .text
     // 
-    // display none
+    display none
     // 
     z-index 132
     position fixed
     top 0
     width 100%
     color $gold
-    padding 10px 0
+    padding 10px 0 0
     background-color #000
     transition .2s linear all
     &:before, &:after
@@ -324,15 +346,15 @@ canvas
         &:focus
             outline none
     &__left
-        display none
+        opacity 0
         background-color #000
         position absolute
         left 0 
         top 0
+        z-index -1
         // bottom 0
         width 20px
         height 120vh
-        transition .2s linear all
         &:before, &:after
             content ''
             transition .2s linear all
@@ -340,6 +362,7 @@ canvas
         &:before, &:after
             opacity 0
         .text__left
+            opacity 1
             &:before, &:after
                 opacity 0
         
@@ -348,7 +371,7 @@ canvas
             content ''
             position absolute
             bottom 0
-            left 20px
+            left 16px
             width 100%
             z-index 1
             height 4px
@@ -362,14 +385,14 @@ canvas
             overflow-y visible
             height 200vh
             &:before, &:after
-                top 34px
+                top 32px
+                // -webkit-top 36px
                 content ''
                 position absolute
                 right 0
                 width 4px
                 
                 height 120%
-                z-index 1
                 transition .2s linear all
             &:before
                 background-image: linear-gradient( 360deg, rgba($gold, 0) 0%, rgba($gold, .44) 1%, rgba($gold,.44) 100%);
@@ -378,7 +401,8 @@ canvas
 
     p
         text-transform uppercase
-        display inline-block
+        padding-bottom 10px
+        background-color black
         font-family $times
         letter-spacing 2px 
         color #fff
@@ -453,7 +477,7 @@ canvas
         overflow-x hidden
         position relative
         padding-top 20px
-        min-height 100vh
+        // min-height 100vh
         color #fff
         &--map
             background-color #000
@@ -481,6 +505,7 @@ canvas
             &:last-of-type
                 padding-bottom 60px
         &:nth-of-type(2)
+            min-height 100vh
             h2
                 text-align center
                 width 100%
@@ -668,9 +693,15 @@ canvas
 .intro
     position relative
     background-color #000
-    display none
+    // 
+    // display none
+    // 
     height 100vh 
     z-index 123123123
+    &.is-passive
+        visibility hidden
+        height 0
+        display none
     &__logo
         display block
         max-width 100%
@@ -709,7 +740,7 @@ canvas
     transition 0s
     height 260px
     // 
-    top 280px
+    // top 280px
     // 
     &--active
         top 280px
@@ -834,13 +865,19 @@ canvas
                 
             p
                 font-size 20px
+    .intro
+        &__text
+            width 325px
+            margin 20px auto 100px
     .swiper-pagination
         top 680px
     .text
-        padding 28px 0
+        padding 28px 0 0
         p
             letter-spacing 4px
             font-size 16px
+            padding-top 0
+            padding-bottom 28px
         &__goto
             left 27px 
             top 24px
@@ -854,7 +891,7 @@ canvas
             width 50px
         &--active
             &:before, &:after
-                left 47px 
+                left 46px 
             .text__left
                 &:before, &:after 
                     top 73px
@@ -885,6 +922,13 @@ canvas
         .swiper-pagination-bullet
             margin-bottom 40px
             font-size 16px
+    .map-container
+        &__bg-img
+            max-height 400px
+@media (min-width 960px) 
+    .swiper-slide
+        &__main-wrapper
+            padding-bottom 290px
 // @media(orientation: portrait) and (min-width 360px) 
 //     .swiper-pagination
 //         top 340px
@@ -938,8 +982,6 @@ canvas
 //     .swiper-pagination
 //         top 605px
 // @media(min-width 720px)
-//     .map-container
-//         &__bg-img
-//             max-height 400px
+
             
             

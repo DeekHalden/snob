@@ -60,7 +60,9 @@ a
     &:hover
         color $gold
 .menu-close, .menu-toggler
-    // display: none
+    // 
+    display: none
+    // 
     z-index 10
     position absolute
     top 46px
@@ -184,22 +186,23 @@ a
         transition 4s linear all
         .swiper-slide
             &__content
+                padding-top 80px
                 pointer-events none
                 width 100%
                 max-width initial
                 height 100%
                 opacity 0
                 h3
-                    padding-right 18%
+                    padding-right 4%
                 &--active
                     color #fff
                     opacity 1
             &__dot-description
                 position absolute
-                right 20%
+                right 6%
                 bottom 100px
                 transform translateX(0%)
-                width 900px
+                width 1020px
                 p
                     text-align right
                     &:not(:first-child)
@@ -570,12 +573,12 @@ a
     // height 700px
     position absolute
     top 50%
-    right 20%
+    right 14%
     transform translateY(-50%) translateX(0%)
     &__bg-img
         display block
         
-        max-height 550px
+        max-height 579px
     &__dot
         display none
         position absolute
@@ -630,15 +633,13 @@ a
     width 0%
     left 50%
     transition 1.5s linear all
-    width 100%
+    // width 100%
     &--active
         width 100%
-    // display flex
-    // justify-content space-between
     
 .dot 
     margin 0
-    // display none
+    display none
     float left
     background-color: black
     background-size 100%
@@ -650,16 +651,14 @@ a
     position absolute
     left 50%
     transform translateX(-50%) scale(.25)
-    margin 0 calc( (100% / 100 / 2) - 4px)
-    position static
+    // margin 0 calc( (100% / 100 / 2) - 4px)
+    // position static
     &--active
         position static
         margin 0 calc( (100% / 100 / 2) - 4px)
         transform translateX(0%) scale(.25)
     &--light 
         background-color #fff
-    // &:last-child
-    //     display none !important
 // main dots
 
 .flip-container 
